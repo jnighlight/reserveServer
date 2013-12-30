@@ -291,11 +291,12 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `user` (
   `email` varchar(30) NOT NULL DEFAULT '',
-  `password` varchar(30) NOT NULL,
+  `password` varchar(100) NOT NULL,
   `first_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
   `phone_number` varchar(15) NOT NULL,
   `user_level_id` int(11) NOT NULL,
+  `salt` varchar(100) NOT NULL,
   PRIMARY KEY (`email`),
   KEY `user_level_id` (`user_level_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -392,4 +393,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-12-30  6:17:49
+-- Dump completed on 2013-12-30 16:57:51
