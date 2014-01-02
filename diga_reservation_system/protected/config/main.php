@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'My Web Application',
+	'name'=>'Digital Arts Reservations',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -37,16 +37,17 @@ return array(
 			'allowAutoLogin'=>true,
 		),
 		// uncomment the following to enable URLs in path-format
-		/*
+		
 		'urlManager'=>array(
 			'urlFormat'=>'path',
+			'showScriptName'=>false,
 			'rules'=>array(
 				'<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 			),
 		),
-		*/
+		
 
 /*
 		'db'=>array(
@@ -60,7 +61,7 @@ return array(
 			'connectionString' => 'mysql:host=localhost;dbname=diga_reservation_system',
 			'emulatePrepare' => true,
 			'username' => 'root',
-			'password' => 'sb0biskool1',
+			'password' => 'your_password_here',
 			'charset' => 'utf8',
 		),
 		

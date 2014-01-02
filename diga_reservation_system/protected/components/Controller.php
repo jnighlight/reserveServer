@@ -20,4 +20,19 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
+
+
+	public function init()
+        {
+	  /* If the user is not logged in and not already
+	     on the login page, force them to do so
+	  */
+	  $login = "site/login"; // login Controller/Action pair
+
+          if((Yii::app()->user->getId() == null) &&
+	    (Yii::app()->urlManager->parseUrl(Yii::app()->request) != $login))
+          {
+              $this->redirect(array("site/login"));
+          }
+        }
 }

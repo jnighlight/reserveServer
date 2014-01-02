@@ -1135,3 +1135,848 @@ Stack trace:
 REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=user/create
 in /var/www/html/reserveServer/diga_reservation_system/protected/controllers/UserController.php (75)
 in /var/www/html/reserveServer/diga_reservation_system/index.php (13)
+2013/12/31 16:54:26 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(18): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(18): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:00:14 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:01:50 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): User->validatePassword('sblah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:02:50 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): User->validatePassword('slah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:04:32 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(20): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(20): User->validatePassword('slah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:19:02 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:19:09 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:19:52 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:20:00 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:20:06 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:20:17 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:20:26 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:21:09 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:25:36 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:25:52 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(28): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 17:41:27 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(21): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(21): User->validatePassword('blah')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2013/12/31 18:47:57 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): User->validatePassword('sb0biskool1')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2014/01/01 19:46:55 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): User->validatePassword('password')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2014/01/01 20:26:47 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): User->validatePassword('password')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/index.php?r=site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/index.php?r=site/login
+---
+2014/01/01 20:57:25 [error] [exception.CException] exception 'CException' with message 'User and its behaviors do not have a method or closure named "validatePassword".' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:265
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/db/ar/CActiveRecord.php(225): CComponent->__call('validatePasswor...', Array)
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): CActiveRecord->__call('validatePasswor...', Array)
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php(19): User->validatePassword('sb0biskool1')
+#3 /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php(52): UserIdentity->authenticate()
+#4 /var/www/html/reserveServer/yii_framework/framework/validators/CInlineValidator.php(42): LoginForm->authenticate('password', Array)
+#5 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute(Object(LoginForm), 'password')
+#6 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CValidator->validate(Object(LoginForm), NULL)
+#7 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): CModel->validate()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#13 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#14 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#15 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#16 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
+2014/01/01 21:28:10 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "jlites@stetson.edu".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('jlites@stetson....')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('jlites@stetson....')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/jlites@ste...')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/jlites%40stetson.edu
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 21:35:01 [error] [exception.CHttpException.403] exception 'CHttpException' with message 'You are not authorized to perform this action.' in /var/www/html/reserveServer/yii_framework/framework/web/auth/CAccessControlFilter.php:179
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/auth/CAccessControlFilter.php(142): CAccessControlFilter->accessDenied(Object(CWebUser), 'You are not aut...')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilter.php(38): CAccessControlFilter->preFilter(Object(CFilterChain))
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#3 /var/www/html/reserveServer/yii_framework/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#4 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#7 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('admin')
+#8 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/admin')
+#9 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#10 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#11 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/admin
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/index
+---
+2014/01/01 21:35:24 [error] [php] Trying to get property of non-object (/var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php:19)
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): LoginForm->validate()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#4 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): SiteController->runAction()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): SiteController->run()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#10 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CWebApplication->run()
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+in /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php (19)
+in /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php (52)
+in /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php (94)
+2014/01/01 21:39:39 [error] [php] Trying to get property of non-object (/var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php:19)
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): LoginForm->validate()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#4 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): SiteController->runAction()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): SiteController->run()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#10 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CWebApplication->run()
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+in /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php (19)
+in /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php (52)
+in /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php (94)
+2014/01/01 21:42:55 [error] [php] Trying to get property of non-object (/var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php:19)
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): LoginForm->validate()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#4 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): SiteController->runAction()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): SiteController->run()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#10 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CWebApplication->run()
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+in /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php (19)
+in /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php (52)
+in /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php (94)
+2014/01/01 21:43:01 [error] [php] Trying to get property of non-object (/var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php:19)
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/validators/CValidator.php(213): CInlineValidator->validateAttribute()
+#1 /var/www/html/reserveServer/yii_framework/framework/base/CModel.php(159): CInlineValidator->validate()
+#2 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(94): LoginForm->validate()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#4 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams()
+#5 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): SiteController->runAction()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#7 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): SiteController->run()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#10 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CWebApplication->run()
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+in /var/www/html/reserveServer/diga_reservation_system/protected/components/UserIdentity.php (19)
+in /var/www/html/reserveServer/diga_reservation_system/protected/models/LoginForm.php (52)
+in /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php (94)
+2014/01/01 21:47:25 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(1116): CFilterChain->run()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/filters/CInlineFilter.php(58): CController->filterPostOnly(Object(CFilterChain))
+#4 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/html/reserveServer/yii_framework/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('delete')
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/delete/mbu...')
+#13 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#14 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/delete/mburton1%40stetson.edu?ajax=user-grid
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/admin
+---
+2014/01/01 21:47:31 [error] [exception.CHttpException.400] exception 'CHttpException' with message 'Your request is invalid.' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:336
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(309): CController->invalidActionParams(Object(CInlineAction))
+#1 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(1116): CFilterChain->run()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/filters/CInlineFilter.php(58): CController->filterPostOnly(Object(CFilterChain))
+#4 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#5 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(1145): CFilter->filter(Object(CFilterChain))
+#7 /var/www/html/reserveServer/yii_framework/framework/web/filters/CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#8 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(291): CFilterChain->run()
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('delete')
+#12 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/delete/jli...')
+#13 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#14 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#15 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/delete/jlites%40stetson.edu?ajax=user-grid
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/admin
+---
+2014/01/01 21:48:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "mburton1@stetson.edu".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('mburton1@stetso...')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('mburton1@stetso...')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/mburton1@s...')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/mburton1%40stetson.edu
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 21:49:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "jlites@stetson.edu".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('jlites@stetson....')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('jlites@stetson....')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/jlites@ste...')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/jlites%40stetson.edu
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 22:00:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "mburton1@stetson.edu".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('mburton1@stetso...')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('mburton1@stetso...')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/mburton1@s...')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/mburton1%40stetson.edu
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 22:01:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "jlites@stetson.edu".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('jlites@stetson....')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('jlites@stetson....')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/jlites@ste...')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/jlites%40stetson.edu
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 22:08:25 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "mburton1@stetson.edu".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('mburton1@stetso...')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('mburton1@stetso...')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/mburton1@s...')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/mburton1%40stetson.edu
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 22:09:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "jlites@stetson.edu".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('jlites@stetson....')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('jlites@stetson....')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/jlites@ste...')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/jlites%40stetson.edu
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 22:39:49 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "test@test.com".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('test@test.com')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('test@test.com')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/test@test....')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/test%40test.com
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 22:41:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "test@test.com".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('test@test.com')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('test@test.com')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/test@test....')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/test%40test.com
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 22:41:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "test@test.com".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('test@test.com')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('test@test.com')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('user/test@test....')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/test%40test.com
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/user/create
+---
+2014/01/01 22:48:59 [error] [php] Undefined variable: size (/var/www/html/reserveServer/diga_reservation_system/protected/controllers/UserController.php:73)
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(133): UserController->runAction()
+#1 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilter.php(40): CFilterChain->run()
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(1145): CAccessControlFilter->filter()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/filters/CInlineFilter.php(58): UserController->filterAccessControl()
+#4 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#5 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(291): CFilterChain->run()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): UserController->runActionWithFilters()
+#7 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): UserController->run()
+#8 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#9 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#10 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CWebApplication->run()
+REQUEST_URI=/html/reserveServer/diga_reservation_system/user/create
+in /var/www/html/reserveServer/diga_reservation_system/protected/controllers/UserController.php (73)
+in /var/www/html/reserveServer/diga_reservation_system/index.php (13)
+2014/01/02 00:46:09 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('main')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/main
+---
+2014/01/02 00:46:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "index".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('main')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/main
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/main/main
+---
+2014/01/02 02:40:35 [error] [php] Undefined index: choice (/var/www/html/reserveServer/diga_reservation_system/protected/controllers/MainController.php:9)
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): MainController->runAction()
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): MainController->runActionWithFilters()
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): MainController->run()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#4 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#5 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CWebApplication->run()
+REQUEST_URI=/html/reserveServer/diga_reservation_system/main
+in /var/www/html/reserveServer/diga_reservation_system/protected/controllers/MainController.php (9)
+in /var/www/html/reserveServer/diga_reservation_system/index.php (13)
+2014/01/02 03:47:15 [error] [php] include(parrent.php): failed to open stream: No such file or directory (/var/www/html/reserveServer/yii_framework/framework/YiiBase.php:421)
+Stack trace:
+#0 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(123): spl_autoload_call()
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(1144): SiteController->accessRules()
+#2 /var/www/html/reserveServer/yii_framework/framework/web/filters/CInlineFilter.php(58): SiteController->filterAccessControl()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/filters/CFilterChain.php(130): CInlineFilter->filter()
+#4 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(291): CFilterChain->run()
+#5 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): SiteController->runActionWithFilters()
+#6 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): SiteController->run()
+#7 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController()
+#8 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#9 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CWebApplication->run()
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+in /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php (123)
+in /var/www/html/reserveServer/diga_reservation_system/index.php (13)
+2014/01/02 04:03:17 [error] [exception.CException] exception 'CException' with message 'Property "CWebApplication.getController" is not defined.' in /var/www/html/reserveServer/yii_framework/framework/base/CComponent.php:130
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/base/CModule.php(105): CComponent->__get('getController')
+#1 /var/www/html/reserveServer/diga_reservation_system/protected/components/Controller.php(30): CModule->__get('getController')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(281): Controller->init()
+#3 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#4 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#5 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#6 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
+2014/01/02 04:09:58 [error] [php] Use of undefined constant request - assumed 'request' (/var/www/html/reserveServer/diga_reservation_system/protected/components/Controller.php:30)
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#1 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CWebApplication->run()
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+in /var/www/html/reserveServer/diga_reservation_system/protected/components/Controller.php (30)
+in /var/www/html/reserveServer/diga_reservation_system/index.php (13)
+2014/01/02 04:31:55 [error] [exception.CException] exception 'CException' with message 'SiteController has an extra endWidget() call in its view.' in /var/www/html/reserveServer/yii_framework/framework/web/CBaseController.php:210
+Stack trace:
+#0 /var/www/html/reserveServer/diga_reservation_system/protected/views/site/login.php(66): CBaseController->endWidget()
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CBaseController.php(126): require('/var/www/html/r...')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CBaseController.php(95): CBaseController->renderInternal('/var/www/html/r...', Array, true)
+#3 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(869): CBaseController->renderFile('/var/www/html/r...', Array, true)
+#4 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(782): CController->renderPartial('login', Array, true)
+#5 /var/www/html/reserveServer/diga_reservation_system/protected/controllers/SiteController.php(99): CController->render('login', Array)
+#6 /var/www/html/reserveServer/yii_framework/framework/web/actions/CInlineAction.php(49): SiteController->actionLogin()
+#7 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(308): CInlineAction->runWithParams(Array)
+#8 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(286): CController->runAction(Object(CInlineAction))
+#9 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#10 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('login')
+#11 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/login')
+#12 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#13 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#14 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/login
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
+2014/01/02 05:26:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "main".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('main')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('main')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/main')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/main
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
+2014/01/02 05:26:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "main".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('main')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('main')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/main')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/main
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
+2014/01/02 05:26:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "main".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('main')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('main')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/main')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/main
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
+2014/01/02 05:26:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "main".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('main')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('main')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/main')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/main
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
+2014/01/02 05:27:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "main".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('main')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('main')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/main')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/main
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
+2014/01/02 05:27:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "main".' in /var/www/html/reserveServer/yii_framework/framework/web/CController.php:483
+Stack trace:
+#0 /var/www/html/reserveServer/yii_framework/framework/web/CController.php(270): CController->missingAction('main')
+#1 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(282): CController->run('main')
+#2 /var/www/html/reserveServer/yii_framework/framework/web/CWebApplication.php(141): CWebApplication->runController('site/main')
+#3 /var/www/html/reserveServer/yii_framework/framework/base/CApplication.php(169): CWebApplication->processRequest()
+#4 /var/www/html/reserveServer/diga_reservation_system/index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/html/reserveServer/diga_reservation_system/site/main
+HTTP_REFERER=http://localhost/html/reserveServer/diga_reservation_system/site/login
+---
