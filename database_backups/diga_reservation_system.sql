@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.1.61, for redhat-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.5.34, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: diga_reservation_system
 -- ------------------------------------------------------
--- Server version	5.1.61
+-- Server version	5.5.34-0ubuntu0.13.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -296,7 +296,7 @@ CREATE TABLE `user` (
   `last_name` varchar(20) NOT NULL,
   `phone_number` varchar(15) NOT NULL,
   `user_level_id` int(11) NOT NULL,
-  `salt` varchar(100) NOT NULL,
+  `salt` varchar(200) NOT NULL,
   `id_number` varchar(10) NOT NULL,
   PRIMARY KEY (`email`),
   UNIQUE KEY `id_number` (`id_number`),
@@ -310,6 +310,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('mburton1@stetson.edu','password','Mark','Burton','77',0,'?S9?zV?\n?n?a{	??~?q???????V?r \r??f~P?|9???tG?-??\0/?&?Y??#\'I??+p?.??ku?[?!???=?k??c?m???DTz????b??(#?','55'),('jlites@stetson.edu','password','Jacob','Lites','680',0,'G?S[c??O???=????44?fS?W@?????:???? ???F?84?\0????p?/??|?FUa`\Z?-???e??\0??(?8_r?3?T\ZUs?q??????|????^C???x=????1?3??C?=o?','097');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -395,4 +396,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-12-30 17:58:31
+-- Dump completed on 2014-01-02  5:33:25
