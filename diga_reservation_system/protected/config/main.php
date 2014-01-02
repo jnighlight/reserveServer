@@ -7,7 +7,7 @@
 // CWebApplication properties can be configured here.
 return array(
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
-	'name'=>'Digital Arts Reservations',
+	'name'=>'My Web Application',
 
 	// preloading 'log' component
 	'preload'=>array('log'),
@@ -60,8 +60,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=diga_reservation_system',
 			'emulatePrepare' => true,
-			'username' => 'root',
-			'password' => 'your_password_here',
+			'username' => 'cinf301',
+			'password' => 'f3rdb3rf3lp4ss',
 			'charset' => 'utf8',
 		),
 		
