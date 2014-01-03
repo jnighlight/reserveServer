@@ -16,6 +16,7 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
+		'ext.EDataTables.*',
 	),
 
 	'modules'=>array(
@@ -60,8 +61,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=diga_reservation_system',
 			'emulatePrepare' => true,
-			'username' => 'cinf301',
-			'password' => 'f3rdb3rf3lp4ss',
+			'username' => 'username',
+			'password' => 'password',
 			'charset' => 'utf8',
 		),
 		
