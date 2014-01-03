@@ -46,15 +46,17 @@ DROP TABLE IF EXISTS `equipment`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `equipment` (
-  `equipment_id` bigint(20) NOT NULL DEFAULT '0',
+  `equipment_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `serial_number` varchar(30) DEFAULT NULL,
   `manufacturer` varchar(30) DEFAULT NULL,
   `model_number` varchar(30) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
   `image_url` varchar(150) DEFAULT NULL,
-  PRIMARY KEY (`equipment_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `equipment_type_id` int(11) NOT NULL,
+  PRIMARY KEY (`equipment_id`),
+  KEY `equipment_type_id` (`equipment_type_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,6 +65,7 @@ CREATE TABLE `equipment` (
 
 LOCK TABLES `equipment` WRITE;
 /*!40000 ALTER TABLE `equipment` DISABLE KEYS */;
+INSERT INTO `equipment` VALUES (1,'serial_number','manufacturer','model_number','HOORAY. LOOK AT ME!. I\'M A DESCRIPTION!.','PowerShot G16','http://www.usa.canon.com/CUSA/assets/app/images/cameras/powershot/PS_G16/g16_586x186.gif',1),(2,'serial_number','manufacturer','model_number','LOOK AT ME, I AM ALSO A DESCRIPTION!!','Vixia HF R40','http://www.usa.canon.com/CUSA/assets/app/images/camcorder/VIXIA_HF_R40/vixia_hfr40_586x186.gif',2);
 /*!40000 ALTER TABLE `equipment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -132,7 +135,7 @@ CREATE TABLE `equipment_type` (
   `equipment_type_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(20) NOT NULL,
   PRIMARY KEY (`equipment_type_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,6 +144,7 @@ CREATE TABLE `equipment_type` (
 
 LOCK TABLES `equipment_type` WRITE;
 /*!40000 ALTER TABLE `equipment_type` DISABLE KEYS */;
+INSERT INTO `equipment_type` VALUES (1,'Camera'),(2,'Video Camera');
 /*!40000 ALTER TABLE `equipment_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -312,7 +316,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES ('mburton1@stetson.edu','password','Mark','Burton','77',0,'?S9?zV?\n?n?a{	??~?q???????V?r \r??f~P?|9???tG?-??\0/?&?Y??#\'I??+p?.??ku?[?!???=?k??c?m???DTz????b??(#?','55'),('jlites@stetson.edu','password','Jacob','Lites','680',0,'G?S[c??O???=????44?fS?W@?????:???? ???F?84?\0????p?/??|?FUa`\Z?-???e??\0??(?8_r?3?T\ZUs?q??????|????^C???x=????1?3??C?=o?','097');
+INSERT INTO `user` VALUES ('mburton1@stetson.edu','password','Mark','Burton','77',1,'?S9?zV?\n?n?a{	??~?q???????V?r \r??f~P?|9???tG?-??\0/?&?Y??#\'I??+p?.??ku?[?!???=?k??c?m???DTz????b??(#?','55'),('jlites@stetson.edu','password','Jacob','Lites','680',1,'G?S[c??O???=????44?fS?W@?????:???? ???F?84?\0????p?/??|?FUa`\Z?-???e??\0??(?8_r?3?T\ZUs?q??????|????^C???x=????1?3??C?=o?','097');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -327,7 +331,7 @@ CREATE TABLE `user_level` (
   `user_level_id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(15) NOT NULL,
   PRIMARY KEY (`user_level_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -336,6 +340,7 @@ CREATE TABLE `user_level` (
 
 LOCK TABLES `user_level` WRITE;
 /*!40000 ALTER TABLE `user_level` DISABLE KEYS */;
+INSERT INTO `user_level` VALUES (1,'casual'),(2,'workstudy'),(3,'admin');
 /*!40000 ALTER TABLE `user_level` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -398,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-02 21:05:19
+-- Dump completed on 2014-01-03  4:02:07
