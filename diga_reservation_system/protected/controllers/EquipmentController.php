@@ -20,6 +20,12 @@ class EquipmentController extends Controller
           return $equipment->findAll($criteria);
 	}
 
+	public function getAllEquipmentTypes()
+	{
+	  return EquipmentType::model()->findAll(
+	    array('order'=>'name'));
+	}
+
 	public function getEquipmentType($equipment_type_id)
 	{
 	  $equipment_type = EquipmentType::model();

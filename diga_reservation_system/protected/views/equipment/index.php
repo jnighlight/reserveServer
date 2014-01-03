@@ -5,6 +5,23 @@ $this->breadcrumbs=array(
 	'Equipment',
 );
 
+/* Search form and filters */
+echo CHtml::openTag("div");
+  echo CHtml::beginForm();
+    echo "Search ".CHtml::activeTextField(Equipment::model(), "name");
+    echo CHtml::submitButton("Search");
+    $list = CHtml::listData($this->getAllEquipmentTypes(),
+			    "equipment_type_id","name");
+
+    echo CHtml::dropDownList("Types",EquipmentType::model(),
+	  $list, array("empty"=> "Select Type"));
+  echo CHtml::endForm();
+echo CHtml::closeTag("div");
+
+echo CHTML::closeTag("br");
+
+/*Equipment listing */
+
 $equipment = $this->getEquipment();
 
 $listContainer = array(
@@ -47,6 +64,9 @@ for($x = 0; $x < sizeof($equipment); $x++)
       echo CHtml::closeTag("p");
       echo CHtml::openTag("p");
         echo "<b>Description</b>: ".$equipment[$x]->description;
+      echo CHtml::closeTag("p");
+      echo CHtml::openTag("p");
+        echo "<b>Availability</b>: "; //TODO: See if equipment item is available.
       echo CHtml::closeTag("p");
     echo CHtml::closeTag("div");
   echo CHtml::closeTag("div"); // close listRow
