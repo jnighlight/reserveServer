@@ -52,6 +52,7 @@ CREATE TABLE `equipment` (
   `model_number` varchar(30) DEFAULT NULL,
   `description` varchar(200) DEFAULT NULL,
   `name` varchar(20) NOT NULL,
+  `image_url` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`equipment_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -178,6 +179,7 @@ CREATE TABLE `room` (
   `room_number` int(11) NOT NULL,
   `building_id` int(11) NOT NULL,
   `description` varchar(200) DEFAULT NULL,
+  `image_url` varchar(150) DEFAULT NULL,
   PRIMARY KEY (`room_id`),
   KEY `building_id` (`building_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
@@ -396,4 +398,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-02  5:33:25
+-- Dump completed on 2014-01-02 21:05:19
