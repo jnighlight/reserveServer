@@ -1,0 +1,49 @@
+/*
+  Custom CSS file
+  styles reservation listings.
+*/
+
+/* Style the whole reservation list */
+#reservation_list
+{
+  width:90%;
+}
+/* Stylize each row */
+#reservation_list .reservation_list_row
+{
+  border-style:solid;
+  border-width:2px;
+  border-color:#56C5FE;
+
+  width:100%;
+  height:100px;
+
+  margin-bottom:5px;
+}
+
+/* Stylize the image of each piece of equipment */
+#reservation_list .reservation_list_row .reservation_list_image
+{
+  width:30%;
+  height:80%;
+}
+
+/* Stylize the description of each piece of equipment */
+#reservation_list .reservation_list_row .reservation_list_description
+{
+  float:right;
+  width:60%;
+}
+
+/* Stylize the description title of each piece of equipment */
+#reservation_list .reservation_list_row .reservation_list_description .reservation_list_description_title
+{
+  font-size:20px;
+  font-weight:bold;
+}
+
+/* Styelize the description text */
+#reservation_list .reservation_list_row .reservation_list_description p
+{
+  margin-bottom:2px;
+}
