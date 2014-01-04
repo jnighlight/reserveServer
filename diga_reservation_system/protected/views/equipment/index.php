@@ -44,6 +44,10 @@ $listDescriptionTitle = array(
   'class' => 'reservation_list_description_title',
 );
 
+$listDescriptionDropDown = array(
+  'class' => 'reservation_list_dropdown',
+);
+
 echo CHtml::openTag("div", $listContainer);
 
 
@@ -68,9 +72,28 @@ for($x = 0; $x < sizeof($equipment); $x++)
       echo CHtml::openTag("p");
         echo "<b>Availability</b>: "; //TODO: See if equipment item is available.
       echo CHtml::closeTag("p");
-    echo CHtml::closeTag("div");
+	
+    echo CHtml::closeTag("div"); // close list description
   echo CHtml::closeTag("div"); // close listRow
-}
 
+  $accessories = $this->getAccessories($equipment[$x]->equipment_id);
+  //echo CHtml::openTag("div");
+//  echo CHtml::openTag("div",$listDescriptionDropDown);
+  echo CHtml::openTag("div",$listDescription);
+      echo CHtml::openTag("p",$listDescriptionTitle);
+        echo "Accessories";
+      echo CHtml::closeTag("p");
+  echo CHtml::openTag("ul");
+  for($y = 0; $y < sizeof($accessories); $y++)
+  {
+    echo CHtml::openTag("li");
+    echo $accessories[$y]->name;
+    echo CHtml::closeTag("li");
+  }
+  echo CHtml::closeTag("ul");
+  echo CHtml::closeTag("div");
+
+  //echo CHtml::closeTag("div"); // close drop-down div
+}
 echo CHtml::closeTag("div");
 ?>
