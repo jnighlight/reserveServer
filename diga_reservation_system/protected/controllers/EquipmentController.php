@@ -20,6 +20,15 @@ class EquipmentController extends Controller
           return $equipment->findAll($criteria);
 	}
 
+	public function getSpecs($equipment_id)
+	{
+	  $criteria = new CDbCriteria;
+	    $condition = "equipment_id = ".$equipment_id; 
+          $criteria->condition = $condition;
+	  $specs = Specification::model()->findAll($criteria);
+	  return $specs;
+	}
+
 	public function getAccessories($equipment_id)
 	{
 	  $equipment_accessories = EquipmentAccessory::model();
