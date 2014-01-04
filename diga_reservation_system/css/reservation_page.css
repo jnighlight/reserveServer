@@ -36,14 +36,22 @@
 }
 
 /* Stylize the description title of each piece of equipment */
-#reservation_list .reservation_list_row .reservation_list_description .reservation_list_description_title
+.reservation_list_description .reservation_list_description_title
 {
   font-size:20px;
   font-weight:bold;
 }
 
-/* Styelize the description text */
-#reservation_list .reservation_list_row .reservation_list_description p
+/* Stylize the description text */
+.reservation_list_description p
 {
   margin-bottom:2px;
+}
+
+/* Stylize the dropdown description div */
+.reservation_list_dropdown p
+{
+  //background-color:#00A6FB;
+  //color:white;
+  opacity:0.8;
 }
