@@ -16,6 +16,31 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `accessory`
+--
+
+DROP TABLE IF EXISTS `accessory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `accessory` (
+  `accessory_id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `description` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`accessory_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `accessory`
+--
+
+LOCK TABLES `accessory` WRITE;
+/*!40000 ALTER TABLE `accessory` DISABLE KEYS */;
+INSERT INTO `accessory` VALUES (1,'USB Cable',NULL),(2,'Power Adapter',NULL),(3,'Carrying Bag',NULL),(4,'Instruction Manual',NULL);
+/*!40000 ALTER TABLE `accessory` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `building`
 --
 
@@ -67,6 +92,30 @@ LOCK TABLES `equipment` WRITE;
 /*!40000 ALTER TABLE `equipment` DISABLE KEYS */;
 INSERT INTO `equipment` VALUES (1,'serial_number','manufacturer','model_number','HOORAY. LOOK AT ME!. I\'M A DESCRIPTION!.','PowerShot G16','http://www.usa.canon.com/CUSA/assets/app/images/cameras/powershot/PS_G16/g16_586x186.gif',1),(2,'serial_number','manufacturer','model_number','LOOK AT ME, I AM ALSO A DESCRIPTION!!','Vixia HF R40','http://www.usa.canon.com/CUSA/assets/app/images/camcorder/VIXIA_HF_R40/vixia_hfr40_586x186.gif',2);
 /*!40000 ALTER TABLE `equipment` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `equipment_accessory`
+--
+
+DROP TABLE IF EXISTS `equipment_accessory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `equipment_accessory` (
+  `equipment_id` bigint(20) NOT NULL DEFAULT '0',
+  `accessory_id` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`equipment_id`,`accessory_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `equipment_accessory`
+--
+
+LOCK TABLES `equipment_accessory` WRITE;
+/*!40000 ALTER TABLE `equipment_accessory` DISABLE KEYS */;
+INSERT INTO `equipment_accessory` VALUES (1,1),(1,2),(2,1),(2,2),(2,3),(2,4);
+/*!40000 ALTER TABLE `equipment_accessory` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -403,4 +452,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-03  5:31:42
+-- Dump completed on 2014-01-03 21:16:21
