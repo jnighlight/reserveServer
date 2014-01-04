@@ -338,6 +338,32 @@ LOCK TABLES `room_reservation_policy` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `specification`
+--
+
+DROP TABLE IF EXISTS `specification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `specification` (
+  `specification_id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(20) NOT NULL,
+  `value` varchar(20) NOT NULL,
+  `equipment_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`specification_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `specification`
+--
+
+LOCK TABLES `specification` WRITE;
+/*!40000 ALTER TABLE `specification` DISABLE KEYS */;
+INSERT INTO `specification` VALUES (1,'Megapixel','12.1',1),(2,'Optical Zoom','5.0x',1),(3,'Digital Zoom','4.0x',1);
+/*!40000 ALTER TABLE `specification` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `user`
 --
 
@@ -452,4 +478,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-04  2:50:09
+-- Dump completed on 2014-01-04  5:32:42
