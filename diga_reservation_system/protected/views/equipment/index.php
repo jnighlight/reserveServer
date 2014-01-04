@@ -48,6 +48,10 @@ $listDescriptionDropDown = array(
   'class' => 'reservation_list_dropdown',
 );
 
+$listDescriptionDropDownSection = array(
+  'class' => 'reservation_list_dropdown_section',
+);
+
 echo CHtml::openTag("div", $listContainer);
 
 
@@ -66,9 +70,11 @@ for($x = 0; $x < sizeof($equipment); $x++)
       echo CHtml::openTag("p");
         echo "<b>Type</b>: ".$this->getEquipmentType($equipment[$x]->equipment_type_id);
       echo CHtml::closeTag("p");
+	/*
       echo CHtml::openTag("p");
         echo "<b>Description</b>: ".$equipment[$x]->description;
       echo CHtml::closeTag("p");
+	*/
       echo CHtml::openTag("p");
         echo "<b>Availability</b>: "; //TODO: See if equipment item is available.
       echo CHtml::closeTag("p");
@@ -76,10 +82,11 @@ for($x = 0; $x < sizeof($equipment); $x++)
     echo CHtml::closeTag("div"); // close list description
   echo CHtml::closeTag("div"); // close listRow
 
-  $accessories = $this->getAccessories($equipment[$x]->equipment_id);
-  //echo CHtml::openTag("div");
-//  echo CHtml::openTag("div",$listDescriptionDropDown);
+  echo CHtml::openTag("div",$listDescriptionDropDown);
   echo CHtml::openTag("div",$listDescription);
+  // Accessory Section --------------------------------
+  $accessories = $this->getAccessories($equipment[$x]->equipment_id);
+  echo CHtml::openTag("div",$listDescriptionDropDownSection);
       echo CHtml::openTag("p",$listDescriptionTitle);
         echo "Accessories";
       echo CHtml::closeTag("p");
@@ -91,9 +98,44 @@ for($x = 0; $x < sizeof($equipment); $x++)
     echo CHtml::closeTag("li");
   }
   echo CHtml::closeTag("ul");
-  echo CHtml::closeTag("div");
 
-  //echo CHtml::closeTag("div"); // close drop-down div
+  echo CHtml::closeTag("div"); // close accessory section
+  // End Accessory Section -----------------------------
+
+  // Specification Section
+  echo CHtml::openTag("div",$listDescriptionDropDownSection);
+    echo CHtml::openTag("p",$listDescriptionTitle);
+        echo "Specifications";
+      echo CHtml::closeTag("p");
+
+      $specs = $this->getSpecs($equipment[$x]->equipment_id);
+
+      echo CHtml::openTag("ul");
+      for($y = 0; $y < sizeof($specs); $y++)
+      {
+        echo CHtml::openTag("li");
+	  echo $specs[$y]->name.": ".$specs[$y]->value;
+	echo CHtml::closeTag("li");
+      }
+      echo CHtml::closeTag("ul");
+
+  echo CHtml::closeTag("div"); // close specifications section
+  // End Specification Section ------------------------------
+
+  // Description Section
+  echo CHtml::openTag("div",$listDescriptionDropDownSection);
+    echo CHtml::openTag("p",$listDescriptionTitle);
+      echo "<b>Description</b>: ";
+    echo CHtml::closeTag("p");
+    echo CHtml::openTag("p");
+      echo $equipment[$x]->description;
+    echo CHtml::closeTag("p");
+  echo CHtml::closeTag("div");
+  // End Description Section
+
+  echo CHtml::closeTag("div"); // close list description
+
+  echo CHtml::closeTag("div"); // close drop-down div
 }
 echo CHtml::closeTag("div");
 ?>
