@@ -61,8 +61,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=diga_reservation_system',
 			'emulatePrepare' => true,
-			'username' => 'username',
-			'password' => 'password',
+			'username' => 'digaReserveSys',
+			'password' => 'MagicalYiiPass',
 			'charset' => 'utf8',
 		),
 		
