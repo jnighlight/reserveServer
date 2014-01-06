@@ -29,15 +29,17 @@ class RoomController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				//'users'=>array('@'),
+				'roles'=>array('user','workStudy','admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				//'users'=>array('@'),
+				'roles'=>array('workStudy','admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -71,10 +73,14 @@ class RoomController extends Controller
 	public function actionCreate()
 	{
 		$model=new Room;
-		//$build = $this -> getBuildings();
-		//$buildList = CHtml::listData($build, 'building_id', 'name');
-		//$buildMenu = CHtml::dropDownList('building_stuff', Building::model(), $buildList, array('empty' => '(Select one stupid)'));
-		
+		/**$userLvl = Yii::app()->db->createCommand()
+		->select('user_level_id')
+		->from('user')
+		->where('first_name =\'Jacob\'')
+		->queryRow();
+		echo($userLvl['user_level_id']);
+		echo(Yii::app()->user->id);*/
+		//$role = Yii::app()->db->createCommand()->select('user_level_id')->from('user')->where('email=\''.Yii::app()->user->id.'\'')->queryRow();echo($role['user_level_id']);
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

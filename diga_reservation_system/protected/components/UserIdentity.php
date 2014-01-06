@@ -31,9 +31,15 @@ class UserIdentity extends CUserIdentity
 	    $this->errorCode=self::ERROR_PASSWORD_INVALID;
 	  else
 	  {
+	    $this->_id = $record->email;
 	    $this->errorCode=self::ERROR_NONE;
 	  }
 	  return !$this->errorCode;
+	}
+
+	public function getId()
+	{
+		return $this->_id;
 	}
 	
 	/**

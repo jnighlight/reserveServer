@@ -48,6 +48,7 @@ return array(
 		'authManager'=>array(
 			'class'=>'CDbAuthManager',
 			'connectionID'=>'db',
+			'defaultRoles'=>array('admin','user','workStudy'),
 		),
 
 		// uncomment the following to enable URLs in path-format
