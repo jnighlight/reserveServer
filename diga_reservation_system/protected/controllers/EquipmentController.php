@@ -19,7 +19,7 @@ class EquipmentController extends Controller
 		    //print("Equipment_id = ".$_POST['equipment_id']);
 		    
 		    //$url = $this->createUrl("/checkout/?equipment_id=".$_POST['equipment_id']);
-		    //$this->redirect(array("/equipment"));
+		    //$this->redirect(array("/checkout"));
 		  }
 		}
 		
