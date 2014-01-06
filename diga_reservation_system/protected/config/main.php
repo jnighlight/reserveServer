@@ -37,8 +37,20 @@ return array(
 			// enable cookie-based authentication
 			'allowAutoLogin'=>true,
 		),
-		// uncomment the following to enable URLs in path-format
 		
+		'db'=>array(
+			'class'=>'CDbConnection',
+			'connectionString' => 'mysql:host=localhost;dbname=auth_database',
+			'username' => 'digaReserveSys',
+			'password' => 'MagicalYiiPass',
+			'charset' => 'utf8',
+		),
+		'authManager'=>array(
+			'class'=>'CDbAuthManager',
+			'connectionID'=>'db',
+		),
+
+		// uncomment the following to enable URLs in path-format
 		'urlManager'=>array(
 			'urlFormat'=>'path',
 			'showScriptName'=>false,
