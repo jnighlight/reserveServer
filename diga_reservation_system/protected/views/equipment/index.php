@@ -4,7 +4,6 @@
 $this->breadcrumbs=array(
 	'Equipment',
 );
-
 /* Search form and filters */
 echo CHtml::openTag("div");
   echo CHtml::beginForm();
@@ -19,6 +18,8 @@ echo CHtml::openTag("div");
 echo CHtml::closeTag("div");
 
 echo CHTML::closeTag("br");
+
+//$this->redirect(array("checkout/"));
 
 /*Equipment listing */
 
@@ -52,8 +53,14 @@ $listDescriptionDropDownSection = array(
   'class' => 'reservation_list_dropdown_section',
 );
 
-echo CHtml::openTag("div", $listContainer);
+/*
+$equipmentSubmit = array(
+  'name' => 'equipment_id',
+);
+*/
 
+echo CHtml::beginForm();
+echo CHtml::openTag("div", $listContainer);
 
 for($x = 0; $x < sizeof($equipment); $x++)
 {
@@ -78,6 +85,14 @@ for($x = 0; $x < sizeof($equipment); $x++)
       echo CHtml::openTag("p");
         echo "<b>Availability</b>: "; //TODO: See if equipment item is available.
       echo CHtml::closeTag("p");
+
+      echo CHtml::htmlButton("Checkout",
+	array(
+	  'type' => 'submit',
+  	  'name' => 'equipment_id',
+	  'value' => $equipment[$x]->equipment_id,
+	));
+
 	
     echo CHtml::closeTag("div"); // close list description
   echo CHtml::closeTag("div"); // close listRow
@@ -138,4 +153,5 @@ for($x = 0; $x < sizeof($equipment); $x++)
   echo CHtml::closeTag("div"); // close drop-down div
 }
 echo CHtml::closeTag("div");
+echo CHtml::endForm();
 ?>
