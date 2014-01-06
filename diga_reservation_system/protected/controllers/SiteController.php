@@ -98,12 +98,33 @@ class SiteController extends Controller
 			// validate user input and redirect to the previous page if valid
 			if($model->validate() && $model->login())
 				//$this->redirect(Yii::app()->user->returnUrl);
-				$this->redirect(array("main/"));
+				$this->redirect(array("site/index"));
 
 		}
 		// display the login form
 		$this->render('login',array('model'=>$model));
 	}
+
+	/*
+	  checks to see if user is an admin
+	*/
+
+	public function isUserAdmin()
+	{
+	  // Real logic to come once Jacob figures it out.
+	  return true;
+	}
+
+	/*
+          checks to see if user is workstudy
+        */
+
+        public function isUserWorkstudy()
+        {
+          // Real logic to come once Jacob figures it out.
+          return true;
+        }
+
 
 	/**
 	 * Logs out the current user and redirect to homepage.

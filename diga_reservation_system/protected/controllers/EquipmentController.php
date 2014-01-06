@@ -4,9 +4,8 @@ class EquipmentController extends Controller
 {
 	public function actionIndex()
 	{
-		$this->render('index');
+	//	$this->render('index');
 
-		
 		if(isset($_POST['equipment_id']))
 	        {
 		  if(!is_numeric($_POST['equipment_id']) ||
@@ -16,13 +15,12 @@ class EquipmentController extends Controller
 		    }
 		  else
 		  {
-		    //print("Equipment_id = ".$_POST['equipment_id']);
-		    
-		    //$url = $this->createUrl("/checkout/?equipment_id=".$_POST['equipment_id']);
-		    //$this->redirect(array("/equipment"));
+		    //$url = $this->createUrl("/checkout?equipment_id=".$_POST['equipment_id']);
+		    $this->redirect(
+		      array("/checkout/?equipment_id=".$_POST['equipment_id']));
 		  }
 		}
-		
+		$this->render('index');
 	}
 
 	public function getEquipment()
@@ -40,27 +38,12 @@ class EquipmentController extends Controller
 
 	public function getSpecs($equipment_id)
 	{
-	  $criteria = new CDbCriteria;
-	    $condition = "equipment_id = ".$equipment_id; 
-          $criteria->condition = $condition;
-	  $specs = Specification::model()->findAll($criteria);
-	  return $specs;
+	  return Equipment::model()->getSpecs($equipment_id);
 	}
 
 	public function getAccessories($equipment_id)
 	{
-	  $equipment_accessories = EquipmentAccessory::model();
-	  $criteria = new CDbCriteria;
-	    $condition = "equipment_id = ".$equipment_id;
-	  $criteria->condition = $condition;
-	  $resulting_equipment_accessories = $equipment_accessories->findAll($criteria);
-	  //return $resulting_equipment_accessories;
-	  $resultAccessories = array();
-	  for($x = 0; $x < sizeof($resulting_equipment_accessories); $x++)
-	  {
-	    $resultAccessories[] = Accessory::model()->find("accessory_id = ".$resulting_equipment_accessories[$x]->accessory_id);
-	  }
-	  return $resultAccessories;
+	  return Equipment::model()->getAccessories($equipment_id);
 	}
 
 	public function getAllEquipmentTypes()
