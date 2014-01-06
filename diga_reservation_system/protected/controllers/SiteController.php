@@ -30,6 +30,10 @@ class SiteController extends Controller
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
 		$this->render('index');
+		if(isset($_POST['reserve_room']))
+			{$this->redirect(array("/room"));}
+		elseif(isset($_POST['reserve_equipment']))
+			{$this->redirect(array("/equipment"));}
 		//print(Yii::app()->user->getId());
 	}
 

@@ -5,11 +5,11 @@ class MainController extends Controller
 	public function actionIndex()
 	{
 		$this->render('index');
-
+		
 		if(isset($_POST['reserve_room']))
-		  print("test");
+		  {$this->redirect(array("/room"));}
 		elseif(isset($_POST['reserve_equipment']))
-		  $this->redirect(array("/equipment"));
+		  {$this->redirect(array("/equipment"));}
 	}
 
 	/*
