@@ -5,6 +5,24 @@ class EquipmentController extends Controller
 	public function actionIndex()
 	{
 		$this->render('index');
+
+		
+		if(isset($_POST['equipment_id']))
+	        {
+		  if(!is_numeric($_POST['equipment_id']) ||
+		    empty($_POST['equipment_id']))
+		    {
+		      print("Invalid piece of equipment");
+		    }
+		  else
+		  {
+		    //print("Equipment_id = ".$_POST['equipment_id']);
+		    
+		    //$url = $this->createUrl("/checkout/?equipment_id=".$_POST['equipment_id']);
+		    //$this->redirect(array("/equipment"));
+		  }
+		}
+		
 	}
 
 	public function getEquipment()
