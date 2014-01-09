@@ -1,0 +1,145 @@
+/*
+  The style sheet for the checkout page
+*/
+
+.checkout_container
+{
+  height:auto;
+  overflow-y:auto;
+  width:100%;
+  //background:red;
+  background-color:#2A7BAC;
+}
+
+.user_section, .equipment_section
+{
+  float:left;
+  //display:none;
+}
+
+.equipment_section
+{
+  width:40%;
+
+  background-color:#61A3CB;
+  overflow:auto;
+  color:white;
+
+  border-style:solid;
+  border-width:3px;
+  border-color:#2A7BAC;
+
+  padding-top:10px;
+
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.equipment_section img
+{
+  width:250px;
+  height:150px;
+  background-color:white;
+
+  border-style:solid;
+  border-width:3px;
+  border-color:#2A7BAC;
+
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.equipment_section label
+{
+  font-size:15px;
+  //text-align:center;
+}
+
+.equipment_section p
+{
+  margin-bottom:2px;
+  font-size:20px;
+  text-align:center;
+}
+
+.accessory_checklist_section
+{
+  margin-left:auto;
+  margin-right:auto;
+  width:200px;
+}
+
+.accessory_checklist_section input
+{ 
+  vertical-align:bottom;
+  position:relative;
+}
+
+.accessory_checklist_section label
+{
+  padding-left:15px;
+  text-indent:-15px;
+}
+
+.checkout_settings_section
+{
+  margin-left:auto;
+  margin-right:auto;
+  width:100px;
+}
+
+.notes_section
+{
+  //background-color:red;
+  width:80%;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.notes_section textarea
+{
+  width:100%;
+  height:100px;
+}
+
+.user_section
+{
+  width:28%;
+  height:auto;
+  padding-top:30px;
+  
+  background-color:#2A7BAC;
+  overflow:auto;
+  color:white;
+/*
+  border-style:solid;
+  border-width:3px;
+  border-color:#61A3CB;
+  padding-bottom:20px;
+*/
+}
+
+.user_section p
+{
+  text-align:center;
+}
+
+.user_section input
+{
+  display:block;
+}
+
+.user_section_title
+{
+  font-size:25px;
+  padding-bottom:0px;
+  margin-bottom:10px;
+}
+
+.user_section_forms
+{
+  width:200px;
+  margin-left:auto;
+  margin-right:auto;
+}
