@@ -2,88 +2,185 @@
 
 class EquipmentController extends Controller
 {
-	public function actionIndex()
-	{
-	//	$this->render('index');
+	/**
+	  Retrieves all equipment types
+	*/
 
-		if(isset($_POST['equipment_id']))
-	        {
-		  if(!is_numeric($_POST['equipment_id']) ||
-		    empty($_POST['equipment_id']))
-		    {
-		      print("Invalid piece of equipment");
-		    }
-		  else
-		  {
-		    //$url = $this->createUrl("/checkout?equipment_id=".$_POST['equipment_id']);
-		    $this->redirect(
-		      array("/checkout/?equipment_id=".$_POST['equipment_id']));
-		  }
-		}
-		$this->render('index');
+	public function getEquipmentTypes()
+	{
+	  return EquipmentType::model()->findAll();
 	}
 
-	public function getEquipment()
-	{
-	  $equipment = Equipment::model();
-	  $criteria = new CDbCriteria;
-	    $limit = 10;
-	    $offset = 0;
-	  $criteria->limit = $limit;
-	  $criteria->offset = $offset;
-	  $criteria->order = "name ASC";
 
-          return $equipment->findAll($criteria);
-	}
+	/**
+	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 */
+	public $layout='//layouts/column2';
 
-	public function getSpecs($equipment_id)
-	{
-	  return Equipment::model()->getSpecs($equipment_id);
-	}
-
-	public function getAccessories($equipment_id)
-	{
-	  return Equipment::model()->getAccessories($equipment_id);
-	}
-
-	public function getAllEquipmentTypes()
-	{
-	  return EquipmentType::model()->findAll(
-	    array('order'=>'name'));
-	}
-
-	public function getEquipmentType($equipment_type_id)
-	{
-	  $equipment_type = EquipmentType::model();
-	  $type = $equipment_type->findByPK($equipment_type_id);
-
-          return $type->name;
-	}
-
-	// Uncomment the following methods and override them if needed
-	/*
+	/**
+	 * @return array action filters
+	 */
 	public function filters()
 	{
-		// return the filter configuration for this controller, e.g.:
 		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
+			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update','admin','delete'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),
+			array('deny',  // deny all users
+				'users'=>array('*'),
 			),
 		);
 	}
 
-	public function actions()
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionView($id)
 	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
+		$this->render('view',array(
+			'model'=>$this->loadModel($id),
+		));
 	}
-	*/
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionCreate()
+	{
+		$model=new Equipment;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Equipment']))
+		{
+			$model->attributes=$_POST['Equipment'];
+			// For some reason, the equipment_type_id was not saved in the model automatically as part of the statement above, so I had to use the statement below to ensure its addition.
+
+			$model->equipment_type_id = $_POST['Equipment']['equipment_type_id'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->equipment_id));
+		}
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdate($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['Equipment']))
+		{
+			$model->attributes=$_POST['Equipment'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->equipment_id));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'admin' page.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDelete($id)
+	{
+		$this->loadModel($id)->delete();
+
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+	}
+
+	/**
+	 * Lists all models.
+	 */
+	public function actionIndex()
+	{
+		$dataProvider=new CActiveDataProvider('Equipment');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}
+
+	/**
+	 * Manages all models.
+	 */
+	public function actionAdmin()
+	{
+		$model=new Equipment('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['Equipment']))
+			$model->attributes=$_GET['Equipment'];
+
+		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer $id the ID of the model to be loaded
+	 * @return Equipment the loaded model
+	 * @throws CHttpException
+	 */
+	public function loadModel($id)
+	{
+		$model=Equipment::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 * @param Equipment $model the model to be validated
+	 */
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='equipment-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
 }
