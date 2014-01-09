@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: diga_reservation_system
 -- ------------------------------------------------------
--- Server version	5.5.34-0ubuntu0.12.04.1
+-- Server version	5.5.34-0ubuntu0.13.10.1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -160,7 +160,7 @@ CREATE TABLE `equipment` (
   `equipment_type_id` int(11) NOT NULL,
   PRIMARY KEY (`equipment_id`),
   KEY `equipment_type_id` (`equipment_type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,7 +183,9 @@ DROP TABLE IF EXISTS `equipment_accessory`;
 CREATE TABLE `equipment_accessory` (
   `equipment_id` bigint(20) NOT NULL DEFAULT '0',
   `accessory_id` int(11) NOT NULL DEFAULT '0',
-  PRIMARY KEY (`equipment_id`,`accessory_id`)
+  PRIMARY KEY (`equipment_id`,`accessory_id`),
+  KEY `accessory_id` (`accessory_id`),
+  CONSTRAINT `equipment_accessory_ibfk_1` FOREIGN KEY (`accessory_id`) REFERENCES `accessory` (`accessory_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -193,7 +195,7 @@ CREATE TABLE `equipment_accessory` (
 
 LOCK TABLES `equipment_accessory` WRITE;
 /*!40000 ALTER TABLE `equipment_accessory` DISABLE KEYS */;
-INSERT INTO `equipment_accessory` VALUES (1,1),(1,2),(2,1),(2,2),(2,3),(2,4);
+INSERT INTO `equipment_accessory` VALUES (1,1),(2,1),(1,2),(2,2),(2,3),(2,4);
 /*!40000 ALTER TABLE `equipment_accessory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -235,12 +237,16 @@ DROP TABLE IF EXISTS `equipment_reservation`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `equipment_reservation` (
   `equipment_reservation_id` int(11) NOT NULL AUTO_INCREMENT,
-  `email` varchar(30) NOT NULL,
+  `borrowers_email` varchar(30) NOT NULL,
   `equipment_id` bigint(20) NOT NULL,
   `start_date_time` datetime NOT NULL,
   `end_date_time` datetime NOT NULL,
-  PRIMARY KEY (`equipment_reservation_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `notes` varchar(200) DEFAULT NULL,
+  `checkout_assistant_email` varchar(30) NOT NULL,
+  PRIMARY KEY (`equipment_reservation_id`),
+  KEY `borrowers_email` (`borrowers_email`),
+  KEY `checkout_assistant_email` (`checkout_assistant_email`)
+) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -249,7 +255,33 @@ CREATE TABLE `equipment_reservation` (
 
 LOCK TABLES `equipment_reservation` WRITE;
 /*!40000 ALTER TABLE `equipment_reservation` DISABLE KEYS */;
+INSERT INTO `equipment_reservation` VALUES (47,'mburton1@stetson.edu',2,'2014-01-09 15:56:09','2014-01-11 15:56:09','Notes notes. NOOOOOOTES!!','jlites@stetson.edu');
 /*!40000 ALTER TABLE `equipment_reservation` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `equipment_reservation_accessory`
+--
+
+DROP TABLE IF EXISTS `equipment_reservation_accessory`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `equipment_reservation_accessory` (
+  `equipment_reservation_id` bigint(20) NOT NULL,
+  `accessory_id` int(11) NOT NULL,
+  `present` tinyint(1) NOT NULL,
+  PRIMARY KEY (`equipment_reservation_id`,`accessory_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `equipment_reservation_accessory`
+--
+
+LOCK TABLES `equipment_reservation_accessory` WRITE;
+/*!40000 ALTER TABLE `equipment_reservation_accessory` DISABLE KEYS */;
+INSERT INTO `equipment_reservation_accessory` VALUES (47,1,1),(47,2,1),(47,3,0),(47,4,0);
+/*!40000 ALTER TABLE `equipment_reservation_accessory` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -557,4 +589,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-06 17:36:15
+-- Dump completed on 2014-01-09 15:58:54
