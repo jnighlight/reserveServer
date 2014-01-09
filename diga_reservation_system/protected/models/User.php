@@ -28,6 +28,28 @@ class User extends CActiveRecord
 		return parent::model($className);
 	}
 
+	// Checks the password login combination
+	public function validateLogin($email, $password)
+	{
+	  $user = User::model()->findByPk($email);
+
+	  if($user == null) // not found
+	  {
+	    return false;
+	  }
+	  else // user was found
+	  {
+	    if($user->password == $this->password)
+	    {
+	      return true;
+	    }
+	    else
+	    {
+	      return false;
+	    }
+	  }
+	}
+
 	/**
 	 * @return string the associated database table name
 	 */
@@ -44,10 +66,10 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('password, password_repeat, first_name, last_name, phone_number, id_number', 'required'),
+			array('email, password, password_repeat, first_name, last_name, phone_number, id_number', 'required'),
 			array('user_level_id', 'numerical', 'integerOnly'=>true),
 			array('email', 'length', 'max'=>30),
-			array('password', 'length', 'max'=>100),
+			array('password', 'length', 'min'=>3,'max'=>100),
 			array('first_name, last_name', 'length', 'max'=>20),
 			array('phone_number', 'length', 'max'=>15),
 			array('id_number', 'length', 'max'=>10),
