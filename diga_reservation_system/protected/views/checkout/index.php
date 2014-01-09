@@ -2,8 +2,15 @@
 /* @var $this CheckoutController */
 
 $this->breadcrumbs=array(
+        'Equipment','Checkout'
+);
+
+
+/*
+$this->breadcrumbs=array(
 	'Checkout',
 );
+*/
 
 if(isset($_GET['equipment_id']))
 {
@@ -14,56 +21,43 @@ if(isset($_GET['equipment_id']))
   }
   else
   {
-    $checkoutContainer = array(
-      'class'=>'checkout_container',
-    );
+    $checkoutContainer = array('class'=>'checkout_container',);
 
-    $userSection = array(
-      'class'=>'user_section',
-    );
+    $userSection = array('class'=>'user_section',);
 
-    $equipmentSection = array(
-      'class'=>'equipment_section',
-    );
+    $equipmentSection = array('class'=>'equipment_section',);
 
-    $accessoryChecklistSection = array(
-      'class'=>'accessory_checklist_section',
-    );
+    $accessoryChecklistSection = array('class'=>'accessory_checklist_section',);
 
-    $checkoutSettings = array(
-      'class'=>'checkout_settings_section',
-    );
+    $checkoutSettings = array('class'=>'checkout_settings_section',);
 
-    $userSectionTitle = array(
-      'class'=>'user_section_title',
-    );
+    $notes_section = array('class'=> 'notes_section',);
 
-    // The names of the checkout manager and checkoutee
-    // email and password forms
+    $userSectionTitle = array('class'=>'user_section_title',);
 
-    $emailCheckoutManager = array(
-      'name'=>'checkout_manager_email',
-    );
+    $userSectionForms = array('class'=>'user_section_forms',);
 
-    $emailCheckoutee = array(
-      'name'=>'checkoutee_email',
-    );
+    //$accessoryCheckbox = array('name'=>'accessory_check_list[]',);
 
-    $passwordCheckoutManager = array(
-      'name'=>'checkoutee_manager_password',
-    );
+    // TODO: Add other form names after testing the current ones.
 
-    $passwordCheckoutee = array(
-      'name'=>'checkoutee_password',
-    );
-	
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/checkout_page.css");
+
+    //echo CHtml::beginForm("","post");
+
+$form = $this->beginWidget('CActiveForm', array(
+        'id'=>'checkout-form',
+        'enableClientValidation'=>true,
+        'clientOptions'=>array(
+                'validateOnSubmit'=>true,
+        ),
+));
+
+
+    echo $form->errorSummary(array($checkoutAssistant,$borrower));
 
     // Checkout container
     echo CHtml::openTag("div",$checkoutContainer);
-
-    //echo CHtml::label("Email","Email");
-    //echo CHtml::label("Password","Password");
 
       // Start Checkout manager section
       echo CHtml::openTag("div",$userSection);
@@ -72,10 +66,16 @@ if(isset($_GET['equipment_id']))
 	  echo "Checkout Manager";
         echo CHtml::closeTag("p");
 
-        echo CHtml::label("Email","checkout_manager_email");
-        echo CHtml::activeEmailField(User::model(),"email",$emailCheckoutManager);
-	echo CHtml::label("Password","checkout_manager_password");
-        echo CHtml::activePasswordField(User::model(),"password",$passwordCheckoutManager);
+	echo CHtml::openTag("div",$userSectionForms);
+	  // Checkout Manager email
+	  echo $form->labelEx($checkoutAssistant,"email");
+	  echo $form->textField($checkoutAssistant,"email");
+	  echo $form->error($checkoutAssistant,'email');
+	  // Checkout Manager password
+	  echo $form->labelEx($checkoutAssistant,"password");
+          echo $form->passwordField($checkoutAssistant,"password");
+          echo $form->error($checkoutAssistant,'password');
+	  echo CHtml::closeTag("div"); // close user input section
       echo CHtml::closeTag("div"); // close checkout manager section
       // End Checkout manager section
 
@@ -130,6 +130,22 @@ if(isset($_GET['equipment_id']))
 	echo CHtml::closeTag("div"); // close accessory checklist
 
 	echo CHtml::openTag("p");
+	  echo "Any notes to add about this reservation:";
+	echo CHtml::closeTag("p");
+	
+	echo CHtml::openTag("div",$notes_section); // description
+	  
+	  // Checkout Notes
+          echo $form->labelEx($checkoutAssistant,"notes");
+          echo $form->textArea($checkoutAssistant,"notes");
+          echo $form->error($checkoutAssistant,'notes');
+	  
+	  
+	  //echo CHtml::textArea("description");
+	  
+	echo CHtml::closeTag("div"); // close description
+
+	echo CHtml::openTag("p");
 	echo "* This is due back: 00/00/2014";
 	echo CHtml::closeTag("p");
           echo CHtml::closeTag("br");
@@ -146,15 +162,24 @@ if(isset($_GET['equipment_id']))
 	echo CHtml::openTag("p",$userSectionTitle);
           echo "Borrower";
         echo CHtml::closeTag("p");
-
-        echo CHtml::label("Email","checkoutee_email");
-        echo CHtml::activeEmailField(User::model(),"email",$emailCheckoutee);
-        echo CHtml::label("Password","checkoutee_password");
-        echo CHtml::activePasswordField(User::model(),"password",$passwordCheckoutee);
+	echo CHtml::openTag("div",$userSectionForms);
+	
+	  // Checkout Borrower email
+          echo $form->labelEx($borrower,"email");
+          echo $form->textField($borrower,"email");
+          echo $form->error($borrower,'email');
+          // Checkout Borrower password
+          echo $form->labelEx($borrower,"password");
+          echo $form->passwordField($borrower,"password");
+          echo $form->error($borrower,'password');
+	echo CHtml::closeTag("div"); // close user input section
       echo CHtml::closeTag("div"); // close checkout manager section
       // End Checkoutee manager section
 
     echo CHtml::closeTag("div"); // close checkout container.
+    //echo CHtml::endForm();
+
+    $this->endWidget();
   }
 }
 ?>
