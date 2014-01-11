@@ -27,12 +27,25 @@ class Controller extends CController
 	  /* If the user is not logged in and not already
 	     on the login page, force them to do so
 	  */
-	  $login = "site/login"; // login Controller/Action pair
+	  $loginPage = "site/login"; // login Controller/Action pair
+	  $registerPage = "user/create"; // register Controller/Action pair
 
+	  /*
           if((Yii::app()->user->getId() == null) &&
-	    (Yii::app()->urlManager->parseUrl(Yii::app()->request) != $login))
+	    ((Yii::app()->urlManager->parseUrl(Yii::app()->request) != $loginPage) && (Yii::app()->urlManager->parseUrl(Yii::app()->request) != $registerPage)  ))
           {
               $this->redirect(array("site/login"));
           }
+	  */
+
+	  // If the user is not logged in
+  	  if((Yii::app()->user->isGuest) == true)
+	  {
+	    // if the user is not on the login or register page
+	    if((Yii::app()->urlManager->parseUrl(Yii::app()->request) != $loginPage) && (Yii::app()->urlManager->parseUrl(Yii::app()->request) != $registerPage))
+	    {
+	      $this->redirect(array("site/login"));
+	    }
+	  }
         }
 }
