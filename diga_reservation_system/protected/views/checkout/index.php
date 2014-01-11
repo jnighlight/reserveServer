@@ -37,13 +37,10 @@ if(isset($_GET['equipment_id']))
 
     $userSectionForms = array('class'=>'user_section_forms',);
 
-    //$accessoryCheckbox = array('name'=>'accessory_check_list[]',);
-
-    // TODO: Add other form names after testing the current ones.
+    $error = array('class'=>'error',);
 
     Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/checkout_page.css");
 
-    //echo CHtml::beginForm("","post");
 
 $form = $this->beginWidget('CActiveForm', array(
         'id'=>'checkout-form',
@@ -54,7 +51,7 @@ $form = $this->beginWidget('CActiveForm', array(
 ));
 
 
-    echo $form->errorSummary(array($checkoutAssistant,$borrower));
+    //echo $form->errorSummary(array($checkoutAssistant,$borrower));
 
     // Checkout container
     echo CHtml::openTag("div",$checkoutContainer);
@@ -70,11 +67,11 @@ $form = $this->beginWidget('CActiveForm', array(
 	  // Checkout Manager email
 	  echo $form->labelEx($checkoutAssistant,"email");
 	  echo $form->textField($checkoutAssistant,"email");
-	  echo $form->error($checkoutAssistant,'email');
+	  echo $form->error($checkoutAssistant,'email',$error);
 	  // Checkout Manager password
 	  echo $form->labelEx($checkoutAssistant,"password");
           echo $form->passwordField($checkoutAssistant,"password");
-          echo $form->error($checkoutAssistant,'password');
+          echo $form->error($checkoutAssistant,'password',$error);
 	  echo CHtml::closeTag("div"); // close user input section
       echo CHtml::closeTag("div"); // close checkout manager section
       // End Checkout manager section
@@ -111,7 +108,7 @@ $form = $this->beginWidget('CActiveForm', array(
 	echo CHtml::closeTag("br");
 
 	// Accessories checklist
-        $accessories = $this->getAccessories($equipment_id);
+        $accessories = $equipment->getAccessories();
 
         echo CHtml::openTag("p");
           echo "Accessory Checklist";
@@ -138,7 +135,7 @@ $form = $this->beginWidget('CActiveForm', array(
 	  // Checkout Notes
           echo $form->labelEx($checkoutAssistant,"notes");
           echo $form->textArea($checkoutAssistant,"notes");
-          echo $form->error($checkoutAssistant,'notes');
+          echo $form->error($checkoutAssistant,'notes',$error);
 	  
 	  
 	  //echo CHtml::textArea("description");
@@ -167,11 +164,11 @@ $form = $this->beginWidget('CActiveForm', array(
 	  // Checkout Borrower email
           echo $form->labelEx($borrower,"email");
           echo $form->textField($borrower,"email");
-          echo $form->error($borrower,'email');
+          echo $form->error($borrower,'email',$error);
           // Checkout Borrower password
           echo $form->labelEx($borrower,"password");
           echo $form->passwordField($borrower,"password");
-          echo $form->error($borrower,'password');
+          echo $form->error($borrower,'password',$error);
 	echo CHtml::closeTag("div"); // close user input section
       echo CHtml::closeTag("div"); // close checkout manager section
       // End Checkoutee manager section
