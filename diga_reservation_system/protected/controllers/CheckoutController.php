@@ -4,7 +4,6 @@ class CheckoutController extends Controller
 {
 	public function actionIndex()
 	{
-
 		if(!isset($_GET['equipment_id'])) // equipment_id not set
 		{
 		  print("Invalid Request!");
@@ -21,19 +20,13 @@ class CheckoutController extends Controller
 		  }
 		  else // good to go
 		  {
-		//}
-		
+		    $equipment = Equipment::model()->findByPk($_GET['equipment_id']);
 		    // Model to be used to validate the checkout assistant
 		    $checkoutAssistant = new CheckoutAssistantForm;
 		    // Model to be used to validate the borrower
 		    $borrower = new BorrowerCheckoutForm;
 
 		    // Perform validation all all models
-/*
-		    $this->performAjaxValidation(
-		    $checkoutAssistant,
-		    $borrower);
-*/
 		    if(isset($_POST['CheckoutAssistantForm'],
 		             $_POST['BorrowerCheckoutForm']))
 		    {
@@ -57,17 +50,14 @@ class CheckoutController extends Controller
 			$later = date("Y-m-d H:i:s", strtotime($now . "+ 2 day"));
 			$reservation->start_date_time = $now;
 			$reservation->end_date_time = $later;
-			$reservation->equipment_id = $_GET['equipment_id'];
-			$reservation->save(false);
+			$reservation->equipment_id = $equipment->equipment_id;
 
-			//var_dump($_POST);
+			$reservation->save(false);
 
 			/*
 			  For some reason, the checkboxes related to acessory pieces are being identified with their IDs, which seem to be thier names with the spaces removed
 			*/
-
-			$accessories = Equipment::model()->getAccessories(
-				$_GET['equipment_id']);
+			$accessories = $equipment->getAccessories();
 
 			for($x = 0; $x < sizeof($accessories); $x++)
 			{
@@ -93,7 +83,15 @@ class CheckoutController extends Controller
 			    $equipment_reservation_accessory
                             ->present = false;
 			  }
+			  // Save the reservation
 			  $equipment_reservation_accessory->save(false);
+			  // Set that piece of equipments availability to be
+			  // false and save it
+			  $equipment->availability=false;
+			  $equipment->save(false);
+
+			  $this->redirect(
+                      	    array("/equipment_checkout_summary/?equipment_reservation_id=".$reservation->equipment_reservation_id));
 			}
 			
 		      }
