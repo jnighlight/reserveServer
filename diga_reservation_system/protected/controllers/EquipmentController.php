@@ -82,7 +82,7 @@ class EquipmentController extends Controller
 			$model->attributes=$_POST['Equipment'];
 			// For some reason, the equipment_type_id was not saved in the model automatically as part of the statement above, so I had to use the statement below to ensure its addition.
 
-			$model->equipment_type_id = $_POST['Equipment']['equipment_type_id'];
+			//$model->equipment_type_id = $_POST['Equipment']['equipment_type_id'];
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->equipment_id));
 		}
