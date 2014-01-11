@@ -4,8 +4,6 @@ class Equipment_reservationController extends Controller
 {
 	public function actionIndex()
 	{
-	//	$this->render('index');
-
 		if(isset($_POST['equipment_id']))
 	        {
 		  if(!is_numeric($_POST['equipment_id']) ||
@@ -15,7 +13,6 @@ class Equipment_reservationController extends Controller
 		    }
 		  else
 		  {
-		    //$url = $this->createUrl("/checkout?equipment_id=".$_POST['equipment_id']);
 		    $this->redirect(
 		      array("/checkout/?equipment_id=".$_POST['equipment_id']));
 		  }
@@ -34,16 +31,6 @@ class Equipment_reservationController extends Controller
 	  $criteria->order = "name ASC";
 
           return $equipment->findAll($criteria);
-	}
-
-	public function getSpecs($equipment_id)
-	{
-	  return Equipment::model()->getSpecs($equipment_id);
-	}
-
-	public function getAccessories($equipment_id)
-	{
-	  return Equipment::model()->getAccessories($equipment_id);
 	}
 
 	public function getAllEquipmentTypes()
