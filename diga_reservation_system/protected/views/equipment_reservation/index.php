@@ -58,7 +58,6 @@ $listDescriptionDropDownSection = array(
   'class' => 'reservation_list_dropdown_section',
 );
 
-
 echo CHtml::beginForm();
 echo CHtml::openTag("div", $listContainer);
 
@@ -80,16 +79,40 @@ for($x = 0; $x < sizeof($equipment); $x++)
         echo "<b>Type</b>: ".$this->getEquipmentType($equipment[$x]->equipment_type_id);
       echo CHtml::closeTag("p");
       echo CHtml::openTag("p");
-        echo "<b>Availability</b>: "; //TODO: See if equipment item is available.
-      echo CHtml::closeTag("p");
+        echo "<b>Availability</b>: ";
+	if($equipment[$x]->availability) // if available
+	{
+	  echo "<font color ='green'>Available</font>";
+	  echo CHtml::closeTag("p");
 
+	  echo CHtml::htmlButton("Checkout",
+          array(
+            'type' => 'submit',
+            'name' => 'equipment_id',
+            'value' => $equipment[$x]->equipment_id,
+          ));
+	}
+	else
+	{
+	  echo "<font color = 'red'>Unavailable</font>";
+	  echo CHtml::closeTag("p");
+
+	  echo CHtml::htmlButton("Checkout",
+          array(
+            'type' => 'submit',
+            'name' => 'equipment_id',
+            'value' => $equipment[$x]->equipment_id,
+	    'disabled'=> 'disabled',
+          ));
+	}
+/*
       echo CHtml::htmlButton("Checkout",
 	array(
 	  'type' => 'submit',
   	  'name' => 'equipment_id',
 	  'value' => $equipment[$x]->equipment_id,
 	));
-
+*/
     echo CHtml::closeTag("div"); // close list description
 
   echo CHtml::closeTag("div"); // close listRow
@@ -98,7 +121,8 @@ for($x = 0; $x < sizeof($equipment); $x++)
   echo CHtml::openTag("div",$listDescription);
 
   // Accessory Section --------------------------------
-  $accessories = $this->getAccessories($equipment[$x]->equipment_id);
+  //$accessories = $this->getAccessories($equipment[$x]->equipment_id);
+  $accessories = $equipment[$x]->getAccessories();
 
   echo CHtml::openTag("div",$listDescriptionDropDownSection);
 
@@ -125,7 +149,8 @@ for($x = 0; $x < sizeof($equipment); $x++)
         echo "Specifications";
       echo CHtml::closeTag("p");
 
-      $specs = $this->getSpecs($equipment[$x]->equipment_id);
+      //$specs = $this->getSpecs($equipment[$x]->equipment_id);
+      $specs = $equipment[$x]->getSpecs();
 
       echo CHtml::openTag("ul");
       for($y = 0; $y < sizeof($specs); $y++)
