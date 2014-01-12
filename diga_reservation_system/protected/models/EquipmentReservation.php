@@ -24,6 +24,18 @@ class EquipmentReservation extends CActiveRecord
 		return parent::model($className);
 	}
 
+	/*
+	  Retrieves the accessory checklist for this reservation
+	*/
+	public function getAccessoryChecklist()
+	{
+	  $attributes =
+	    array("equipment_reservation_id"=>$this->equipment_reservation_id);
+
+	  return EquipmentReservationAccessory::model()
+	  	   ->findAllByAttributes($attributes);
+	}
+
 	/**
 	 * @return string the associated database table name
 	 */
