@@ -2,15 +2,10 @@
 /* @var $this CheckoutController */
 
 $this->breadcrumbs=array(
-        'Equipment','Checkout'
+        'Equipment'=>array("/equipment_reservation/"),
+	'Checkout'
 );
 
-
-/*
-$this->breadcrumbs=array(
-	'Checkout',
-);
-*/
 
 if(isset($_GET['equipment_id']))
 {
