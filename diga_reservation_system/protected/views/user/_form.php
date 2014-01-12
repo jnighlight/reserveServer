@@ -67,7 +67,7 @@
 	</div>
 -->
 	<div class="row">
-		<?php echo $form->labelEx($model,'id_number'); ?>
+		<?php echo $form->labelEx($model,'ID Number (800-number)'); ?>
 		<?php echo $form->textField($model,'id_number',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'id_number'); ?>
 	</div>
