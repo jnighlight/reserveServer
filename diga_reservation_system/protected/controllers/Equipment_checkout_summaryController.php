@@ -35,6 +35,15 @@ class Equipment_checkout_summaryController extends Controller
           return EquipmentReservation::model()->findByPk($equipment_reservation_id);
 	}
 
+	/*
+	  Retrieves a piece an accessory based on its id
+	*/
+
+	public function getAccessory($accessory_id)
+	{
+	  return Accessory::model()->findByPk($accessory_id);
+	}
+
 	// Uncomment the following methods and override them if needed
 	/*
 	public function filters()
