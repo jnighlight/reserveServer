@@ -64,15 +64,11 @@ class CheckoutController extends Controller
 			  $accessory = str_replace(" ", "_",$accessories[$x]->name);
 			  $equipment_reservation_accessory = 
 				new EquipmentReservationAccessory;
-
 			  $equipment_reservation_accessory
 			    ->equipment_reservation_id =
 				$reservation->equipment_reservation_id;
-
 			  $equipment_reservation_accessory
                             ->accessory_id = $accessories[$x]->accessory_id;
-
-
 			  if(isset($_POST[$accessory])) //checked
 			  {
 			    $equipment_reservation_accessory
@@ -85,15 +81,15 @@ class CheckoutController extends Controller
 			  }
 			  // Save the reservation
 			  $equipment_reservation_accessory->save(false);
-			  // Set that piece of equipments availability to be
-			  // false and save it
-			  $equipment->availability=false;
-			  $equipment->save(false);
-
-			  $this->redirect(
-                      	    array("/equipment_checkout_summary/?equipment_reservation_id=".$reservation->equipment_reservation_id));
 			}
-			
+			// Set that piece of equipments availability to be
+                        // false and save it
+                        $equipment->availability=false;
+                        $equipment->save(false);
+
+                        $this->redirect(
+                          array("/equipment_checkout_summary/?equipment_reservation_id=".$reservation->equipment_reservation_id));
+	
 		      }
 		    }
 
