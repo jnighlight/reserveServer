@@ -158,9 +158,10 @@ CREATE TABLE `equipment` (
   `name` varchar(20) NOT NULL,
   `image_url` varchar(150) DEFAULT NULL,
   `equipment_type_id` int(11) NOT NULL,
+  `availability` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`equipment_id`),
   KEY `equipment_type_id` (`equipment_type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -169,7 +170,7 @@ CREATE TABLE `equipment` (
 
 LOCK TABLES `equipment` WRITE;
 /*!40000 ALTER TABLE `equipment` DISABLE KEYS */;
-INSERT INTO `equipment` VALUES (1,'serial_number','manufacturer','model_number','HOORAY. LOOK AT ME!. I\'M A DESCRIPTION!.','PowerShot G16','http://www.usa.canon.com/CUSA/assets/app/images/cameras/powershot/PS_G16/g16_586x186.gif',1),(2,'serial_number','manufacturer','model_number','LOOK AT ME, I AM ALSO A DESCRIPTION!!','Vixia HF R40','http://www.usa.canon.com/CUSA/assets/app/images/camcorder/VIXIA_HF_R40/vixia_hfr40_586x186.gif',2);
+INSERT INTO `equipment` VALUES (1,'serial_number','manufacturer','model_number','HOORAY. LOOK AT ME!. I\'M A DESCRIPTION!.','PowerShot G16','http://www.usa.canon.com/CUSA/assets/app/images/cameras/powershot/PS_G16/g16_586x186.gif',1,0),(2,'serial_number','manufacturer','model_number','LOOK AT ME, I AM ALSO A DESCRIPTION!!','Vixia HF R40','http://www.usa.canon.com/CUSA/assets/app/images/camcorder/VIXIA_HF_R40/vixia_hfr40_586x186.gif',2,0);
 /*!40000 ALTER TABLE `equipment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -246,7 +247,7 @@ CREATE TABLE `equipment_reservation` (
   PRIMARY KEY (`equipment_reservation_id`),
   KEY `borrowers_email` (`borrowers_email`),
   KEY `checkout_assistant_email` (`checkout_assistant_email`)
-) ENGINE=MyISAM AUTO_INCREMENT=48 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -255,7 +256,7 @@ CREATE TABLE `equipment_reservation` (
 
 LOCK TABLES `equipment_reservation` WRITE;
 /*!40000 ALTER TABLE `equipment_reservation` DISABLE KEYS */;
-INSERT INTO `equipment_reservation` VALUES (47,'mburton1@stetson.edu',2,'2014-01-09 15:56:09','2014-01-11 15:56:09','Notes notes. NOOOOOOTES!!','jlites@stetson.edu');
+INSERT INTO `equipment_reservation` VALUES (1,'mburton1@stetson.edu',2,'2014-01-11 23:06:38','2014-01-13 23:06:38','Notes about this checkout!!','jlites@stetson.edu'),(2,'mburton1@stetson.edu',1,'2014-01-12 01:13:18','2014-01-14 01:13:18','Blah Blah Blah','jlites@stetson.edu');
 /*!40000 ALTER TABLE `equipment_reservation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,7 +281,7 @@ CREATE TABLE `equipment_reservation_accessory` (
 
 LOCK TABLES `equipment_reservation_accessory` WRITE;
 /*!40000 ALTER TABLE `equipment_reservation_accessory` DISABLE KEYS */;
-INSERT INTO `equipment_reservation_accessory` VALUES (47,1,1),(47,2,1),(47,3,0),(47,4,0);
+INSERT INTO `equipment_reservation_accessory` VALUES (1,1,1),(1,2,0),(1,3,1),(1,4,0),(2,1,0),(2,2,1);
 /*!40000 ALTER TABLE `equipment_reservation_accessory` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -589,4 +590,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2014-01-09 15:58:54
+-- Dump completed on 2014-01-12  2:45:02
