@@ -68,9 +68,7 @@ for($x = 0; $x < sizeof($equipment); $x++)
   echo CHtml::openTag("div",$listRow);
 
     //Equipment image
-    //echo CHtml::openTag("div",$listImage);
       echo CHtml::image($equipment[$x]->image_url,"",$listImage);
-    //echo CHtml::closeTag("div"); // close image div
     echo CHtml::openTag("div",$listDescription);
       echo CHtml::openTag("p",$listDescriptionTitle);
         echo $equipment[$x]->name;
@@ -105,14 +103,6 @@ for($x = 0; $x < sizeof($equipment); $x++)
 	    'disabled'=> 'disabled',
           ));
 	}
-/*
-      echo CHtml::htmlButton("Checkout",
-	array(
-	  'type' => 'submit',
-  	  'name' => 'equipment_id',
-	  'value' => $equipment[$x]->equipment_id,
-	));
-*/
     echo CHtml::closeTag("div"); // close list description
 
   echo CHtml::closeTag("div"); // close listRow
@@ -121,7 +111,6 @@ for($x = 0; $x < sizeof($equipment); $x++)
   echo CHtml::openTag("div",$listDescription);
 
   // Accessory Section --------------------------------
-  //$accessories = $this->getAccessories($equipment[$x]->equipment_id);
   $accessories = $equipment[$x]->getAccessories();
 
   echo CHtml::openTag("div",$listDescriptionDropDownSection);
@@ -149,7 +138,6 @@ for($x = 0; $x < sizeof($equipment); $x++)
         echo "Specifications";
       echo CHtml::closeTag("p");
 
-      //$specs = $this->getSpecs($equipment[$x]->equipment_id);
       $specs = $equipment[$x]->getSpecs();
 
       echo CHtml::openTag("ul");
