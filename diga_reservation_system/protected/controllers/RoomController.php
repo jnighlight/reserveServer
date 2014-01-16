@@ -28,7 +28,7 @@ class RoomController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','reserve'),
 				//'users'=>array('@'),
 				'roles'=>array('user','workStudy','admin'),
 			),
@@ -120,6 +120,31 @@ class RoomController extends Controller
 			'model'=>$model,
 		));
 	}
+
+	public function actionReserve()
+	{
+    		$model=new Room;
+
+	    // uncomment the following code to enable ajax-based validation
+	    /*
+	    if(isset($_POST['ajax']) && $_POST['ajax']==='room-reserve-form')
+	    {
+		echo CActiveForm::validate($model);
+		Yii::app()->end();
+	    }
+	    */
+
+	    if(isset($_POST['Room']))
+	    {
+		$model->attributes=$_POST['Room'];
+		if($model->validate())
+		{
+		    // form inputs are valid, do something here
+		    return;
+		}
+	    }
+	    $this->render('reserve',array('model'=>$model));
+}
 
 	/**
 	 * Deletes a particular model.
