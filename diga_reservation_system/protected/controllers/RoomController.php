@@ -28,7 +28,7 @@ class RoomController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','reserve'),
+				'actions'=>array('index','view','reserve','resTest'),
 				//'users'=>array('@'),
 				'roles'=>array('user','workStudy','admin'),
 			),
@@ -64,6 +64,16 @@ class RoomController extends Controller
 	public function getBuildings()
 	{
 		return Building::model() -> findAll(true);	
+	}
+
+	public function getRooms($buildId)
+	{
+		$roomNum = 1;
+		return Room::model() -> findAllByAttributes(
+			array('building_id'=>$buildId)
+			//array('room_number'=>$roomNum),
+			//"building_id=".$buildId);
+			);
 	}
 
 	/**
@@ -119,6 +129,31 @@ class RoomController extends Controller
 		$this->render('update',array(
 			'model'=>$model,
 		));
+	}
+
+	
+	public function actionResTest()
+	{
+		$model = new Room;
+	    	$this->render('resTest',array('model'=>$model));
+
+		echo('hai?');
+		if(!isset($_POST['building_id']))
+			{$_POST['building_id'] = '';}
+		$data = Room::model()->findAll('building_id=:building_id',
+			array(':building_id'=>(int) $_POST['building_id']));
+		//if(isset($data[0])){print_r($data[0]['room_number']);}
+		
+		$data = CHtml::listData($data,'room_number','description');
+		print_r($data);
+		foreach($data as $value=>$name)
+		{
+			print('HHEEEEEEEEEEEEEEEEERE');
+			echo CHtml::tag('option',
+				array('value'=>$value),CHtml::encode($name),true);
+		}
+		//}
+	    //$this->render('resTest',array('model'=>$model));
 	}
 
 	public function actionReserve()

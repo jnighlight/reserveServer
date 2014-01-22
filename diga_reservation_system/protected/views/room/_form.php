@@ -7,7 +7,7 @@
 <?php 
 $build = $this -> getBuildings(); 
 $buildList = CHtml::listData($build, 'building_id','name');
-$buildMenu = CHtml::dropDownList('building_names', Building::model(), $buildList, array('empty' => 'freaking choose one'));
+$buildMenu = CHtml::dropDownList('building_names', Building::model(), $buildList, array('empty' => 'Choose a Building'));
 ?>
 
 <div class="form">
