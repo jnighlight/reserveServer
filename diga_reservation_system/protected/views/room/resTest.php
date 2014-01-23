@@ -9,11 +9,14 @@
 <?php
 $build = $this -> getBuildings();
 $buildList = CHtml::listData($build, 'building_id', 'name');
+//$buildIDs = array_keys($buildList);
+//$roomsInBuild = $this -> getRooms($buildList[0]['building_id']);
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'room-resTest-form',
 	'enableAjaxValidation'=>false,
+	//'action'=>Yii::app()->createUrl('room/calendarRes'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -21,17 +24,27 @@ $buildList = CHtml::listData($build, 'building_id', 'name');
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-	<?php echo CHtml::dropDownList('building_id','',$buildList,
+	<?php echo $form -> labelEx($model, 'building_id');
+		//echo CHtml::dropDownList('building_id','',$buildList,
+		echo $form -> dropDownList($model, 'building_id',$buildList,
 	array(
+	'empty'=> 'Choose a building',
 	'ajax' => array(
 	'type' => 'POST',
 	//'data' => array('building_id'=>'js:this.value'),
 	'url'=> CController::createUrl('room/resTest'),
 	//'update'=>'#room_num',
-	'update'=>'#' . CHtml::activeId($model, 'room_num'),
+	'update'=>'#' . CHtml::activeId($model, 'room_number'),
 	)));
+	 echo $form -> error($model, 'building_id'); ?>
+	</div>
+	<div class="row">
+	<?php
+	
+	echo $form -> labelEx($model, 'room_number');
 	//echo CHtml::dropDownList('room_num','',array(1=>'NY', 2=>'Paree'));
-	echo CHtml::dropDownList(CHtml::activeName($model, 'room_num'),'rum_num',array());
+	echo $form -> dropDownList($model,'room_number',array('empty'=>'select a building'));
+	echo $form -> error($model, 'room_number');
 ?>
 	</div>
 

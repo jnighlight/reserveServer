@@ -28,7 +28,7 @@ class RoomController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','reserve','resTest'),
+				'actions'=>array('index','view','reserve','resTest','calendarRes'),
 				//'users'=>array('@'),
 				'roles'=>array('user','workStudy','admin'),
 			),
@@ -135,26 +135,62 @@ class RoomController extends Controller
 	public function actionResTest()
 	{
 		$model = new Room;
+		
+	    	if(isset($_POST['yt0']))
+	    	{
+			//$model->attributes=$_POST['Room'];
+			//if($model->validate())
+			//{
+			echo($model->validate());
+		    	echo('THIS IS SUBMITed');
+		    	//return;
+			//}
+	    	}
 	    	$this->render('resTest',array('model'=>$model));
 
-		echo('hai?');
-		if(!isset($_POST['building_id']))
-			{$_POST['building_id'] = '';}
+		if(!isset($_POST['Room']['building_id']))
+			{print_r($_POST); $_POST['Room']['building_id'] = '';}
 		$data = Room::model()->findAll('building_id=:building_id',
-			array(':building_id'=>(int) $_POST['building_id']));
+			array(':building_id'=>(int) $_POST['Room']['building_id']));
 		//if(isset($data[0])){print_r($data[0]['room_number']);}
 		
-		$data = CHtml::listData($data,'room_number','description');
 		print_r($data);
+		$data = CHtml::listData($data,'room_id','room_number');
+		print_r($data);
+		echo CHtml::tag('option', array('value'=>''), 'Choose a room', true);
 		foreach($data as $value=>$name)
 		{
-			print('HHEEEEEEEEEEEEEEEEERE');
 			echo CHtml::tag('option',
 				array('value'=>$value),CHtml::encode($name),true);
 		}
 		//}
 	    //$this->render('resTest',array('model'=>$model));
 	}
+
+	public function actionCalendarRes()
+{
+    $model=new Room;
+
+    // uncomment the following code to enable ajax-based validation
+    /*
+    if(isset($_POST['ajax']) && $_POST['ajax']==='room-calendarRes-form')
+    {
+        echo CActiveForm::validate($model);
+        Yii::app()->end();
+    }
+    */
+
+    if(isset($_POST['Room']))
+    {
+        $model->attributes=$_POST['Room'];
+        if($model->validate())
+        {
+            // form inputs are valid, do something here
+            return;
+        }
+    }
+    $this->render('calendarRes',array('model'=>$model));
+}
 
 	public function actionReserve()
 	{
