@@ -30,6 +30,11 @@ class Room extends CActiveRecord
 		return 'room';
 	}
 
+	public function validateDropdown($buildId, $roomNum)
+	{
+		return ($buildId != '' && $roomNum != '');
+	}
+
 	/**
 	 * @return array validation rules for model attributes.
 	 */
@@ -39,7 +44,7 @@ class Room extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('room_number, building_id', 'required'),
-			array('room_number, building_id', 'numerical', 'integerOnly'=>true),
+			//array('room_number, building_id', 'numerical', 'integerOnly'=>true),
 			array('description', 'length', 'max'=>200),
 			array('image_url', 'length', 'max'=>150),
 			// The following rule is used by search().

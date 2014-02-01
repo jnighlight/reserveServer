@@ -34,17 +34,17 @@ $buildList = CHtml::listData($build, 'building_id', 'name');
 	//'data' => array('building_id'=>'js:this.value'),
 	'url'=> CController::createUrl('room/resTest'),
 	//'update'=>'#room_num',
-	'update'=>'#' . CHtml::activeId($model, 'room_number'),
+	'update'=>'#' . CHtml::activeId($model, 'room_id'),
 	)));
 	 echo $form -> error($model, 'building_id'); ?>
 	</div>
 	<div class="row">
 	<?php
 	
-	echo $form -> labelEx($model, 'room_number');
+	echo $form -> labelEx($model, 'room_id');
 	//echo CHtml::dropDownList('room_num','',array(1=>'NY', 2=>'Paree'));
-	echo $form -> dropDownList($model,'room_number',array('empty'=>'select a building'));
-	echo $form -> error($model, 'room_number');
+	echo $form -> dropDownList($model,'room_id',array('empty'=>'select a building'));
+	echo $form -> error($model, 'room_id');
 ?>
 	</div>
 

@@ -28,7 +28,17 @@ return array(
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1',$_SERVER['REMOTE_ADDR']),
 		),
-		
+		'cal'=>array(
+			'debug'=>'true',
+		),
+		'wdcalendar'=>array(
+			//'admin'=>'install'
+			'embed'=>'true',
+			'wd_options'=>array(
+				'view'=>'week',
+				'enableDrag'=>'JS:false',
+			),
+		),
 	),
 
 	// application components

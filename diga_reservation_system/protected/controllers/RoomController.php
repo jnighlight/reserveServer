@@ -138,25 +138,24 @@ class RoomController extends Controller
 		
 	    	if(isset($_POST['yt0']))
 	    	{
-			//$model->attributes=$_POST['Room'];
-			//if($model->validate())
-			//{
-			echo($model->validate());
-		    	echo('THIS IS SUBMITed');
-		    	//return;
-			//}
+			$model->attributes=$_POST['Room'];
+			if($model->validate())
+			{
+				print_r($model->attributes);
+		    		echo('THIS IS SUBMITed');
+				//return;
+				$this->redirect(array('reserve','build_id'=>$model->building_id, 'room_id'=>$model->room_number));
+			}
 	    	}
 	    	$this->render('resTest',array('model'=>$model));
 
 		if(!isset($_POST['Room']['building_id']))
-			{print_r($_POST); $_POST['Room']['building_id'] = '';}
+			{/*print_r($_POST);*/ $_POST['Room']['building_id'] = '';}
 		$data = Room::model()->findAll('building_id=:building_id',
 			array(':building_id'=>(int) $_POST['Room']['building_id']));
 		//if(isset($data[0])){print_r($data[0]['room_number']);}
 		
-		print_r($data);
 		$data = CHtml::listData($data,'room_id','room_number');
-		print_r($data);
 		echo CHtml::tag('option', array('value'=>''), 'Choose a room', true);
 		foreach($data as $value=>$name)
 		{
@@ -194,16 +193,8 @@ class RoomController extends Controller
 
 	public function actionReserve()
 	{
-    		$model=new Room;
-
-	    // uncomment the following code to enable ajax-based validation
-	    /*
-	    if(isset($_POST['ajax']) && $_POST['ajax']==='room-reserve-form')
-	    {
-		echo CActiveForm::validate($model);
-		Yii::app()->end();
-	    }
-	    */
+    	    $model=new Room;
+	    //print(Yii::app()->request->getQuery('build_id', 0));
 
 	    if(isset($_POST['Room']))
 	    {
@@ -214,6 +205,7 @@ class RoomController extends Controller
 		    return;
 		}
 	    }
+	    print_r($model->attributes);
 	    $this->render('reserve',array('model'=>$model));
 }
 
