@@ -28,7 +28,7 @@ class RoomController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','reserve','resTest','calendarRes'),
+				'actions'=>array('index','view','reserve','calendarRes'),
 				//'users'=>array('@'),
 				'roles'=>array('user','workStudy','admin'),
 			),
@@ -132,22 +132,23 @@ class RoomController extends Controller
 	}
 
 	
-	public function actionResTest()
+	public function actionReserve()
 	{
 		$model = new Room;
 		
 	    	if(isset($_POST['yt0']))
 	    	{
 			$model->attributes=$_POST['Room'];
+				//print_r($model->attributes);
 			if($model->validate())
 			{
-				print_r($model->attributes);
+				//print_r($model->attributes);
 		    		echo('THIS IS SUBMITed');
 				//return;
-				$this->redirect(array('reserve','build_id'=>$model->building_id, 'room_id'=>$model->room_number));
+				$this->redirect(array('calendarRes','build_id'=>$model->building_id, 'room_number'=>$model->room_number));
 			}
 	    	}
-	    	$this->render('resTest',array('model'=>$model));
+	    	$this->render('reserve',array('model'=>$model));
 
 		if(!isset($_POST['Room']['building_id']))
 			{/*print_r($_POST);*/ $_POST['Room']['building_id'] = '';}
@@ -167,34 +168,14 @@ class RoomController extends Controller
 	}
 
 	public function actionCalendarRes()
-{
-    $model=new Room;
-
-    // uncomment the following code to enable ajax-based validation
-    /*
-    if(isset($_POST['ajax']) && $_POST['ajax']==='room-calendarRes-form')
-    {
-        echo CActiveForm::validate($model);
-        Yii::app()->end();
-    }
-    */
-
-    if(isset($_POST['Room']))
-    {
-        $model->attributes=$_POST['Room'];
-        if($model->validate())
-        {
-            // form inputs are valid, do something here
-            return;
-        }
-    }
-    $this->render('calendarRes',array('model'=>$model));
-}
-
-	public function actionReserve()
 	{
     	    $model=new Room;
-	    //print(Yii::app()->request->getQuery('build_id', 0));
+//	    print(Yii::app()->request->getQuery('build_id', -1));
+	    $building_id = Yii::app()->request->getQuery('build_id',-1);
+	    $room_id = Yii::app()->request->getQuery('room_number',-1);
+            if($building_id == -1 || $room_id == -1)
+		{$this->redirect(array('reserve'));}
+	    //$reservationList = $model->getReservations($building_id, $room_id);
 
 	    if(isset($_POST['Room']))
 	    {
@@ -205,8 +186,7 @@ class RoomController extends Controller
 		    return;
 		}
 	    }
-	    print_r($model->attributes);
-	    $this->render('reserve',array('model'=>$model));
+	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id));
 }
 
 	/**
