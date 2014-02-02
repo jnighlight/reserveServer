@@ -25,7 +25,7 @@ $cs->registerScriptFile($base . $fullCal . '/lib/jquery-ui.custom.min.js');
 $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
 //$cs->registerScript();
 ?>
-<script type="text/javascript">
+<script>
 
 	$(document).ready(function() {
 		var date = new Date();
@@ -34,8 +34,16 @@ $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
 		var y = date.getFullYear();
 
 		$('#calendar').fullCalendar({
-			editable: true,
-			events: [
+			editable: false,
+			header: {
+				left: 'prev,next today',
+				center: 'title',
+				right: 'month,agendaWeek'
+			},
+			defaultView: 'agendaWeek',
+			allDayDefault: false,
+			events: <?php echo $JSONRes; ?>
+				/*[
 				{
 					title: 'All Day Event',
 					start: new Date(y, m, 1)
@@ -80,7 +88,7 @@ $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
 					end: new Date(y, m, 29),
 					url: 'http://google.com/'
 				}
-			]
+			]*/
 		});
 	});
 </script>

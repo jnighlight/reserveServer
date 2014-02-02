@@ -23,6 +23,33 @@ class Room_reservationController extends Controller
 			);
 	}
 
+	public function getReservations($buildId, $roomId)
+	{
+		return RoomReservation::model() -> findAllByAttributes(
+			array('building_id'=>$buildId, 'room_id'=>$roomId)
+			);
+	}
+
+	public function reservationsToJSON($reservations)
+	{
+		$JSONRes = array();
+		$i = 0;
+		foreach($reservations as $reservation)
+		{
+			$id = $i++;
+			$title = $reservation['email'];
+			$start = $reservation['start_date_time'];
+			$v = new DateTime($start);
+			$start = $v -> format('D M d Y H:i:s TO');
+			$end = $reservation['end_date_time'];
+			$v = new DateTime($end);
+			$end = $v -> format('D M d Y H:i:s TO');
+			$JSONRes[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 'end'=>$end);
+		}
+		//$JSONRes
+		return json_encode($JSONRes);
+	}
+
 	/**
 	 * @return array action filters
 	 */
@@ -105,7 +132,10 @@ class Room_reservationController extends Controller
 	    $room_id = Yii::app()->request->getQuery('room_number',-1);
             if($building_id == -1 || $room_id == -1)
 		{$this->redirect(array('reserve'));}
-	    //$reservationList = $model->getReservations($building_id, $room_id);
+	    $reservations = $this -> getReservations($building_id, $room_id);
+		//print_r($reservations[0]['start_date_time']);
+            $JSONreservations = $this -> reservationsToJSON($reservations);
+		//print_r($JSONreservations);
 
 	    if(isset($_POST['Room']))
 	    {
@@ -116,7 +146,8 @@ class Room_reservationController extends Controller
 		    return;
 		}
 	    }
-	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id));
+	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id,
+		'JSONRes'=>$JSONreservations));
 }
 
 	/**
