@@ -36,6 +36,8 @@ class SiteController extends Controller
 			{$this->redirect(array("/equipment_reservation"));}
 		elseif(isset($_POST['equipment_admin_controls']))
 			{$this->redirect(array("/equipment"));}
+		elseif(isset($_POST['reserve_room']))
+			{$this->redirect(array("/room/reserve"));}
 	}
 
 	/**
