@@ -13,8 +13,14 @@ $availRooms = $this -> getRooms(4);
 $roomList = CHtml::listData($availRooms, 'room_id', 'room_number');
 $roomMenu = CHtml::dropDownList('Room Numbers', Room::model(), $roomList, array('empty' => 'Choose a Room Number'));
 
-/*Yii::app()->clientScript->registerScript(
-	Yii::app()->assetsManager->publish(Yii::app()->baseUrl . '/extensions/js/fullcalendar/fullcalendar/fullcalendar.min.js', CClientScript::POS_HEAD);//);*/
+$hourSelect = array();
+$hourSelect[] = 12;
+for($i = 1; $i <= 11; $i++)
+{
+	$hourSelect[] = $i;
+}
+$minuteSelect = array(0=>"00", 1=>"30");
+$ampmSelect = array(0=>"AM", 1=>"PM");
 
 $cs = Yii::app()->clientScript;
 $base = Yii::app()->baseUrl;
@@ -28,12 +34,34 @@ $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
 <script>
 
 	$(document).ready(function() {
-		var date = new Date();
-		var d = date.getDate();
-		var m = date.getMonth();
-		var y = date.getFullYear();
 
 		$('#calendar').fullCalendar({
+			dayClick: function(date, allDay, jsEvent, view) {
+				//alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+
+				//alert('Current view: ' + view.name);
+				$("#daySelect").html($.fullCalendar.formatDate(date, "dddd',' MMMM d',' yyyy"));
+				$("#dateHolder").val(date);
+				//$("#dateHolder").val("BLECH");
+				//alert(date);
+				// change the day's background color just for fun
+				//$(this).css('background-color', '#bbbbbb');
+
+                                },
+			eventClick: function(calEvent, jsEvent, view) {
+
+				//alert('Event: ' + calEvent.title);
+				//alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+				//alert('View: ' + view.name);
+
+				$("#daySelect").html($.fullCalendar.formatDate(calEvent.start, "dddd',' MMMM d',' yyyy"));
+				$("#dateHolder").val(calEvent.start);
+
+				// change the border color just for fun
+				//$(this).css('border-color', 'red');
+				return false;
+
+			    },
 			editable: false,
 			header: {
 				left: 'prev,next today',
@@ -43,54 +71,18 @@ $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
 			defaultView: 'agendaWeek',
 			allDayDefault: false,
 			events: <?php echo $JSONRes; ?>
-				/*[
-				{
-					title: 'All Day Event',
-					start: new Date(y, m, 1)
-				},
-				{
-					title: 'Long Event',
-					start: new Date(y, m, d-5),
-					end: new Date(y, m, d-2)
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d-3, 16, 0),
-					allDay: false
-				},
-				{
-					id: 999,
-					title: 'Repeating Event',
-					start: new Date(y, m, d+4, 16, 0),
-					allDay: false
-				},
-				{
-					title: 'Meeting',
-					start: new Date(y, m, d, 10, 30),
-					allDay: false
-				},
-				{
-					title: 'Lunch',
-					start: new Date(y, m, d, 12, 0),
-					end: new Date(y, m, d, 14, 0),
-					allDay: false
-				},
-				{
-					title: 'Birthday Party',
-					start: new Date(y, m, d+1, 19, 0),
-					end: new Date(y, m, d+1, 22, 30),
-					allDay: false
-				},
-				{
-					title: 'Click for Google',
-					start: new Date(y, m, 28),
-					end: new Date(y, m, 29),
-					url: 'http://google.com/'
-				}
-			]*/
 		});
 	});
+</script>
+<script>
+function checkFunction()
+{
+	if($("#dateHolder").val() == '')
+	{
+		alert("Please click a day");
+		return false;
+	}
+}
 </script>
 <div id='calendar'></div>
 <div class="form">
@@ -98,16 +90,48 @@ $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'room-calendarRes-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions'=>array('onsubmit'=>'return checkFunction()'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
+	
+	<div class="row">
+	<?php echo("<b>Date</b>"); ?>
+	</div>
+
+	<div class="row" id="daySelect">
+	<?php echo("Click a day"); ?>
+	</div>
+	
+	<div>
+		<?php echo CHtml::hiddenField('dateHolder', '', array("id"=>"dateHolder")); ?>
+	</div
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'image_url'); ?>
-		<?php echo $form->textField($model,'image_url'); ?>
-		<?php echo $form->error($model,'image_url'); ?>
+	<?php echo("<b>Start Time</b>"); ?>
+	</div>
+	<div class="row">
+		<?php 
+		echo CHtml::dropDownList('StartHour','0',$hourSelect);
+		echo(":");
+		echo CHtml::dropDownList('StartMinute','0',$minuteSelect);
+		echo CHtml::dropDownList('StartAMPM','0',$ampmSelect);
+		//echo $form -> dropDownList($model,'start_date_time',array('empty'=>'select a time'));
+		?>
+	</div>
+
+	<div class="row">
+	<?php echo("<b>End Time</b>"); ?>
+	</div>
+	<div class="row">
+		<?php 
+		echo CHtml::dropDownList('EndHour','0',$hourSelect);
+		echo(":");
+		echo CHtml::dropDownList('EndMinute','0',$minuteSelect);
+		echo CHtml::dropDownList('EndAMPM','1',$ampmSelect);
+		?>
 	</div>
 
 

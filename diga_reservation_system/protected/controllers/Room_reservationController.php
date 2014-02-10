@@ -13,16 +13,15 @@ class Room_reservationController extends Controller
 		return Building::model() -> findAll(true);	
 	}
 
+	//Getting all of the rooms with a specific buildingId
 	public function getRooms($buildId)
 	{
-		$roomNum = 1;
 		return Room::model() -> findAllByAttributes(
 			array('building_id'=>$buildId)
-			//array('room_number'=>$roomNum),
-			//"building_id=".$buildId);
 			);
 	}
 
+	//Getting all of the reservations for a room in a building
 	public function getReservations($buildId, $roomId)
 	{
 		return RoomReservation::model() -> findAllByAttributes(
@@ -30,24 +29,111 @@ class Room_reservationController extends Controller
 			);
 	}
 
+	//Takes an array with SQL information of reservations for a specific room in a specific
+	//building and turns them into a JSON array for the fullcalendar plugin
 	public function reservationsToJSON($reservations)
 	{
 		$JSONRes = array();
+		//i is just for the event ID's. Wouldn't want ppl knowing the real database id's. Security, and stuff
 		$i = 0;
 		foreach($reservations as $reservation)
 		{
 			$id = $i++;
 			$title = $reservation['email'];
+
+			//Make a dateTime with SQL data, and outputting it in the javascript format
 			$start = $reservation['start_date_time'];
 			$v = new DateTime($start);
 			$start = $v -> format('D M d Y H:i:s TO');
+
 			$end = $reservation['end_date_time'];
 			$v = new DateTime($end);
 			$end = $v -> format('D M d Y H:i:s TO');
+
 			$JSONRes[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 'end'=>$end);
 		}
-		//$JSONRes
+		//I return it json_encoded just so I get the product the way it should be inserted. This does limit the use of the method though. May change this later.
 		return json_encode($JSONRes);
+	}
+
+	//To validate the time for a possible new reservation.
+	//It can't conflict with another reservation, and the end time must be after the start time
+	public function timeValidate($startHour, $startMinute, $startAMPM, $endHour, $endMinute, $endAMPM, $date)
+	{
+		$conflicts = false;
+		$inOrder = true;
+		//If it starts in PM and ends in AM, it's not in order
+		if($endAMPM < $startAMPM)
+			{$inOrder = false;}
+		//If they're in the same half-day...
+		if($endAMPM == $startAMPM)
+		{
+			//And during the same hour..
+			if($startHour == $endHour)
+			{
+				//Unless it's only a half hour reservation, it's bad
+				if($endMinute <= $startMinute)
+					{$inOrder = false;}
+			}
+			//And if it ends before it begins, we're nogo
+			if($startHour > $endHour)
+				{$inOrder = false;}
+			
+		}
+		
+		//Now to check for conflicts
+		
+		//Taking the inputs and turning them into real time data
+		$adjustedStartHour = $startAMPM == 1? $startHour + 12 : $startHour;
+		$startTime = ' ' . $adjustedStartHour . ':' . ($startMinute * 30) . ':00';
+		$adjustedEndHour = $endAMPM == 1? $endHour + 12 : $endHour;
+		$endTime = ' ' . $adjustedEndHour . ':' . ($endMinute * 30) . ':00';
+
+		//Getting the start and end time of the reservation to be made
+		$mysqlDate = date('Y-m-d', strtotime($date));
+		$startDateTime = new DateTime($mysqlDate . $startTime);
+		$endDateTime = new DateTime($mysqlDate . $endTime);
+
+		//Getting all of the reservations on that given day
+		$criteria = new CDbCriteria();
+		$criteria->select = '*';
+		$criteria->condition = 'DATE(start_date_time) = "' . $mysqlDate .
+			'" OR DATE(end_date_time) = "' . $mysqlDate . '"';
+		$resvs = RoomReservation::model() -> findAll($criteria);
+
+
+		foreach($resvs as $res)
+		{
+			$resStart = new DateTime($res['start_date_time']);
+			$resEnd = new DateTime($res['end_date_time']);
+
+			//Checks to see if our new reservation's start or end time is during an already made reservation
+			if(($startDateTime > $resStart && $startDateTime < $resEnd) ||
+				($endDateTime > $resStart && $endDateTime < $resEnd))
+				{$conflicts = true;}
+
+			if(($resStart > $startDateTime && $resStart < $endDateTime) ||
+				($resEnd > $startDateTime && $resEnd < $endDateTime))
+				{$conflicts = true;}
+			//If they start and end at the same time, nogo
+			if($resStart == $startDateTime && $resEnd == $endDateTime)
+				{$conflicts = true;}
+		}
+		//first value is true if they're in order, second value true if there are no conflicts
+		return array($inOrder, !$conflicts);
+	}
+
+
+	public function insertRoomReservation($email, $buildID, $roomID, $startDateTime, $endDateTime)
+	{
+		$res = new RoomReservation;
+		$res->email = $email;
+		$res->building_id = $buildID;
+		$res->room_id = $roomID;
+		$res->start_date_time = $startDateTime;
+		$res->end_date_time = $endDateTime;
+		$res->save();
+		return $res->getPrimaryKey();
 	}
 
 	/**
@@ -126,7 +212,11 @@ class Room_reservationController extends Controller
 
 	public function actionCalendarRes()
 	{
-    	    $model=new Room;
+    	    $model=new RoomReservation;
+	    //print(Yii::app()->request->getQuery('dateHolder', -1));
+	    //print(Yii::app()->request->getParam('dateHolder', -1));
+	    //print(Yii::app()->request->getPost('dateHolder', -1));
+
 //	    print(Yii::app()->request->getQuery('build_id', -1));
 	    $building_id = Yii::app()->request->getQuery('build_id',-1);
 	    $room_id = Yii::app()->request->getQuery('room_number',-1);
@@ -137,14 +227,44 @@ class Room_reservationController extends Controller
             $JSONreservations = $this -> reservationsToJSON($reservations);
 		//print_r($JSONreservations);
 
-	    if(isset($_POST['Room']))
+	    if(isset($_POST['yt0']))
 	    {
-		$model->attributes=$_POST['Room'];
-		if($model->validate())
+		//$model->attributes=$_POST['Room'];
+		//print_r($_POST);
+		$date = Yii::app()->request->getPost('dateHolder', -1);
+		$startHour = Yii::app()->request->getPost('StartHour', -1);
+		$startMinute = Yii::app()->request->getPost('StartMinute', -1);
+		$startAMPM = Yii::app()->request->getPost('StartAMPM', -1);
+		$endHour = Yii::app()->request->getPost('EndHour', -1);
+		$endMinute = Yii::app()->request->getPost('EndMinute', -1);
+		$endAMPM = Yii::app()->request->getPost('EndAMPM', -1);
+
+		$valid = $this -> timeValidate($startHour, $startMinute, $startAMPM, $endHour, $endMinute, $endAMPM, $date);
+		if($valid[0] && $valid[1])
 		{
-		    // form inputs are valid, do something here
-		    return;
+			//Taking the inputs and turning them into real time data
+			$adjustedStartHour = $startAMPM == 1? $startHour + 12 : $startHour;
+			$startTime = ' ' . $adjustedStartHour . ':' . ($startMinute * 30) . ':00';
+			$adjustedEndHour = $endAMPM == 1? $endHour + 12 : $endHour;
+			$endTime = ' ' . $adjustedEndHour . ':' . ($endMinute * 30) . ':00';
+
+			//Getting the start and end time of the reservation to be made
+			$mysqlDate = date('Y-m-d', strtotime($date));
+			$startDateTime = new DateTime($mysqlDate . $startTime);
+			$endDateTime = new DateTime($mysqlDate . $endTime);
+
+			$resID = $this -> insertRoomReservation(Yii::app()->user->getId(), $building_id, $room_id, $startDateTime->format('Y/m/d H:i:s'), $endDateTime->format('Y/m/d H:i:s'));
+			$this->redirect(array($resID));
 		}
+		else if(!$valid[0])
+		{
+			echo("<script> alert('Check the times for your reservation again.'); </script>");
+		}
+		else if(!$valid[1])
+		{
+			echo("<script> alert('Your reservation seems to conflict with another reservation. Please try again'); </script>");
+		}
+		//$this->refresh();
 	    }
 	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id,
 		'JSONRes'=>$JSONreservations));
@@ -231,6 +351,7 @@ class Room_reservationController extends Controller
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
+
 	}
 
 	/**

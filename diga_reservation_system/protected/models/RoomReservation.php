@@ -39,7 +39,7 @@ class RoomReservation extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, building_id, room_id', 'required'),
+			array('email, start_date_time, end_date_time', 'required'),
 			array('building_id, room_id', 'numerical', 'integerOnly'=>true),
 			array('email', 'length', 'max'=>30),
 			array('start_date_time, end_date_time', 'safe'),

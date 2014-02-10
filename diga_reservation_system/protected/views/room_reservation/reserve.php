@@ -16,7 +16,6 @@ $buildList = CHtml::listData($build, 'building_id', 'name');
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'room-reserve-form',
 	'enableAjaxValidation'=>false,
-	//'action'=>Yii::app()->createUrl('room/calendarRes'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -32,7 +31,7 @@ $buildList = CHtml::listData($build, 'building_id', 'name');
 	'ajax' => array(
 	'type' => 'POST',
 	//'data' => array('building_id'=>'js:this.value'),
-	'url'=> CController::createUrl('room/reserve'),
+	'url'=> CController::createUrl('room_reservation/reserve'),
 	//'update'=>'#room_num',
 	'update'=>'#' . CHtml::activeId($model, 'room_number'),
 	)));
