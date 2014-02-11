@@ -7,10 +7,9 @@
 <div class="form">
 
 <?php
+//Getting the buildList for later
 $build = $this -> getBuildings();
 $buildList = CHtml::listData($build, 'building_id', 'name');
-//$buildIDs = array_keys($buildList);
-//$roomsInBuild = $this -> getRooms($buildList[0]['building_id']);
 ?>
 
 <?php $form=$this->beginWidget('CActiveForm', array(
@@ -23,14 +22,14 @@ $buildList = CHtml::listData($build, 'building_id', 'name');
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-	<?php echo $form -> labelEx($model, 'building_id');
+	<?php echo //Making a drop down list that will modify the room_number list after it
+		$form -> labelEx($model, 'building_id');
 		//echo CHtml::dropDownList('building_id','',$buildList,
 		echo $form -> dropDownList($model, 'building_id',$buildList,
 	array(
 	'empty'=> 'Choose a building',
 	'ajax' => array(
 	'type' => 'POST',
-	//'data' => array('building_id'=>'js:this.value'),
 	'url'=> CController::createUrl('room_reservation/reserve'),
 	//'update'=>'#room_num',
 	'update'=>'#' . CHtml::activeId($model, 'room_number'),

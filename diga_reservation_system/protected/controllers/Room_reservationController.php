@@ -8,6 +8,8 @@ class Room_reservationController extends Controller
 	 */
 	public $layout='//layouts/column2';
 
+	//A function to return a list of buildings. Technically, I could just call this line each time,
+	//But I like the cleanliness
 	public function getBuildings()
 	{
 		return Building::model() -> findAll(true);	
@@ -58,7 +60,7 @@ class Room_reservationController extends Controller
 
 	//To validate the time for a possible new reservation.
 	//It can't conflict with another reservation, and the end time must be after the start time
-	public function timeValidate($startHour, $startMinute, $startAMPM, $endHour, $endMinute, $endAMPM, $date)
+	public function timeValidate($startHour, $startMinute, $startAMPM, $endHour, $endMinute, $endAMPM, $date, $roomID)
 	{
 		$conflicts = false;
 		$inOrder = true;
@@ -97,8 +99,8 @@ class Room_reservationController extends Controller
 		//Getting all of the reservations on that given day
 		$criteria = new CDbCriteria();
 		$criteria->select = '*';
-		$criteria->condition = 'DATE(start_date_time) = "' . $mysqlDate .
-			'" OR DATE(end_date_time) = "' . $mysqlDate . '"';
+		$criteria->condition = '(DATE(start_date_time) = "' . $mysqlDate .
+			'" OR DATE(end_date_time) = "' . $mysqlDate . '") AND room_id = "' . $roomID . '"';
 		$resvs = RoomReservation::model() -> findAll($criteria);
 
 
@@ -115,6 +117,7 @@ class Room_reservationController extends Controller
 			if(($resStart > $startDateTime && $resStart < $endDateTime) ||
 				($resEnd > $startDateTime && $resEnd < $endDateTime))
 				{$conflicts = true;}
+
 			//If they start and end at the same time, nogo
 			if($resStart == $startDateTime && $resEnd == $endDateTime)
 				{$conflicts = true;}
@@ -123,7 +126,7 @@ class Room_reservationController extends Controller
 		return array($inOrder, !$conflicts);
 	}
 
-
+	//Makes a new reservation with email, buildID and the rest of the stuff
 	public function insertRoomReservation($email, $buildID, $roomID, $startDateTime, $endDateTime)
 	{
 		$res = new RoomReservation;
@@ -156,7 +159,7 @@ class Room_reservationController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','reserve','calendarRes'),
+				'actions'=>array('index','view','reserve','calendarRes', 'updateCal'),
 				//'users'=>array('@'),
 				'roles'=>array('user','workStudy','admin'),
 			),
@@ -179,26 +182,29 @@ class Room_reservationController extends Controller
 	{
 		$model = new Room;
 		
+		//If they've clicked the submit button...
 	    	if(isset($_POST['yt0']))
 	    	{
+			//Take the attributes from the page and validate it
 			$model->attributes=$_POST['Room'];
-				//print_r($model->attributes);
 			if($model->validate())
 			{
-				//print_r($model->attributes);
-		    		echo('THIS IS SUBMITed');
-				//return;
+				//If validates, then goes to the calendarRes page with the buildID and roomNum
 				$this->redirect(array('calendarRes','build_id'=>$model->building_id, 'room_number'=>$model->room_number));
 			}
 	    	}
+		//Otherwise, renders the reserve page
 	    	$this->render('reserve',array('model'=>$model));
-
+		
+		//If the building ID isn't set, we just make it blank.
 		if(!isset($_POST['Room']['building_id']))
-			{/*print_r($_POST);*/ $_POST['Room']['building_id'] = '';}
+			{$_POST['Room']['building_id'] = '';}
+
+		//We find the buildings with a certain building ID (replacing the :building_id with a number)
 		$data = Room::model()->findAll('building_id=:building_id',
 			array(':building_id'=>(int) $_POST['Room']['building_id']));
-		//if(isset($data[0])){print_r($data[0]['room_number']);}
 		
+		//Echos out extra options for the roomnumber dropdown (this will only happen if there's a proper buildingID)
 		$data = CHtml::listData($data,'room_id','room_number');
 		echo CHtml::tag('option', array('value'=>''), 'Choose a room', true);
 		foreach($data as $value=>$name)
@@ -206,31 +212,29 @@ class Room_reservationController extends Controller
 			echo CHtml::tag('option',
 				array('value'=>$value),CHtml::encode($name),true);
 		}
-		//}
-	    //$this->render('resTest',array('model'=>$model));
 	}
 
 	public function actionCalendarRes()
 	{
     	    $model=new RoomReservation;
-	    //print(Yii::app()->request->getQuery('dateHolder', -1));
-	    //print(Yii::app()->request->getParam('dateHolder', -1));
-	    //print(Yii::app()->request->getPost('dateHolder', -1));
 
-//	    print(Yii::app()->request->getQuery('build_id', -1));
+	    //get the room and building ID from GET
 	    $building_id = Yii::app()->request->getQuery('build_id',-1);
 	    $room_id = Yii::app()->request->getQuery('room_number',-1);
+		
+	    //If we're missing one of them, we should go back to reserve, where they're generated
             if($building_id == -1 || $room_id == -1)
 		{$this->redirect(array('reserve'));}
-	    $reservations = $this -> getReservations($building_id, $room_id);
-		//print_r($reservations[0]['start_date_time']);
-            $JSONreservations = $this -> reservationsToJSON($reservations);
-		//print_r($JSONreservations);
 
+	    //We then get the reservations and turn them into JSON format.
+	    $reservations = $this -> getReservations($building_id, $room_id);
+            $JSONreservations = $this -> reservationsToJSON($reservations);
+
+	    //If the submit button has been pushed...
 	    if(isset($_POST['yt0']))
 	    {
-		//$model->attributes=$_POST['Room'];
-		//print_r($_POST);
+		//we have to get all of the data out of the post.
+		//There's probably a better way to do this. I'm not quite sure what it is ATM
 		$date = Yii::app()->request->getPost('dateHolder', -1);
 		$startHour = Yii::app()->request->getPost('StartHour', -1);
 		$startMinute = Yii::app()->request->getPost('StartMinute', -1);
@@ -239,7 +243,10 @@ class Room_reservationController extends Controller
 		$endMinute = Yii::app()->request->getPost('EndMinute', -1);
 		$endAMPM = Yii::app()->request->getPost('EndAMPM', -1);
 
-		$valid = $this -> timeValidate($startHour, $startMinute, $startAMPM, $endHour, $endMinute, $endAMPM, $date);
+		//See if they're valid by calling our own validate method
+		$valid = $this -> timeValidate($startHour, $startMinute, $startAMPM, $endHour, $endMinute, $endAMPM, $date, $room_id);
+
+		//Valid returns an array so we know WHY it's not valid
 		if($valid[0] && $valid[1])
 		{
 			//Taking the inputs and turning them into real time data
@@ -253,18 +260,21 @@ class Room_reservationController extends Controller
 			$startDateTime = new DateTime($mysqlDate . $startTime);
 			$endDateTime = new DateTime($mysqlDate . $endTime);
 
+			//getting it all into the correct format, and redirecting to the page
+			//Maybe this should go to the calendar view for the current building/room...hmmm
 			$resID = $this -> insertRoomReservation(Yii::app()->user->getId(), $building_id, $room_id, $startDateTime->format('Y/m/d H:i:s'), $endDateTime->format('Y/m/d H:i:s'));
 			$this->redirect(array($resID));
 		}
+		//If the reservation times are in a bad format (like it ends before it begins)
 		else if(!$valid[0])
 		{
 			echo("<script> alert('Check the times for your reservation again.'); </script>");
 		}
+		//If there's a reservation conflict
 		else if(!$valid[1])
 		{
 			echo("<script> alert('Your reservation seems to conflict with another reservation. Please try again'); </script>");
 		}
-		//$this->refresh();
 	    }
 	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id,
 		'JSONRes'=>$JSONreservations));
@@ -340,17 +350,50 @@ class Room_reservationController extends Controller
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
 			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-	}
+	}	
 
 	/**
 	 * Lists all models.
+	 * Has been modified to show them as a calendar, which is selected by building and room number
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('RoomReservation');
+		//If we're looking for a specific building and room, get that here. Otherwise...
+		$buildingID = Yii::app()->request->getParam('building_list', -1);
+		$roomID = Yii::app()->request->getParam('room_num',-1);
+		$buildings = $this -> getBuildings();
+		if($buildingID != -1 && $roomID != -1)
+		{
+			$resvs = $this -> getReservations($buildingID, $roomID);
+			$rooms = $this -> getRooms($buildingID);
+		}
+		else
+		{
+			//Just get the first one in the database
+			$buildingID = $buildings[0]['building_id'];
+			$rooms = $this -> getRooms($buildingID);
+			$roomID = $rooms[0]['room_id'];
+			$resvs = $this -> getReservations($buildingID, $roomID);
+		}
+		//Get the JSON version and pass it on
+		$JSONRes = $this -> reservationsToJSON($resvs);
 		$this->render('index',array(
-			'dataProvider'=>$dataProvider,
+			'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes,
 		));
+	
+		/*       Modifying the second dropdown bar     */
+		if(!isset($_POST['building_list']))
+			{$_POST['building_list'] = '';}
+		$data = Room::model()->findAll('building_id=:building_list',
+			array(':building_list'=>(int) $_POST['building_list']));
+		
+		$data = CHtml::listData($data,'room_id','room_number');
+		echo CHtml::tag('option', array('value'=>''), 'Choose a room', true);
+		foreach($data as $value=>$name)
+		{
+			echo CHtml::tag('option',
+				array('value'=>$value),CHtml::encode($name),true);
+		}
 
 	}
 

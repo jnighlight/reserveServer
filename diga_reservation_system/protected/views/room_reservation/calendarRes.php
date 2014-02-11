@@ -4,15 +4,7 @@
 /* @var $form CActiveForm */
 ?>
 <?php
-$build = $this -> getBuildings();
-$buildList = CHtml::listData($build, 'building_id', 'name');
-$buildMenu = CHtml::dropDownList('Building Names',Building::model(),$buildList, array('empty' => 'Choose a Building'));
-
-$availRooms = $this -> getRooms(4);
-//print($availRooms[0]['room_number']);
-$roomList = CHtml::listData($availRooms, 'room_id', 'room_number');
-$roomMenu = CHtml::dropDownList('Room Numbers', Room::model(), $roomList, array('empty' => 'Choose a Room Number'));
-
+//Prepares information for the dropdown boxes
 $hourSelect = array();
 $hourSelect[] = 12;
 for($i = 1; $i <= 11; $i++)
@@ -22,6 +14,7 @@ for($i = 1; $i <= 11; $i++)
 $minuteSelect = array(0=>"00", 1=>"30");
 $ampmSelect = array(0=>"AM", 1=>"PM");
 
+//Importin dose libraries doe
 $cs = Yii::app()->clientScript;
 $base = Yii::app()->baseUrl;
 $fullCal = '/extensions/js/fullcalendar';
@@ -29,38 +22,22 @@ $cs->registerCssFile($base . $fullCal . '/fullcalendar/fullcalendar.css');
 $cs->registerCoreScript('jquery');
 $cs->registerScriptFile($base . $fullCal . '/lib/jquery-ui.custom.min.js');
 $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
-//$cs->registerScript();
 ?>
 <script>
-
+	//A script to create the calendar
 	$(document).ready(function() {
 
 		$('#calendar').fullCalendar({
 			dayClick: function(date, allDay, jsEvent, view) {
-				//alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-
-				//alert('Current view: ' + view.name);
+				//Lets you select the day by clicking on it...
 				$("#daySelect").html($.fullCalendar.formatDate(date, "dddd',' MMMM d',' yyyy"));
 				$("#dateHolder").val(date);
-				//$("#dateHolder").val("BLECH");
-				//alert(date);
-				// change the day's background color just for fun
-				//$(this).css('background-color', '#bbbbbb');
-
                                 },
 			eventClick: function(calEvent, jsEvent, view) {
-
-				//alert('Event: ' + calEvent.title);
-				//alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-				//alert('View: ' + view.name);
-
+				//...Even if they click an event on that day
 				$("#daySelect").html($.fullCalendar.formatDate(calEvent.start, "dddd',' MMMM d',' yyyy"));
 				$("#dateHolder").val(calEvent.start);
-
-				// change the border color just for fun
-				//$(this).css('border-color', 'red');
 				return false;
-
 			    },
 			editable: false,
 			header: {
@@ -77,6 +54,7 @@ $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
 <script>
 function checkFunction()
 {
+	//We don't want them submitting without clicking a day first
 	if($("#dateHolder").val() == '')
 	{
 		alert("Please click a day");
@@ -87,7 +65,8 @@ function checkFunction()
 <div id='calendar'></div>
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php 	//And this is the pretty form
+	$form=$this->beginWidget('CActiveForm', array(
 	'id'=>'room-calendarRes-form',
 	'enableAjaxValidation'=>false,
 	'htmlOptions'=>array('onsubmit'=>'return checkFunction()'),
@@ -118,7 +97,6 @@ function checkFunction()
 		echo(":");
 		echo CHtml::dropDownList('StartMinute','0',$minuteSelect);
 		echo CHtml::dropDownList('StartAMPM','0',$ampmSelect);
-		//echo $form -> dropDownList($model,'start_date_time',array('empty'=>'select a time'));
 		?>
 	</div>
 
