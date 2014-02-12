@@ -75,7 +75,7 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Submit'); ?>
+		<?php echo CHtml::submitButton('View'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>

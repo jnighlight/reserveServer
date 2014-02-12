@@ -18,6 +18,7 @@ echo CHtml::imageButton(Yii::app()->baseUrl."/images/equipment_reservation.png",
 // Room Reservation
 /* if the user is an admin */
 echo CHtml::imageButton(Yii::app()->baseUrl."/images/room_reservation.png",array('name'=>'reserve_room'));
+echo CHtml::imageButton(Yii::app()->baseUrl."/images/room_reservation_list.png",array('name'=>'reserve_list'));
 if($this->isUserWorkStudy())
 {
   // Equipment Admin Controls

@@ -1,0 +1,5 @@
+$auth=Yii::app()->authManager;
+$userEmail = 'Yii::app()->user->id';
+$userLvl = "\$roleLvl = Yii::app()->db->createCommand()->select('user_level_id')->from('user')->where('email=\''.(".$userEmail.").'\'')->queryRow();";
+$bizRule = ($userLvl . " return 1==\$roleLvl['user_level_id'];");
+$auth->createRole('admin', 'Admin User, account GOD', $bizRule);
