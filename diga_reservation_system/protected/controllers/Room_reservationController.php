@@ -358,10 +358,16 @@ class Room_reservationController extends Controller
 	 */
 	public function actionIndex()
 	{
+		print_r($_POST);
 		//If we're looking for a specific building and room, get that here. Otherwise...
 		$buildingID = Yii::app()->request->getParam('building_list', -1);
 		$roomID = Yii::app()->request->getParam('room_num',-1);
 		$buildings = $this -> getBuildings();
+		if($buildingID == '' || $roomID == '')
+		{
+			$buildingID = Yii::app()->request->getParam('cur_build', -1);
+			$roomID = Yii::app()->request->getParam('cur_room',-1);
+		}
 		if($buildingID != -1 && $roomID != -1)
 		{
 			$resvs = $this -> getReservations($buildingID, $roomID);
@@ -375,12 +381,18 @@ class Room_reservationController extends Controller
 			$roomID = $rooms[0]['room_id'];
 			$resvs = $this -> getReservations($buildingID, $roomID);
 		}
-		//Get the JSON version and pass it on
-		$JSONRes = $this -> reservationsToJSON($resvs);
-		$this->render('index',array(
-			'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes,
-		));
-	
+		if(isset($_POST['yt1']))
+		{
+			$this->redirect(array('calendarRes','build_id'=>$buildingID, 'room_number'=>$roomID));
+		}
+		else
+		{
+			//Get the JSON version and pass it on
+			$JSONRes = $this -> reservationsToJSON($resvs);
+			$this->render('index',array(
+				'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes,
+			));
+		}	
 		/*       Modifying the second dropdown bar     */
 		if(!isset($_POST['building_list']))
 			{$_POST['building_list'] = '';}

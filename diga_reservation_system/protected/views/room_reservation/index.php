@@ -34,6 +34,7 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'room-reserve-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions'=>array('onsubmit'=>'return checkFunction()'),
 )); ?>
 
 
@@ -69,13 +70,16 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 			events: JSONRes
 		});}",*/
 	//)));
-	echo CHtml::dropDownList('room_num','',array('empty'=>'select a building'));
-?>
+	echo CHtml::dropDownList('room_num','',array(''=>'select a building'));
+	echo CHtml::hiddenField('cur_build', $buildingID, array("id"=>"cur_build")); 
+	echo CHtml::hiddenField('cur_room', $roomID, array("id"=>"cur_room")); 
+	?>
 	</div>
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('View'); ?>
+		<?php echo CHtml::submitButton('View'); 
+		      echo " " . CHtml::submitButton('Reserve'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
@@ -100,6 +104,31 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 			events: <?php echo $JSONRes; ?>
 		});
 	});
+</script>
+<script>
+function checkFunction()
+{
+	//We don't want them submitting without selecting a room and building
+	//if($("#building_list").val() == '' ||$("#room_num").val() == '')
+	//{
+		//alert("Please select a Building and a Room");
+		//$('#room-reserve-form').attr('name', 'bob')
+		//alert('click');
+		//return false;
+	//}
+}
+</script>
+<script>
+$('#room-reserve-form').submit(function(){ //listen for submit event
+    $.each(params, function(i,param){
+        $('<input />').attr('type', 'hidden')
+            .attr('name', 'bob')
+            .attr('value', '10')
+            .appendTo('#room-reserve-form');
+    });
+
+    return true;
+});
 </script>
 
 <div id='calendar'></div>
