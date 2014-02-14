@@ -169,7 +169,7 @@ class Room_reservationController extends Controller
 				'roles'=>array('workStudy','admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
+				'actions'=>array('admin','delete', 'class'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
@@ -279,6 +279,31 @@ class Room_reservationController extends Controller
 	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id,
 		'JSONRes'=>$JSONreservations));
 }
+
+	public function actionClass()
+	{
+	    $model=new RoomReservation;
+
+	    // uncomment the following code to enable ajax-based validation
+	    /*
+	    if(isset($_POST['ajax']) && $_POST['ajax']==='room-reservation-class-form')
+	    {
+		echo CActiveForm::validate($model);
+		Yii::app()->end();
+	    }
+	    */
+
+	    if(isset($_POST['RoomReservation']))
+	    {
+		$model->attributes=$_POST['RoomReservation'];
+		if($model->validate())
+		{
+		    // form inputs are valid, do something here
+		    return;
+		}
+	    }
+	    $this->render('class',array('model'=>$model));
+	}
 
 	/**
 	 * Displays a particular model.
