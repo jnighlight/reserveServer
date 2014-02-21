@@ -28,16 +28,16 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','create'),
-				'users'=>array('*'),
+				'actions'=>array(),
+				'roles'=>array('user','workStudy','admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('update'),
-				'users'=>array('@'),
+				'actions'=>array('index','view'),
+				'roles'=>array('workStudy','admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'actions'=>array('update','create','admin','delete'),
+				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
 				'users'=>array('*'),
@@ -51,6 +51,7 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
+		echo($id);
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -70,7 +71,7 @@ class UserController extends Controller
 		if(isset($_POST['User']))
 		{
 			$model->attributes=$_POST['User'];
-			$model->salt = mcrypt_create_iv(64,MCRYPT_DEV_RANDOM);
+			//$model->salt = mcrypt_create_iv(64,MCRYPT_DEV_RANDOM);
 			//$model->password = crypt(($model->password),($model->salt));
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->email));
@@ -154,7 +155,8 @@ class UserController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=User::model()->findByPk($id);
+		echo($id);
+		$model=User::model()->findByAttributes(array('id_number'=>$id));
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

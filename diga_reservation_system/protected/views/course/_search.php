@@ -17,6 +17,11 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'room_id'); ?>
+		<?php echo $form->textField($model,'room_id'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'name'); ?>
 		<?php echo $form->textField($model,'name',array('size'=>30,'maxlength'=>30)); ?>
 	</div>
@@ -24,6 +29,16 @@
 	<div class="row">
 		<?php echo $form->label($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>30,'maxlength'=>30)); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'startDate'); ?>
+		<?php echo $form->textField($model,'startDate'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'endDate'); ?>
+		<?php echo $form->textField($model,'endDate'); ?>
 	</div>
 
 	<div class="row">
@@ -59,11 +74,6 @@
 	<div class="row">
 		<?php echo $form->label($model,'friday'); ?>
 		<?php echo $form->textField($model,'friday'); ?>
-	</div>
-
-	<div class="row">
-		<?php echo $form->label($model,'room_id'); ?>
-		<?php echo $form->textField($model,'room_id'); ?>
 	</div>
 
 	<div class="row buttons">

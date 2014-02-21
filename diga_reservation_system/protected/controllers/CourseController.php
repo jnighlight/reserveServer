@@ -63,7 +63,7 @@ class CourseController extends Controller
 	public function actionCreate()
 	{
 		$model=new Course;
-		$buildings = Building::model() -> findAll(true);
+		$buildings = Building::model() -> findAll(true);	
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);

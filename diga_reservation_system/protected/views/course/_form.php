@@ -30,6 +30,18 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	</div>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'startDate'); ?>
+		<?php echo $form->dateField($model,'startDate'); ?>
+		<?php echo $form->error($model,'startDate'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->labelEx($model,'endDate'); ?>
+		<?php echo $form->dateField($model,'endDate'); ?>
+		<?php echo $form->error($model,'endDate'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'start_time'); ?>
 		<?php echo CHtml::tag('p', array('class'=>'hint'), '24 hour time: If you want 8:00 PM, insert 20:00'); ?>
 		<?php echo $form->textField($model,'start_time'); ?>

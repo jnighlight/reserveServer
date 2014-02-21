@@ -55,7 +55,62 @@ class Room_reservationController extends Controller
 			$JSONRes[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 'end'=>$end);
 		}
 		//I return it json_encoded just so I get the product the way it should be inserted. This does limit the use of the method though. May change this later.
-		return json_encode($JSONRes);
+		return $JSONRes;
+	}
+
+	//Takes an array with SQL information of course for a specific room in a specific
+	//building and turns them into a JSON array for the fullcalendar plugin
+	public function coursesToJSON($courses)
+	{
+		$JSONCour = array();
+		//i is just for the event ID's. Wouldn't want ppl knowing the real database id's. Security, and stuff
+		$i = 0;
+		//Go through each course
+		foreach($courses as $course)
+		{
+			//Making an array for if the class happens on each day of the week
+			$courseDays = array();
+			$courseDays[1] = $course['monday'];
+			$courseDays[2] = $course['tuesday'];
+			$courseDays[3] = $course['wednesday'];
+			$courseDays[4] = $course['thursday'];
+			$courseDays[5] = $course['friday'];
+
+			$id = $i++;
+			//We want a little colour to distinguish it as a class
+			$color = 'red';
+			$title = $course['name'];
+			$endDate = new DateTime($course['endDate']);
+
+			//Gonna start with the start date, and iterate through dates until we get to the day after the end date
+			for($iterateDate = new DateTime($course['startDate']); $iterateDate <= $endDate; $iterateDate->modify('+1 day'))
+			{
+				$dayNum = $iterateDate -> format('N');//date('N', $iterateDate);
+				
+				//if it's not the weekend
+				if($dayNum <= 5)
+				{
+					//And if the course is on that day
+					if($courseDays[$dayNum])
+					{
+						//Make a dateTime with SQL data, and outputting it in the javascript format
+						$start = new DateTime($course['start_time']);
+						//$start = new DateTime($start);
+						$v = new DateTime(($iterateDate -> format('D M d Y')) . ' ' . ($start -> format('H:i:s TO')));
+						$start = $v -> format('D M d Y H:i:s TO');
+
+						$end = new DateTime($course['end_time']);
+						//$end = new DateTime($end);
+						//Putting together the date and time
+						$v = new DateTime($iterateDate -> format('D M d Y') . ' ' . $end -> format('H:i:s TO'));
+						$end = $v -> format('D M d Y H:i:s TO');
+
+						$JSONCour[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 'end'=>$end, 'color'=>$color);
+					}
+				}
+			}
+		}
+		return $JSONCour;
 	}
 
 	//To validate the time for a possible new reservation.
@@ -221,6 +276,8 @@ class Room_reservationController extends Controller
 	    //get the room and building ID from GET
 	    $building_id = Yii::app()->request->getQuery('build_id',-1);
 	    $room_id = Yii::app()->request->getQuery('room_number',-1);
+	    $roomNumber = Yii::app()->request->getQuery('roomNumber',-1);
+	    $buildingName = Yii::app()->request->getQuery('buildingName',-1);
 		
 	    //If we're missing one of them, we should go back to reserve, where they're generated
             if($building_id == -1 || $room_id == -1)
@@ -228,7 +285,12 @@ class Room_reservationController extends Controller
 
 	    //We then get the reservations and turn them into JSON format.
 	    $reservations = $this -> getReservations($building_id, $room_id);
+	    $courses = Course::model() -> findAllByAttributes(array('room_id'=>$room_id));
+
             $JSONreservations = $this -> reservationsToJSON($reservations);
+	    $JSONcourses = $this -> coursesToJSON($courses);
+            $JSONreservations = array_merge($JSONcourses, $JSONreservations);
+	    $JSONreservations = json_encode($JSONreservations);
 
 	    //If the submit button has been pushed...
 	    if(isset($_POST['yt0']))
@@ -277,7 +339,7 @@ class Room_reservationController extends Controller
 		}
 	    }
 	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id,
-		'JSONRes'=>$JSONreservations));
+		'JSONRes'=>$JSONreservations, 'roomNumber'=>$roomNumber, 'buildingName'=> $buildingName,));
 }
 
 	public function actionClass()
@@ -395,27 +457,38 @@ class Room_reservationController extends Controller
 		}
 		if($buildingID != -1 && $roomID != -1)
 		{
+			$roomNumber = Room::model() -> findAllByAttributes(array('room_id'=>$roomID));
+			$roomNumber = $roomNumber[0]['room_number'];
+			$buildingName = Building::model() -> findAllByAttributes(array('building_id'=>$buildingID));
+			$buildingName = $buildingName[0]['name'];
 			$resvs = $this -> getReservations($buildingID, $roomID);
-			$rooms = $this -> getRooms($buildingID);
 		}
 		else
 		{
 			//Just get the first one in the database
 			$buildingID = $buildings[0]['building_id'];
+			$buildingName = $buildings[0]['name'];
 			$rooms = $this -> getRooms($buildingID);
 			$roomID = $rooms[0]['room_id'];
+			$roomNumber = $rooms[0]['room_number'];
 			$resvs = $this -> getReservations($buildingID, $roomID);
 		}
 		if(isset($_POST['yt1']))
 		{
-			$this->redirect(array('calendarRes','build_id'=>$buildingID, 'room_number'=>$roomID));
+			$this->redirect(array('calendarRes','build_id'=>$buildingID, 'room_number'=>$roomID, 'buildingName' => $buildingName, 'roomNumber' => $roomNumber,));
 		}
 		else
 		{
+			//Getting courses
+			$courses = Course::model() -> findAllByAttributes(array('room_id'=>$roomID));
+			$JSONcourses = $this -> coursesToJSON($courses);
+
 			//Get the JSON version and pass it on
 			$JSONRes = $this -> reservationsToJSON($resvs);
+			$JSONRes = array_merge($JSONRes, $JSONcourses);
+			$JSONRes = json_encode($JSONRes);
 			$this->render('index',array(
-				'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes,
+				'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes, 'buildingName' => $buildingName, 'roomNumber' => $roomNumber,
 			));
 		}	
 		/*       Modifying the second dropdown bar     */

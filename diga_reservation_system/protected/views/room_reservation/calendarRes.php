@@ -62,6 +62,7 @@ function checkFunction()
 	}
 }
 </script>
+<?php echo ("<center><h1> " . $buildingName . ", Room " . $roomNumber ." </h1></center>"); ?>
 <div id='calendar'></div>
 <div class="form">
 

@@ -37,7 +37,7 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	'htmlOptions'=>array('onsubmit'=>'return checkFunction()'),
 )); ?>
 
-
+	<center>
 	<div class="row">
 	<?php   //Dropdown list that changes the one below it when items are selected
 		echo CHtml::dropDownList('building_list','',$buildList,
@@ -48,8 +48,8 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	'url'=> CController::createUrl('room_reservation/'),
 	'update'=>'#room_num',
 	)));?>
-	</div>
-	<div class="row">
+	<!-- ></div>
+	<div class="row"> -->
 	<?php
 	//This was gonna ajax it, but it got kinda weird. O.o
 	/*echo CHtml::dropDownList('room_num','',array('empty'=>'Select a Building'),
@@ -70,23 +70,22 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 			events: JSONRes
 		});}",*/
 	//)));
-	echo CHtml::dropDownList('room_num','',array(''=>'select a building'));
+	echo CHtml::dropDownList('room_num','',array(''=>'---'));
 	echo CHtml::hiddenField('cur_build', $buildingID, array("id"=>"cur_build")); 
 	echo CHtml::hiddenField('cur_room', $roomID, array("id"=>"cur_room")); 
 	?>
 	</div>
 
-
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('View'); 
 		      echo " " . CHtml::submitButton('Reserve'); ?>
 	</div>
-
+	</center>
 <?php $this->endWidget(); ?>
 
 </div><!-- form -->
 
-
+<?php echo ("<center><h1> " . $buildingName . ", Room " . $roomNumber ." </h1></center>"); ?>
 
 <script>
 

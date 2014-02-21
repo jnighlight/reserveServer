@@ -22,8 +22,11 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'class_id',
+		'room_id',
 		'name',
 		'email',
+		'startDate',
+		'endDate',
 		'start_time',
 		'end_time',
 		'monday',
@@ -31,6 +34,5 @@ $this->menu=array(
 		'wednesday',
 		'thursday',
 		'friday',
-		'room_id',
 	),
 )); ?>
