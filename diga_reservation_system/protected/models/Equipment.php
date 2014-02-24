@@ -98,8 +98,8 @@ class Equipment extends CActiveRecord
 			array('equipment_type_id, availability', 'numerical', 'integerOnly'=>true),
 			array('serial_number, manufacturer, model_number', 'length', 'max'=>30),
 			array('description', 'length', 'max'=>200),
-			array('name', 'length', 'max'=>20),
-			array('image_url', 'length', 'max'=>150),
+			array('name', 'length', 'max'=>40),
+			array('image_url', 'length', 'max'=>300),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('equipment_id, serial_number, manufacturer, model_number, description, name, image_url, equipment_type_id, availability', 'safe', 'on'=>'search'),
