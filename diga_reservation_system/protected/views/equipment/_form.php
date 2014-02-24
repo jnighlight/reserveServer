@@ -41,13 +41,13 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>20)); ?>
+		<?php echo $form->textField($model,'name',array('size'=>20,'maxlength'=>40)); ?>
 		<?php echo $form->error($model,'name'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'image_url'); ?>
-		<?php echo $form->textField($model,'image_url',array('size'=>60,'maxlength'=>150)); ?>
+		<?php echo $form->textField($model,'image_url',array('size'=>60,'maxlength'=>300)); ?>
 		<?php echo $form->error($model,'image_url'); ?>
 	</div>
 
