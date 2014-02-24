@@ -5,8 +5,11 @@
  *
  * The followings are the available columns in table 'course':
  * @property integer $class_id
+ * @property integer $room_id
  * @property string $name
  * @property string $email
+ * @property string $startDate
+ * @property string $endDate
  * @property string $start_time
  * @property string $end_time
  * @property integer $monday
@@ -14,7 +17,6 @@
  * @property integer $wednesday
  * @property integer $thursday
  * @property integer $friday
- * @property integer $room_id
  */
 class Course extends CActiveRecord
 {
@@ -44,12 +46,12 @@ class Course extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, email, start_time, end_time, room_id', 'required'),
-			array('monday, tuesday, wednesday, thursday, friday, room_id', 'numerical', 'integerOnly'=>true),
+			array('room_id, name, email, startDate, endDate, start_time, end_time', 'required'),
+			array('room_id, monday, tuesday, wednesday, thursday, friday', 'numerical', 'integerOnly'=>true),
 			array('name, email', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('class_id, name, email, start_time, end_time, monday, tuesday, wednesday, thursday, friday, room_id', 'safe', 'on'=>'search'),
+			array('class_id, room_id, name, email, startDate, endDate, start_time, end_time, monday, tuesday, wednesday, thursday, friday', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -71,8 +73,11 @@ class Course extends CActiveRecord
 	{
 		return array(
 			'class_id' => 'Class',
-			'name' => 'Course Title',
-			'email' => 'Teacher\'s Email',
+			'room_id' => 'Room',
+			'name' => 'Name',
+			'email' => 'Email',
+			'startDate' => 'Start Date',
+			'endDate' => 'End Date',
 			'start_time' => 'Start Time',
 			'end_time' => 'End Time',
 			'monday' => 'Monday',
@@ -80,7 +85,6 @@ class Course extends CActiveRecord
 			'wednesday' => 'Wednesday',
 			'thursday' => 'Thursday',
 			'friday' => 'Friday',
-			'room_id' => 'Room',
 		);
 	}
 
@@ -96,8 +100,11 @@ class Course extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('class_id',$this->class_id);
+		$criteria->compare('room_id',$this->room_id);
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('email',$this->email,true);
+		$criteria->compare('startDate',$this->startDate,true);
+		$criteria->compare('endDate',$this->endDate,true);
 		$criteria->compare('start_time',$this->start_time,true);
 		$criteria->compare('end_time',$this->end_time,true);
 		$criteria->compare('monday',$this->monday);
@@ -105,7 +112,6 @@ class Course extends CActiveRecord
 		$criteria->compare('wednesday',$this->wednesday);
 		$criteria->compare('thursday',$this->thursday);
 		$criteria->compare('friday',$this->friday);
-		$criteria->compare('room_id',$this->room_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
