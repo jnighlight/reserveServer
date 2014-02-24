@@ -21,11 +21,29 @@ class Equipment_checkout_summaryController extends Controller
                   }
                   else // good to go
                   {
+		    $equipment_reservation = EquipmentReservation::model()->findByPk($_GET['equipment_reservation_id']);
+		    $equipment = Equipment::model()->findByPk($equipment_reservation->equipment_id);
+		    $reservarion_accessories = $this->getReservationAccessories($equipment_reservation->equipment_id);
+ 
+		    //$this->render('index');
 
-		    $this->render('index');
+		    $this->render('index',
+                      array("equipment_reservation" => $equipment_reservation,
+			   "equipment" => $equipment,
+			   "reservarion_accessories" => $reservarion_accessories)
+			);
 		  }
 	        }
 	}
+
+	public function getReservationAccessories($reservation_id)
+        {
+          $reservation_accessories = EquipmentReservationAccessory::model();
+          $criteria = new CDbCriteria;
+	  $criteria->condition = "equipment_reservation_id = ".$reservation_id;
+          return $reservation_accessories->findAll($criteria);
+        }
+
 
 	/*
 	  Retrieves a particular reservation
