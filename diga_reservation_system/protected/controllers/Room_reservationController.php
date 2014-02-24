@@ -78,7 +78,7 @@ class Room_reservationController extends Controller
 
 			$id = $i++;
 			//We want a little colour to distinguish it as a class
-			$color = 'red';
+			$color = '#B00000';
 			$title = $course['name'];
 			$endDate = new DateTime($course['endDate']);
 
@@ -150,6 +150,8 @@ class Room_reservationController extends Controller
 		$mysqlDate = date('Y-m-d', strtotime($date));
 		$startDateTime = new DateTime($mysqlDate . $startTime);
 		$endDateTime = new DateTime($mysqlDate . $endTime);
+		$dayOfWeek = strtolower(date('l', strtotime($date)));
+		
 
 		//Getting all of the reservations on that given day
 		$criteria = new CDbCriteria();
@@ -157,6 +159,13 @@ class Room_reservationController extends Controller
 		$criteria->condition = '(DATE(start_date_time) = "' . $mysqlDate .
 			'" OR DATE(end_date_time) = "' . $mysqlDate . '") AND room_id = "' . $roomID . '"';
 		$resvs = RoomReservation::model() -> findAll($criteria);
+
+		//Find courses on that day
+		$criteria = new CDbCriteria();
+		$criteria->select = '*';
+		$criteria->condition = '("' .$mysqlDate . '" between startDate and endDate) AND ' .
+			 $dayOfWeek . '=1 AND room_id=' . $roomID;
+		$courses = Course::model() -> findAll($criteria);
 
 
 		foreach($resvs as $res)
@@ -175,6 +184,27 @@ class Room_reservationController extends Controller
 
 			//If they start and end at the same time, nogo
 			if($resStart == $startDateTime && $resEnd == $endDateTime)
+				{$conflicts = true;}
+		}
+
+		$startTime = strtotime($startTime);
+		$endTime = strtotime($endTime);
+		foreach($courses as $course)
+		{
+			$courseStart = strtotime($course['start_time']);
+			$courseEnd = strtotime($course['end_time']);
+
+			//Checks to see if our new reservation's start or end time is during an already made reservation
+			if(($startTime > $courseStart && $startTime < $courseEnd) ||
+				($endTime > $courseStart && $endTime < $courseEnd))
+				{$conflicts = true;}
+
+			if(($courseStart > $startTime && $courseStart < $endTime) ||
+				($courseEnd > $startTime && $courseEnd < $endTime))
+				{$conflicts = true;}
+
+			//If they start and end at the same time, nogo
+			if($courseStart == $startTime && $courseEnd == $endTime)
 				{$conflicts = true;}
 		}
 		//first value is true if they're in order, second value true if there are no conflicts
