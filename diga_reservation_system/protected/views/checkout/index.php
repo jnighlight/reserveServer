@@ -136,10 +136,11 @@ $form = $this->beginWidget('CActiveForm', array(
 	  //echo CHtml::textArea("description");
 	  
 	echo CHtml::closeTag("div"); // close description
-
+/*
 	echo CHtml::openTag("p");
 	echo "* This is due back: 00/00/2014";
 	echo CHtml::closeTag("p");
+*/
           echo CHtml::closeTag("br");
 
 	echo CHtml::openTag("div",$checkoutSettings);
