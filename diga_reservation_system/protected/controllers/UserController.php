@@ -51,7 +51,6 @@ class UserController extends Controller
 	 */
 	public function actionView($id)
 	{
-		echo($id);
 		$this->render('view',array(
 			'model'=>$this->loadModel($id),
 		));
@@ -98,7 +97,7 @@ class UserController extends Controller
 		{
 			$model->attributes=$_POST['User'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->email));
+				$this->redirect(array('view','id'=>$model->user_id));
 		}
 
 		$this->render('update',array(
@@ -155,8 +154,7 @@ class UserController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		echo($id);
-		$model=User::model()->findByAttributes(array('id_number'=>$id));
+		$model=User::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;

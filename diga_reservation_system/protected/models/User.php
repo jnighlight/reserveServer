@@ -31,7 +31,7 @@ class User extends CActiveRecord
 	// Checks the password login combination
 	public function validateLogin($email, $password)
 	{
-	  $user = User::model()->findByPk($email);
+	  $user = User::model()->findByAttributes(array('email'=>$email));
 
 	  if($user == null) // not found
 	  {
@@ -100,6 +100,7 @@ class User extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
+			'user_id' => 'User ID',
 			'email' => 'Email',
 			'password' => 'Password',
 			'first_name' => 'First Name',
@@ -122,6 +123,7 @@ class User extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
+		$criteria->compare('user_id', $this->user_id,true);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('password',$this->password,true);
 		$criteria->compare('first_name',$this->first_name,true);
