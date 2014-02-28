@@ -27,7 +27,7 @@ class Room_reservationController extends Controller
 	public function getReservations($buildId, $roomId)
 	{
 		return RoomReservation::model() -> findAllByAttributes(
-			array('building_id'=>$buildId, 'room_id'=>$roomId)
+			array(/*'building_id'=>$buildId,*/ 'room_id'=>$roomId)
 			);
 	}
 
@@ -151,6 +151,7 @@ class Room_reservationController extends Controller
 		$startDateTime = new DateTime($mysqlDate . $startTime);
 		$endDateTime = new DateTime($mysqlDate . $endTime);
 		$dayOfWeek = strtolower(date('l', strtotime($date)));
+		$weekDay = ($dayOfWeek != 'sunday' && $dayOfWeek != 'saturday');
 		
 
 		//Getting all of the reservations on that given day
@@ -160,12 +161,15 @@ class Room_reservationController extends Controller
 			'" OR DATE(end_date_time) = "' . $mysqlDate . '") AND room_id = "' . $roomID . '"';
 		$resvs = RoomReservation::model() -> findAll($criteria);
 
-		//Find courses on that day
-		$criteria = new CDbCriteria();
-		$criteria->select = '*';
-		$criteria->condition = '("' .$mysqlDate . '" between startDate and endDate) AND ' .
-			 $dayOfWeek . '=1 AND room_id=' . $roomID;
-		$courses = Course::model() -> findAll($criteria);
+		if($weekDay)
+		{
+			//Find courses on that day
+			$criteria = new CDbCriteria();
+			$criteria->select = '*';
+			$criteria->condition = '("' .$mysqlDate . '" between startDate and endDate) AND ' .
+				 $dayOfWeek . '=1 AND room_id=' . $roomID;
+			$courses = Course::model() -> findAll($criteria);
+		}
 
 
 		foreach($resvs as $res)
@@ -186,42 +190,58 @@ class Room_reservationController extends Controller
 			if($resStart == $startDateTime && $resEnd == $endDateTime)
 				{$conflicts = true;}
 		}
-
-		$startTime = strtotime($startTime);
-		$endTime = strtotime($endTime);
-		foreach($courses as $course)
+		if($weekDay)
 		{
-			$courseStart = strtotime($course['start_time']);
-			$courseEnd = strtotime($course['end_time']);
+			$startTime = strtotime($startTime);
+			$endTime = strtotime($endTime);
+			foreach($courses as $course)
+			{
+				$courseStart = strtotime($course['start_time']);
+				$courseEnd = strtotime($course['end_time']);
 
-			//Checks to see if our new reservation's start or end time is during an already made reservation
-			if(($startTime > $courseStart && $startTime < $courseEnd) ||
-				($endTime > $courseStart && $endTime < $courseEnd))
-				{$conflicts = true;}
+				//Checks to see if our new reservation's start or end time is during an already made reservation
+				if(($startTime > $courseStart && $startTime < $courseEnd) ||
+					($endTime > $courseStart && $endTime < $courseEnd))
+					{$conflicts = true;}
 
-			if(($courseStart > $startTime && $courseStart < $endTime) ||
-				($courseEnd > $startTime && $courseEnd < $endTime))
-				{$conflicts = true;}
+				if(($courseStart > $startTime && $courseStart < $endTime) ||
+					($courseEnd > $startTime && $courseEnd < $endTime))
+					{$conflicts = true;}
 
-			//If they start and end at the same time, nogo
-			if($courseStart == $startTime && $courseEnd == $endTime)
-				{$conflicts = true;}
+				//If they start and end at the same time, nogo
+				if($courseStart == $startTime && $courseEnd == $endTime)
+					{$conflicts = true;}
+			}
 		}
 		//first value is true if they're in order, second value true if there are no conflicts
 		return array($inOrder, !$conflicts);
 	}
 
 	//Makes a new reservation with email, buildID and the rest of the stuff
-	public function insertRoomReservation($email, $buildID, $roomID, $startDateTime, $endDateTime)
+	public function insertRoomReservation($email, $roomID, $startDateTime, $endDateTime)
 	{
 		$res = new RoomReservation;
 		$res->email = $email;
-		$res->building_id = $buildID;
 		$res->room_id = $roomID;
 		$res->start_date_time = $startDateTime;
 		$res->end_date_time = $endDateTime;
 		$res->save();
 		return $res->getPrimaryKey();
+	}
+
+	private function addRoomPermission($user_id, $room_id)
+	{
+		$perm = new RoomReservationPermission;
+		$perm->user_id = $user_id;
+		$perm->room_id = $room_id;
+		$perm->save();
+	}
+
+	private function deleteRoomPermissions($room_id)
+	{
+		$query = "delete from room_reservation_permission where room_id= :room_id";
+		$command = Yii::app()->db->createCommand($query);
+		$command->execute(array('room_id' => $room_id));
 	}
 
 	/**
@@ -249,7 +269,7 @@ class Room_reservationController extends Controller
 				'roles'=>array('user','workStudy','admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
+				'actions'=>array('create','update', 'permissions'),
 				//'users'=>array('@'),
 				'roles'=>array('workStudy','admin'),
 			),
@@ -261,6 +281,63 @@ class Room_reservationController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	//To edit who can reserve which room
+	public function actionPermissions()
+	{
+		$model=new RoomReservationPermission;
+
+		//Getting all of the users, organized by last name
+		$criteria = new CDbCriteria();
+		$criteria->select = '*';
+		$criteria->order = 'last_name';
+		$users = User::model() -> findAll($criteria);
+
+		//Gets the info about the room so we don't have to search for it again
+		$room_id = Yii::app()->request->getQuery('room_id',-1);
+		$room_number = Yii::app()->request->getQuery('room_number',-1);
+		$building_name = Yii::app()->request->getQuery('building_name',-1);
+
+		//If some of it's missing, something's up, go back to the main reservation page
+		if($room_id == -1 || $room_number == -1 || $building_name == -1)
+			{$this->redirect(array('room_reservation/'));}
+
+		//If we've already pushed the button, act on that before getting the new permission data
+		if(isset($_POST['yt0']))
+		{
+			$i = 1;
+			$iString = 'usr' . $i . 'hid';
+			//Get rid of the permissions as they are
+			$this -> deleteRoomPermissions($room_id);
+			//loop through the hidden fields (i.e., the users in the list)
+			while(isset($_POST[$iString]))
+			{
+				//If their box is checked...
+				if(isset($_POST['usr' . $i]))
+				{
+					//Add a permission for them
+					$this-> addRoomPermission($_POST[$iString], $room_id);
+				}
+				//...then look at the next hidden field
+				$i++;
+				$iString= 'usr'.$i.'hid';
+			}
+		}
+
+		//Get the up to date permission information for this room
+		$permissionObjects = RoomReservationPermission::model() -> findAllByAttributes(
+			array('room_id'=>$room_id)
+			);
+		$permissionIds= array();
+		//we know the room number, so we only need the user_id's
+		//This can be made better, I think. I'll work on that.
+		foreach($permissionObjects as $permissionObject)
+		{
+			$permissionIds[] = $permissionObject['user_id'];
+		}
+		//Finally, make the page
+		$this->render('permissions',array('model'=>$model, 'users'=>$users, 'permissionIds'=>$permissionIds, 'room_number'=>$room_number, 'building_name'=>$building_name));
 	}
 
 	public function actionReserve()
@@ -309,9 +386,17 @@ class Room_reservationController extends Controller
 	    $roomNumber = Yii::app()->request->getQuery('roomNumber',-1);
 	    $buildingName = Yii::app()->request->getQuery('buildingName',-1);
 		
-	    //If we're missing one of them, we should go back to reserve, where they're generated
+	    //If we're missing one of them, we should go back to room_reservation, where they're generated
             if($building_id == -1 || $room_id == -1)
-		{$this->redirect(array('reserve'));}
+		{$this->redirect(array('room_reservation/'));}
+
+	    //Ok, let's make sure they have permission to do this
+	    $userID = Yii::app()->user->getId();
+	    $user = User::model()->findByAttributes(array('email'=>$userID));
+	    $perms = RoomReservationPermission::model()->findByAttributes(array('user_id'=>$user['user_id'], 'room_id'=>$room_id));
+	    $permission = isset($perms['room_id'])? true : false;
+	    if(!$permission)
+	    	{$this -> redirect(array('room_reservation/index'));}
 
 	    //We then get the reservations and turn them into JSON format.
 	    $reservations = $this -> getReservations($building_id, $room_id);
@@ -337,9 +422,10 @@ class Room_reservationController extends Controller
 
 		//See if they're valid by calling our own validate method
 		$valid = $this -> timeValidate($startHour, $startMinute, $startAMPM, $endHour, $endMinute, $endAMPM, $date, $room_id);
+		
 
 		//Valid returns an array so we know WHY it's not valid
-		if($valid[0] && $valid[1])
+		if($valid[0] && $valid[1] && $permission)
 		{
 			//Taking the inputs and turning them into real time data
 			$adjustedStartHour = $startAMPM == 1? $startHour + 12 : $startHour;
@@ -354,7 +440,7 @@ class Room_reservationController extends Controller
 
 			//getting it all into the correct format, and redirecting to the page
 			//Maybe this should go to the calendar view for the current building/room...hmmm
-			$resID = $this -> insertRoomReservation(Yii::app()->user->getId(), $building_id, $room_id, $startDateTime->format('Y/m/d H:i:s'), $endDateTime->format('Y/m/d H:i:s'));
+			$resID = $this -> insertRoomReservation(Yii::app()->user->getId(), $room_id, $startDateTime->format('Y/m/d H:i:s'), $endDateTime->format('Y/m/d H:i:s'));
 			$this->redirect(array($resID));
 		}
 		//If the reservation times are in a bad format (like it ends before it begins)
@@ -475,7 +561,6 @@ class Room_reservationController extends Controller
 	 */
 	public function actionIndex()
 	{
-		print_r($_POST);
 		//If we're looking for a specific building and room, get that here. Otherwise...
 		$buildingID = Yii::app()->request->getParam('building_list', -1);
 		$roomID = Yii::app()->request->getParam('room_num',-1);
@@ -503,24 +588,40 @@ class Room_reservationController extends Controller
 			$roomNumber = $rooms[0]['room_number'];
 			$resvs = $this -> getReservations($buildingID, $roomID);
 		}
+		//see if user has permission to reserve this room
+		$permission = User::model()->findByAttributes(array('email'=>Yii::app()->user->getId()));
+		$permission = RoomReservationPermission::model()->findByAttributes(array('user_id'=>$permission['user_id'], 'room_id'=>$roomID));
+		$alert = false;	
 		if(isset($_POST['yt1']))
 		{
-			$this->redirect(array('calendarRes','build_id'=>$buildingID, 'room_number'=>$roomID, 'buildingName' => $buildingName, 'roomNumber' => $roomNumber,));
+			if($permission)
+			{
+				$this->redirect(array('calendarRes','build_id'=>$buildingID,
+					'room_number'=>$roomID, 'buildingName' => $buildingName,
+					'roomNumber' => $roomNumber,));
+			}
+			else
+			{
+				$alert = true;
+			}
 		}
-		else
+		else if(isset($_POST['yt2']))
 		{
-			//Getting courses
-			$courses = Course::model() -> findAllByAttributes(array('room_id'=>$roomID));
-			$JSONcourses = $this -> coursesToJSON($courses);
+			$this->redirect(array('permissions', 'room_id'=>$roomID, 'room_number'=>$roomNumber,
+				'building_name'=>$buildingName));
+		}
+		//Getting courses
+		$courses = Course::model() -> findAllByAttributes(array('room_id'=>$roomID));
+		$JSONcourses = $this -> coursesToJSON($courses);
 
-			//Get the JSON version and pass it on
-			$JSONRes = $this -> reservationsToJSON($resvs);
-			$JSONRes = array_merge($JSONRes, $JSONcourses);
-			$JSONRes = json_encode($JSONRes);
-			$this->render('index',array(
-				'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes, 'buildingName' => $buildingName, 'roomNumber' => $roomNumber,
-			));
-		}	
+		//Get the JSON version and pass it on
+		$JSONRes = $this -> reservationsToJSON($resvs);
+		$JSONRes = array_merge($JSONRes, $JSONcourses);
+		$JSONRes = json_encode($JSONRes);
+		$this->render('index',array(
+			'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes,
+			'buildingName' => $buildingName, 'roomNumber' => $roomNumber,'alert'=>$alert,
+		));
 		/*       Modifying the second dropdown bar     */
 		if(!isset($_POST['building_list']))
 			{$_POST['building_list'] = '';}

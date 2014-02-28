@@ -20,13 +20,13 @@ $this->menu=array(
 
 <?php   //Getting the room number instead of the ID
 	$roomID = $model['room_id'];
-	$roomNumber = Room::model()->findAllByAttributes(array('room_id'=>$roomID));
-	$roomNumber = $roomNumber[0]['room_number'];
+	$room = Room::model()->findByAttributes(array('room_id'=>$roomID));
+	$roomNumber = $room['room_number'];
 
 	//Getting the building name instead of id number
-	$buildingID = $model['building_id'];
-	$buildingName = Building::model()->findAllByAttributes(array('building_id'=>$buildingID));
-	$buildingName = $buildingName[0]['name'];
+	$buildingID = $room['building_id'];
+	$buildingName = Building::model()->findByAttributes(array('building_id'=>$buildingID));
+	$buildingName = $buildingName['name'];
 
 	//Making the times look prettier
 	$startTime = date('l, F j, Y  g:i a' , strtotime($model['start_date_time']));

@@ -73,7 +73,7 @@ class UserController extends Controller
 			//$model->salt = mcrypt_create_iv(64,MCRYPT_DEV_RANDOM);
 			//$model->password = crypt(($model->password),($model->salt));
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->email));
+				$this->redirect(array('view','id'=>$model->user_id));
 		}
 
 		$this->render('create',array(

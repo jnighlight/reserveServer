@@ -20,6 +20,14 @@ $this->menu=array(
 	array('label'=>'Create RoomReservation', 'url'=>array('create')),
 	array('label'=>'Manage RoomReservation', 'url'=>array('admin')),
 );
+if(isset($alert) && $alert)
+{
+	echo("
+	<script>
+		alert('You do not have permission to reserve " . $buildingName . ", room ". $roomNumber ."');
+	</script>
+	");
+}
 ?>
 <h1>Room Reservations</h1>
 
@@ -77,8 +85,15 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('View'); 
-		      echo " " . CHtml::submitButton('Reserve'); ?>
+		<?php echo CHtml::submitButton('View');
+		      echo " " . CHtml::submitButton('Reserve');
+			$usersRole = User::model()->findByAttributes(array('email'=>Yii::app()->user->getId()));
+			if($usersRole['user_level_id'] == 2 || $usersRole['user_level_id'] == 1)
+			{
+				echo CHtml::submitButton('Modify Permissions');
+			}
+
+?>
 	</div>
 	</center>
 <?php $this->endWidget(); ?>

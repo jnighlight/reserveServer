@@ -1,0 +1,10 @@
+/*
+  Custom CSS file
+  Styles the table for user room reservation Permissions.
+*/
+
+table,th,td
+{
+border:1px solid black;
+border-collapse:collapse;
+}
