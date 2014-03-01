@@ -1,6 +1,6 @@
 <?php
 
-class CourseController extends Controller
+class LabHourController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -28,7 +28,7 @@ class CourseController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view', 'buildList'),
 				'roles'=>array('user', 'workStudy', 'admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -43,6 +43,19 @@ class CourseController extends Controller
 				'users'=>array('*'),
 			),
 		);
+	}
+
+	public function actionBuildList()
+	{
+		$build_id = isset($_POST['building_list'])? $_POST['building_list'] : 4;
+		$data = Room::model()->findAllByAttributes(array('building_id'=>$build_id));
+		$data = CHtml::listData($data,'room_id','room_number');
+		echo CHtml::tag('option', array('value'=>''), 'Choose a room', true);
+		foreach($data as $value=>$name)
+		{
+			echo CHtml::tag('option',
+				array('value'=>$value),CHtml::encode($name),true);
+		}
 	}
 
 	/**
@@ -62,35 +75,21 @@ class CourseController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Course;
-		$buildings = Building::model() -> findAll(true);	
+		$model=new LabHour;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Course']))
+		if(isset($_POST['LabHour']))
 		{
-			$model->attributes=$_POST['Course'];
+			$model->attributes=$_POST['LabHour'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->class_id));
+				$this->redirect(array('view','id'=>$model->lab_hour));
 		}
 
 		$this->render('create',array(
-			'model'=>$model, 'buildings'=>$buildings,
+			'model'=>$model,
 		));
-
-		if(!isset($_POST['building_list']))
-			{$_POST['building_list'] = '';}
-		$data = Room::model()->findAll('building_id=:building_list',
-			array(':building_list'=>(int) $_POST['building_list']));
-		
-		$data = CHtml::listData($data,'room_id','room_number');
-		echo CHtml::tag('option', array('value'=>''), 'Choose a room', true);
-		foreach($data as $value=>$name)
-		{
-			echo CHtml::tag('option',
-				array('value'=>$value),CHtml::encode($name),true);
-		}
 	}
 
 	/**
@@ -105,11 +104,11 @@ class CourseController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Course']))
+		if(isset($_POST['LabHour']))
 		{
-			$model->attributes=$_POST['Course'];
+			$model->attributes=$_POST['LabHour'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->class_id));
+				$this->redirect(array('view','id'=>$model->lab_hour));
 		}
 
 		$this->render('update',array(
@@ -136,7 +135,7 @@ class CourseController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Course');
+		$dataProvider=new CActiveDataProvider('LabHour');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -147,10 +146,10 @@ class CourseController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Course('search');
+		$model=new LabHour('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Course']))
-			$model->attributes=$_GET['Course'];
+		if(isset($_GET['LabHour']))
+			$model->attributes=$_GET['LabHour'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -161,12 +160,12 @@ class CourseController extends Controller
 	 * Returns the data model based on the primary key given in the GET variable.
 	 * If the data model is not found, an HTTP exception will be raised.
 	 * @param integer $id the ID of the model to be loaded
-	 * @return Course the loaded model
+	 * @return LabHour the loaded model
 	 * @throws CHttpException
 	 */
 	public function loadModel($id)
 	{
-		$model=Course::model()->findByPk($id);
+		$model=LabHour::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -174,11 +173,11 @@ class CourseController extends Controller
 
 	/**
 	 * Performs the AJAX validation.
-	 * @param Course $model the model to be validated
+	 * @param LabHour $model the model to be validated
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='course-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='lab-hour-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

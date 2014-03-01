@@ -1,15 +1,15 @@
 <?php
-/* @var $this CourseController */
-/* @var $model Course */
+/* @var $this LabHourController */
+/* @var $model LabHour */
 /* @var $form CActiveForm */
 ?>
 
 <div class="form">
 
 <?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'course-form',
+	'id'=>'lab-hour-form',
 	'enableAjaxValidation'=>false,
-));
+)); 
 $buildings = Building::model()->findAll();
 $buildList = CHtml::listData($buildings, 'building_id', 'name');
 ?>
@@ -19,27 +19,36 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'name'); ?>
-		<?php echo $form->textField($model,'name',array('size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'name'); ?>
+	<?php   //Dropdown list that changes the one below it when items are selected
+		echo CHtml::label('Building', 'building_list');
+		echo CHtml::dropDownList('building_list','',$buildList,
+	array(
+	'empty'=> 'Choose a building',
+	'ajax' => array(
+	'type' => 'POST',
+	'url'=> CController::createUrl('labHour/buildList'),
+	'update'=>'#' . CHtml::activeId($model, 'room_id'),
+	)));?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>30,'maxlength'=>30)); ?>
-		<?php echo $form->error($model,'email'); ?>
+	<?php
+	echo $form->labelEx($model,'room_id');
+	echo $form -> dropDownList($model,'room_id',array(''=>'select a building'));
+	echo $form->error($model,'room_id');
+	?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'startDate'); ?>
-		<?php echo $form->dateField($model,'startDate'); ?>
-		<?php echo $form->error($model,'startDate'); ?>
+		<?php echo $form->labelEx($model,'start_date'); ?>
+		<?php echo $form->dateField($model,'start_date'); ?>
+		<?php echo $form->error($model,'start_date'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->labelEx($model,'endDate'); ?>
-		<?php echo $form->dateField($model,'endDate'); ?>
-		<?php echo $form->error($model,'endDate'); ?>
+		<?php echo $form->labelEx($model,'end_date'); ?>
+		<?php echo $form->dateField($model,'end_date'); ?>
+		<?php echo $form->error($model,'end_date'); ?>
 	</div>
 
 	<div class="row">
@@ -58,7 +67,6 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'monday'); ?>
-		<?php //echo $form->textField($model,'monday'); ?>
 		<?php echo $form->checkBox($model,'monday'); ?>
 		<?php echo $form->error($model,'monday'); ?>
 	</div>
@@ -88,30 +96,15 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	</div>
 
 	<div class="row">
-		<?php //echo $form->labelEx($model,'room_id'); ?>
-		<?php //echo $form->textField($model,'room_id'); ?>
-		<?php //echo $form->error($model,'room_id'); ?>
+		<?php echo $form->labelEx($model,'saturday'); ?>
+		<?php echo $form->checkBox($model,'saturday'); ?>
+		<?php echo $form->error($model,'saturday'); ?>
 	</div>
 
 	<div class="row">
-	<?php   //Dropdown list that changes the one below it when items are selected
-		echo CHtml::label('Building', 'building_list');
-		echo CHtml::dropDownList('building_list','',$buildList,
-	array(
-	'empty'=> 'Choose a building',
-	'ajax' => array(
-	'type' => 'POST',
-	'url'=> CController::createUrl('course/create'),
-	'update'=>'#' . CHtml::activeId($model, 'room_id'),
-	)));?>
-	</div>
-
-	<div class="row">
-	<?php
-	echo $form->labelEx($model,'room_id');
-	echo $form -> dropDownList($model,'room_id',array(''=>'select a building'));
-	echo $form->error($model,'room_id');
-	?>
+		<?php echo $form->labelEx($model,'sunday'); ?>
+		<?php echo $form->checkBox($model,'sunday'); ?>
+		<?php echo $form->error($model,'sunday'); ?>
 	</div>
 
 	<div class="row buttons">

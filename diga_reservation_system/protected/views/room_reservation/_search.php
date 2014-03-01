@@ -22,11 +22,6 @@
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'building_id'); ?>
-		<?php echo $form->textField($model,'building_id'); ?>
-	</div>
-
-	<div class="row">
 		<?php echo $form->label($model,'room_id'); ?>
 		<?php echo $form->textField($model,'room_id'); ?>
 	</div>

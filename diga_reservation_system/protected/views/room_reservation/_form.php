@@ -21,11 +21,6 @@
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'building_id'); ?>
-		<?php echo $form->textField($model,'building_id'); ?>
-		<?php echo $form->error($model,'building_id'); ?>
-	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'room_id'); ?>

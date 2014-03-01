@@ -11,15 +11,21 @@ $cs->registerCoreScript('jquery');
 $cs->registerScriptFile($base . $fullCal . '/lib/jquery-ui.custom.min.js');
 $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
 
+$usersRole = User::model()->findByAttributes(array('email'=>Yii::app()->user->getId()));
+$superUser = ($usersRole['user_level_id'] == 2 || $usersRole['user_level_id'] == 1);
 
 $this->breadcrumbs=array(
 	'Room Reservations',
 );
+if($superUser)
+{
+	$this->menu=array(
+	array('label'=>'Create Room Reservation', 'url'=>array('create')),
+	array('label'=>'Manage Room Reservation', 'url'=>array('admin')),
+	);
+}
 
-$this->menu=array(
-	array('label'=>'Create RoomReservation', 'url'=>array('create')),
-	array('label'=>'Manage RoomReservation', 'url'=>array('admin')),
-);
+
 if(isset($alert) && $alert)
 {
 	echo("
@@ -87,10 +93,9 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('View');
 		      echo " " . CHtml::submitButton('Reserve');
-			$usersRole = User::model()->findByAttributes(array('email'=>Yii::app()->user->getId()));
-			if($usersRole['user_level_id'] == 2 || $usersRole['user_level_id'] == 1)
+			if($superUser)
 			{
-				echo CHtml::submitButton('Modify Permissions');
+				echo " " . CHtml::submitButton('Modify Permissions');
 			}
 
 ?>

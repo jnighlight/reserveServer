@@ -38,11 +38,13 @@ class Room_reservationController extends Controller
 		$JSONRes = array();
 		//i is just for the event ID's. Wouldn't want ppl knowing the real database id's. Security, and stuff
 		$i = 0;
+		$color = "#66A41A";
 		foreach($reservations as $reservation)
 		{
 			$id = $i++;
-			$title = $reservation['email'];
-
+			$name = User::model()->findByAttributes(array('email'=>$reservation['email']));
+			$title = $name['last_name'] . ", " . $name['first_name'] . "\nReservation";
+			
 			//Make a dateTime with SQL data, and outputting it in the javascript format
 			$start = $reservation['start_date_time'];
 			$v = new DateTime($start);
@@ -52,7 +54,7 @@ class Room_reservationController extends Controller
 			$v = new DateTime($end);
 			$end = $v -> format('D M d Y H:i:s TO');
 
-			$JSONRes[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 'end'=>$end);
+			$JSONRes[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 'end'=>$end, 'color'=>$color);
 		}
 		//I return it json_encoded just so I get the product the way it should be inserted. This does limit the use of the method though. May change this later.
 		return $JSONRes;
@@ -65,6 +67,8 @@ class Room_reservationController extends Controller
 		$JSONCour = array();
 		//i is just for the event ID's. Wouldn't want ppl knowing the real database id's. Security, and stuff
 		$i = 0;
+		//We want a little colour to distinguish it as a class
+		$color = '#8F1803';
 		//Go through each course
 		foreach($courses as $course)
 		{
@@ -77,8 +81,6 @@ class Room_reservationController extends Controller
 			$courseDays[5] = $course['friday'];
 
 			$id = $i++;
-			//We want a little colour to distinguish it as a class
-			$color = '#B00000';
 			$title = $course['name'];
 			$endDate = new DateTime($course['endDate']);
 
@@ -88,30 +90,79 @@ class Room_reservationController extends Controller
 				$dayNum = $iterateDate -> format('N');//date('N', $iterateDate);
 				
 				//if it's not the weekend
-				if($dayNum <= 5)
+				if($dayNum <= 5 && $courseDays[$dayNum])
 				{
-					//And if the course is on that day
-					if($courseDays[$dayNum])
-					{
-						//Make a dateTime with SQL data, and outputting it in the javascript format
-						$start = new DateTime($course['start_time']);
-						//$start = new DateTime($start);
-						$v = new DateTime(($iterateDate -> format('D M d Y')) . ' ' . ($start -> format('H:i:s TO')));
-						$start = $v -> format('D M d Y H:i:s TO');
+					//Make a dateTime with SQL data, and outputting it in the javascript format
+					$start = new DateTime($course['start_time']);
+					//$start = new DateTime($start);
+					$v = new DateTime(($iterateDate -> format('D M d Y')) . ' ' . ($start -> format('H:i:s TO')));
+					$start = $v -> format('D M d Y H:i:s TO');
 
-						$end = new DateTime($course['end_time']);
-						//$end = new DateTime($end);
-						//Putting together the date and time
-						$v = new DateTime($iterateDate -> format('D M d Y') . ' ' . $end -> format('H:i:s TO'));
-						$end = $v -> format('D M d Y H:i:s TO');
+					$end = new DateTime($course['end_time']);
+					//$end = new DateTime($end);
+					//Putting together the date and time
+					$v = new DateTime($iterateDate -> format('D M d Y') . ' ' . $end -> format('H:i:s TO'));
+					$end = $v -> format('D M d Y H:i:s TO');
 
-						$JSONCour[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 'end'=>$end, 'color'=>$color);
-					}
+					$JSONCour[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 
+						'end'=>$end, 'color'=>$color);
 				}
 			}
 		}
 		return $JSONCour;
 	}
+
+	//Takes an array with SQL information of labs for a specific room in a specific
+	//building and turns them into a JSON array for the fullcalendar plugin
+	public function labsToJSON($labs)
+	{
+		$JSONLab = array();
+		//i is just for the event ID's. Wouldn't want ppl knowing the real database id's. Security, and stuff
+		$i = 0;
+		$color = "#145BA5";
+		$title = "Lab Hours";
+		//Go through each course
+		foreach($labs as $lab)
+		{
+			//Making an array for if the class happens on each day of the week
+			$labDays = array();
+			$labDays[1] = $lab['monday'];
+			$labDays[2] = $lab['tuesday'];
+			$labDays[3] = $lab['wednesday'];
+			$labDays[4] = $lab['thursday'];
+			$labDays[5] = $lab['friday'];
+			$labDays[6] = $lab['saturday'];
+			$labDays[7] = $lab['sunday'];
+
+			$id = $i++;
+			$endDate = new DateTime($lab['end_date']);
+
+			//Gonna start with the start date, and iterate through dates until we get to the day after the end date
+			for($iterateDate = new DateTime($lab['start_date']); $iterateDate <= $endDate; $iterateDate->modify('+1 day'))
+			{
+				$dayNum = $iterateDate -> format('N');
+				
+				//And if the course is on that day
+				if($labDays[$dayNum])
+				{
+					//Make a dateTime with SQL data, and outputting it in the javascript format
+					$start = new DateTime($lab['start_time']);
+					$v = new DateTime(($iterateDate -> format('D M d Y')) . ' ' . ($start -> format('H:i:s TO')));
+					$start = $v -> format('D M d Y H:i:s TO');
+
+					$end = new DateTime($lab['end_time']);
+					//Putting together the date and time
+					$v = new DateTime($iterateDate -> format('D M d Y') . ' ' . $end -> format('H:i:s TO'));
+					$end = $v -> format('D M d Y H:i:s TO');
+
+					$JSONLab[] = array('id'=>$id, 'title'=>$title, 'start'=>$start,
+					'end'=>$end, 'color'=>$color);
+				}
+			}
+		}
+		return $JSONLab;
+	}
+
 
 	//To validate the time for a possible new reservation.
 	//It can't conflict with another reservation, and the end time must be after the start time
@@ -171,6 +222,13 @@ class Room_reservationController extends Controller
 			$courses = Course::model() -> findAll($criteria);
 		}
 
+		//Find labs on that day
+			$criteria = new CDbCriteria();
+			$criteria->select = '*';
+			$criteria->condition = '("' .$mysqlDate . '" between start_date and end_date) AND ' .
+				 $dayOfWeek . '=1 AND room_id=' . $roomID;
+			$labs = LabHour::model() -> findAll($criteria);
+
 
 		foreach($resvs as $res)
 		{
@@ -190,10 +248,29 @@ class Room_reservationController extends Controller
 			if($resStart == $startDateTime && $resEnd == $endDateTime)
 				{$conflicts = true;}
 		}
+		$startTime = strtotime($startTime);
+		$endTime = strtotime($endTime);
+		foreach($labs as $lab)
+		{
+			$labStart = strtotime($lab['start_time']);
+			$labEnd = strtotime($lab['end_time']);
+
+			//Checks to see if our new reservation's start or
+			//end time is during an already made reservation
+			if(($startTime > $labStart && $startTime < $labEnd) ||
+				($endTime > $labStart && $endTime < $labEnd))
+				{$conflicts = true;}
+
+			if(($labStart > $startTime && $labStart < $endTime) ||
+				($labEnd > $startTime && $labEnd < $endTime))
+				{$conflicts = true;}
+
+			//If they start and end at the same time, nogo
+			if($labStart == $startTime && $labEnd == $endTime)
+				{$conflicts = true;}
+		}
 		if($weekDay)
 		{
-			$startTime = strtotime($startTime);
-			$endTime = strtotime($endTime);
 			foreach($courses as $course)
 			{
 				$courseStart = strtotime($course['start_time']);
@@ -401,10 +478,12 @@ class Room_reservationController extends Controller
 	    //We then get the reservations and turn them into JSON format.
 	    $reservations = $this -> getReservations($building_id, $room_id);
 	    $courses = Course::model() -> findAllByAttributes(array('room_id'=>$room_id));
+	    $labs = LabHour::model() -> findAllByAttributes(array('room_id'=>$room_id));
 
             $JSONreservations = $this -> reservationsToJSON($reservations);
 	    $JSONcourses = $this -> coursesToJSON($courses);
-            $JSONreservations = array_merge($JSONcourses, $JSONreservations);
+	    $JSONLabs = $this -> labsToJSON($labs);
+            $JSONreservations = array_merge($JSONcourses, $JSONreservations, $JSONLabs);
 	    $JSONreservations = json_encode($JSONreservations);
 
 	    //If the submit button has been pushed...
@@ -613,10 +692,12 @@ class Room_reservationController extends Controller
 		//Getting courses
 		$courses = Course::model() -> findAllByAttributes(array('room_id'=>$roomID));
 		$JSONcourses = $this -> coursesToJSON($courses);
+		$labs = LabHour::model() -> findAllByAttributes(array('room_id'=>$roomID));
+		$JSONLabs = $this -> labsToJSON($labs);
 
 		//Get the JSON version and pass it on
 		$JSONRes = $this -> reservationsToJSON($resvs);
-		$JSONRes = array_merge($JSONRes, $JSONcourses);
+		$JSONRes = array_merge($JSONRes, $JSONcourses, $JSONLabs);
 		$JSONRes = json_encode($JSONRes);
 		$this->render('index',array(
 			'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes,
