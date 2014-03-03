@@ -50,6 +50,22 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'building_id',
 		'description',
 		'image_url',
+		'monday_open',
+		/*
+		'monday_close',
+		'tuesday_open',
+		'tuesday_close',
+		'wednesday_open',
+		'wednesday_close',
+		'thursday_open',
+		'thursday_close',
+		'friday_open',
+		'friday_close',
+		'saturday_open',
+		'saturday_close',
+		'sunday_open',
+		'sunday_close',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),

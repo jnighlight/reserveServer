@@ -28,14 +28,12 @@ class RoomController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','reserve','calendarRes'),
-				//'users'=>array('@'),
-				'roles'=>array('user','workStudy','admin'),
+				'actions'=>array('index','view'),
+				'roles'=>array('user', 'workStudy', 'admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update'),
-				//'users'=>array('@'),
-				'roles'=>array('workStudy','admin'),
+				'roles'=>array('workStudy', 'admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -59,39 +57,12 @@ class RoomController extends Controller
 	}
 
 	/**
-	Gets information from building
-	*/
-	public function getBuildings()
-	{
-		return Building::model() -> findAll(true);	
-	}
-
-	public function getRooms($buildId)
-	{
-		$roomNum = 1;
-		return Room::model() -> findAllByAttributes(
-			array('building_id'=>$buildId)
-			//array('room_number'=>$roomNum),
-			//"building_id=".$buildId);
-			);
-	}
-
-	/**
 	 * Creates a new model.
 	 * If creation is successful, the browser will be redirected to the 'view' page.
 	 */
 	public function actionCreate()
 	{
 		$model=new Room;
-		/**$userLvl = Yii::app()->db->createCommand()
-		->select('user_level_id')
-		->from('user')
-		->where('first_name =\'Jacob\'')
-		->queryRow();
-		echo($userLvl['user_level_id']);
-		echo(Yii::app()->user->id);*/
-		//$role = Yii::app()->db->createCommand()->select('user_level_id')->from('user')->where('email=\''.Yii::app()->user->id.'\'')->queryRow();echo($role['user_level_id']);
-
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -130,64 +101,6 @@ class RoomController extends Controller
 			'model'=>$model,
 		));
 	}
-
-	
-	public function actionReserve()
-	{
-		$model = new Room;
-		
-	    	if(isset($_POST['yt0']))
-	    	{
-			$model->attributes=$_POST['Room'];
-				//print_r($model->attributes);
-			if($model->validate())
-			{
-				//print_r($model->attributes);
-		    		echo('THIS IS SUBMITed');
-				//return;
-				$this->redirect(array('calendarRes','build_id'=>$model->building_id, 'room_number'=>$model->room_number));
-			}
-	    	}
-	    	$this->render('reserve',array('model'=>$model));
-
-		if(!isset($_POST['Room']['building_id']))
-			{/*print_r($_POST);*/ $_POST['Room']['building_id'] = '';}
-		$data = Room::model()->findAll('building_id=:building_id',
-			array(':building_id'=>(int) $_POST['Room']['building_id']));
-		//if(isset($data[0])){print_r($data[0]['room_number']);}
-		
-		$data = CHtml::listData($data,'room_id','room_number');
-		echo CHtml::tag('option', array('value'=>''), 'Choose a room', true);
-		foreach($data as $value=>$name)
-		{
-			echo CHtml::tag('option',
-				array('value'=>$value),CHtml::encode($name),true);
-		}
-		//}
-	    //$this->render('resTest',array('model'=>$model));
-	}
-
-	public function actionCalendarRes()
-	{
-    	    $model=new Room;
-//	    print(Yii::app()->request->getQuery('build_id', -1));
-	    $building_id = Yii::app()->request->getQuery('build_id',-1);
-	    $room_id = Yii::app()->request->getQuery('room_number',-1);
-            if($building_id == -1 || $room_id == -1)
-		{$this->redirect(array('reserve'));}
-	    //$reservationList = $model->getReservations($building_id, $room_id);
-
-	    if(isset($_POST['Room']))
-	    {
-		$model->attributes=$_POST['Room'];
-		if($model->validate())
-		{
-		    // form inputs are valid, do something here
-		    return;
-		}
-	    }
-	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id));
-}
 
 	/**
 	 * Deletes a particular model.

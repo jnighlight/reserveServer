@@ -31,6 +31,26 @@ class Room_reservationController extends Controller
 			);
 	}
 
+	private function extractTimes($rooms)
+	{
+		$times = array();
+		$times[] = $rooms['sunday_open'];
+		$times[] = $rooms['sunday_close'];
+		$times[] = $rooms['monday_open'];
+		$times[] = $rooms['monday_close'];
+		$times[] = $rooms['tuesday_open'];
+		$times[] = $rooms['tuesday_close'];
+		$times[] = $rooms['wednesday_open'];
+		$times[] = $rooms['wednesday_close'];
+		$times[] = $rooms['thursday_open'];
+		$times[] = $rooms['thursday_close'];
+		$times[] = $rooms['friday_open'];
+		$times[] = $rooms['friday_close'];
+		$times[] = $rooms['saturday_open'];
+		$times[] = $rooms['saturday_close'];
+		return $times;
+	}
+
 	//Takes an array with SQL information of reservations for a specific room in a specific
 	//building and turns them into a JSON array for the fullcalendar plugin
 	public function reservationsToJSON($reservations)
@@ -699,9 +719,14 @@ class Room_reservationController extends Controller
 		$JSONRes = $this -> reservationsToJSON($resvs);
 		$JSONRes = array_merge($JSONRes, $JSONcourses, $JSONLabs);
 		$JSONRes = json_encode($JSONRes);
+
+		$room = Room::model() -> findByAttributes(array('room_id'=>$roomID));
+		$roomTimes = $this -> extractTimes($room);
+
 		$this->render('index',array(
 			'buildings'=>$buildings, 'buildingID'=>$buildingID, 'roomID'=>$roomID,'JSONRes'=>$JSONRes,
 			'buildingName' => $buildingName, 'roomNumber' => $roomNumber,'alert'=>$alert,
+			'roomTimes'=>$roomTimes,
 		));
 		/*       Modifying the second dropdown bar     */
 		if(!isset($_POST['building_list']))

@@ -62,28 +62,8 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	'url'=> CController::createUrl('room_reservation/'),
 	'update'=>'#room_num',
 	)));?>
-	<!-- ></div>
-	<div class="row"> -->
+
 	<?php
-	//This was gonna ajax it, but it got kinda weird. O.o
-	/*echo CHtml::dropDownList('room_num','',array('empty'=>'Select a Building'),
-	array(
-	'ajax'=>array(
-	'type' => 'POST',
-	'url' => CController::createUrl('updateCal'),
-	'success' => 'function(data){console.log(data);}'//'replaceCal(JSONRes)'
-			"function(JSONRes){\$('#calendar').fullCalendar({
-			editable: false,
-			header: {
-				left: 'prev,next today',
-				center: 'title',
-				right: 'month,agendaWeek'
-			},
-			defaultView: 'agendaWeek',
-			allDayDefault: false,
-			events: JSONRes
-		});}",*/
-	//)));
 	echo CHtml::dropDownList('room_num','',array(''=>'---'));
 	echo CHtml::hiddenField('cur_build', $buildingID, array("id"=>"cur_build")); 
 	echo CHtml::hiddenField('cur_room', $roomID, array("id"=>"cur_room")); 
@@ -122,7 +102,56 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 			allDayDefault: false,
 			events: <?php echo $JSONRes; ?>
 		});
+	//
+
+	$('#calendar').fullCalendar('addEventSource',
+		function(start, end, callback)
+		{
+			var events = [];
+			var times = <?php echo(json_encode($roomTimes)); ?>;
+			for(loop = start.getTime(); loop <= end.getTime(); loop = loop + (24*60*60*1000))
+			{
+				var start_date = new Date(loop);
+				console.log(start_date.getDay());
+				var todayOpen = times[start_date.getDay() * 2];
+				todayOpen = todayOpen.split(":");
+				var todayClose = times[(start_date.getDay() * 2) + 1];
+				todayClose = todayClose.split(":");
+				
+				start_date.setHours(0);
+				start_date.setMinutes(0);
+				start_date.setSeconds(0);
+				start_date.setMilliseconds(0);
+
+				var end_date = new Date(loop);
+				end_date.setHours(todayOpen[0]);
+				end_date.setMinutes(todayOpen[1]);
+				end_date.setSeconds(todayOpen[2]);
+
+				events.push({
+					title:'CLOSED',
+					start: new Date(start_date.getTime()),
+					end: new Date(end_date.getTime()),
+					color:'#000000',
+				});
+
+				start_date.setHours(todayClose[0]);
+				start_date.setMinutes(todayClose[1]);
+				start_date.setSeconds(todayClose[2]);
+				end_date.setHours(24);
+				end_date.setMinutes(0);
+				end_date.setSeconds(0);
+				events.push({
+					title:'CLOSED',
+					start: start_date,
+					end: end_date,
+					color:'#000000',
+				});
+			}
+			callback(events);
+		});
 	});
+	//$('#calendar').fullCalendar.addEventSource();
 </script>
 <script>
 function checkFunction()
