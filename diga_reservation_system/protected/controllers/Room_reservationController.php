@@ -224,6 +224,10 @@ class Room_reservationController extends Controller
 		$dayOfWeek = strtolower(date('l', strtotime($date)));
 		$weekDay = ($dayOfWeek != 'sunday' && $dayOfWeek != 'saturday');
 		
+		//Getting the open/closed hours of the room for that day
+		$roomForTimes = Room::model() -> findByAttributes(array('room_id'=>$roomID));
+		$roomOpenTime = strtotime($roomForTimes[$dayOfWeek . '_open']);
+		$roomCloseTime = strtotime($roomForTimes[$dayOfWeek . '_close']);
 
 		//Getting all of the reservations on that given day
 		$criteria = new CDbCriteria();
@@ -231,6 +235,7 @@ class Room_reservationController extends Controller
 		$criteria->condition = '(DATE(start_date_time) = "' . $mysqlDate .
 			'" OR DATE(end_date_time) = "' . $mysqlDate . '") AND room_id = "' . $roomID . '"';
 		$resvs = RoomReservation::model() -> findAll($criteria);
+
 
 		if($weekDay)
 		{
@@ -270,6 +275,11 @@ class Room_reservationController extends Controller
 		}
 		$startTime = strtotime($startTime);
 		$endTime = strtotime($endTime);
+
+		//make sure that it's while the room is open
+		if($startTime < $roomOpenTime || $endTime > $roomCloseTime)
+			{$conflicts = true;}
+
 		foreach($labs as $lab)
 		{
 			$labStart = strtotime($lab['start_time']);
@@ -553,8 +563,11 @@ class Room_reservationController extends Controller
 			echo("<script> alert('Your reservation seems to conflict with another reservation. Please try again'); </script>");
 		}
 	    }
+		$room = Room::model() -> findByAttributes(array('room_id'=>$room_id));
+		$roomTimes = $this -> extractTimes($room);
 	    $this->render('calendarRes',array('model'=>$model,'building_id'=>$building_id,'room_id'=>$room_id,
-		'JSONRes'=>$JSONreservations, 'roomNumber'=>$roomNumber, 'buildingName'=> $buildingName,));
+		'JSONRes'=>$JSONreservations, 'roomNumber'=>$roomNumber, 'buildingName'=> $buildingName,
+		'roomTimes'=>$roomTimes));
 }
 
 	public function actionClass()
