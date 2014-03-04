@@ -90,6 +90,7 @@ class SiteController extends Controller
 		if(isset($_POST["Register"]))
 		{
 		  $this->redirect(array("user/create"));
+		  //print("TEST");
 		}
 
 		$model=new LoginForm;
