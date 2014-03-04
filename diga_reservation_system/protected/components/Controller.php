@@ -29,7 +29,9 @@ class Controller extends CController
 	  */
 	  $loginPage = "site/login"; // login Controller/Action pair
 	  $registerPage = "user/create"; // register Controller/Action pair
+	  $contactPage = "site/contact"; // contact Controller/Action pair
 
+	  $request = Yii::app()->urlManager->parseUrl(Yii::app()->request);
 	  /*
           if((Yii::app()->user->getId() == null) &&
 	    ((Yii::app()->urlManager->parseUrl(Yii::app()->request) != $loginPage) && (Yii::app()->urlManager->parseUrl(Yii::app()->request) != $registerPage)  ))
@@ -38,13 +40,14 @@ class Controller extends CController
           }
 	  */
 
+	//print("request: ".Yii::app()->urlManager->parseUrl(Yii::app()->request));
 	  // If the user is not logged in
   	  if((Yii::app()->user->isGuest) == true)
 	  {
-	    // if the user is not on the login or register page
-	    if((Yii::app()->urlManager->parseUrl(Yii::app()->request) != $loginPage) && (Yii::app()->urlManager->parseUrl(Yii::app()->request) != $registerPage))
+	    // if the user is not on the login,register, or contact page
+	    if(($request != $loginPage)&&($request != $registerPage)&&($request != $contactPage))
 	    {
-	      $this->redirect(array("site/login"));
+	      $this->redirect(array($loginPage));
 	    }
 	  }
         }
