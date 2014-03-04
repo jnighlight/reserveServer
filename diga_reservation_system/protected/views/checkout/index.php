@@ -82,6 +82,11 @@ $form = $this->beginWidget('CActiveForm', array(
           echo $equipment->name;
         echo CHtml::closeTag("p");
 
+	// Manufacturer of Product
+        echo CHtml::openTag("p");
+          echo "<b>SU Number:</b>  ".$equipment->su_number;
+        echo CHtml::closeTag("p");
+/*
         // Manufacturer of Product
         echo CHtml::openTag("p");
           echo "<b>Manufacturer:</b>  ".$equipment->manufacturer;
@@ -96,7 +101,7 @@ $form = $this->beginWidget('CActiveForm', array(
         echo CHtml::openTag("p");
           echo "<b>Model Number:</b> ".$equipment->model_number;
         echo CHtml::closeTag("p");
-
+*/
 	/* Space between equipment information and
 	   specs checklist.
 	*/
@@ -104,7 +109,7 @@ $form = $this->beginWidget('CActiveForm', array(
 
 	// Accessories checklist
         $accessories = $equipment->getAccessories();
-
+	print("Number of Accessories: ".sizeof($accessories));
         echo CHtml::openTag("p");
           echo "Accessory Checklist";
         echo CHtml::closeTag("p");
