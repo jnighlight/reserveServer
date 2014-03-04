@@ -51,6 +51,14 @@
 		<?php echo $form->error($model,'phone_number'); ?>
 	</div>
 
+	<div class="row">
+                <?php echo $form->labelEx($model,'User Level'); ?>
+                <!--<?php echo $form->textField($model,'user_level_id'); ?> -->
+                <?php echo $form->dropDownList($model, 'user_level_id', CHtml::listData(UserLevel::model()->findAll(array('order'=>'name')),'user_level_id','name'));?>
+                <?php echo $form->error($model,'user_level_id'); ?>
+        </div>
+
+
 <!--    commented out by Mark Burton. These should not be
         acceccible by an level user
 
