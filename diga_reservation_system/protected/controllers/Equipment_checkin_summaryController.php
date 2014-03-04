@@ -8,21 +8,31 @@ class Equipment_checkin_summaryController extends Controller
                 {
                   print("Invalid Request!");
                 }
-                else // equipment_checkin_id is set
+                else // equipment_reservation_id is set
                 {
                   if(empty($_GET['equipment_checkin_id']) || !is_numeric($_GET['equipment_checkin_id']))
                   {
                     print("Invalid Request!");
                   }
-                  else if(EquipmentReservation::model()->findByPk($_GET['equipment_checkin_id']) == null)
+                  else if(EquipmentCheckin::model()->findByPk($_GET['equipment_checkin_id']) == null)
                   {
 		    //$this->render('index');
                     print("We're sorry, the reservation you are looking for was not found.");
                   }
                   else // good to go
                   {
+		    $equipment_checkin = EquipmentCheckin::model()->findByPk($_GET['equipment_checkin_id']);
+		    $equipment = Equipment::model()->findByPk($equipment_checkin->equipment_id);
+		    //$checkin_accessories = $this->getCheckinAccessories($equipment_checkin->equipment_id);
+		    $checkin_accessories = $equipment_checkin->getAccessoryChecklist();
+ 
+		    //$this->render('index');
 
-		    $this->render('index');
+		    $this->render('index',
+                      array("equipment_checkin" => $equipment_checkin,
+			   "equipment" => $equipment,
+			   "checkin_accessories" => $checkin_accessories)
+			);
 		  }
 	        }
 	}
