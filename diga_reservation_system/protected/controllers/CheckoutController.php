@@ -14,13 +14,21 @@ class CheckoutController extends Controller
 		  {
 		    print("Invalid Request!");
 		  }
+		  /*
 		  else if(Equipment::model()->findByPk($_GET['equipment_id']) == null)
 		  {
 		    print("We're sorry, the piece of equipment you are looking for was not found.");
 		  }
+		  */
+		  $equipment = Equipment::model()->findByPk($_GET['equipment_id']);
+		  if(!$equipment->availability)
+	          {
+		    print("We're sorry, the piece of equipment you are looking for is currently unavailable.");
+		  }
 		  else // good to go
 		  {
 		    $equipment = Equipment::model()->findByPk($_GET['equipment_id']);
+		    //print("Size: ".sizeof($equipment->getAccessories()));
 		    // Model to be used to validate the checkout assistant
 		    $checkoutAssistant = new CheckoutAssistantForm;
 		    // Model to be used to validate the borrower
