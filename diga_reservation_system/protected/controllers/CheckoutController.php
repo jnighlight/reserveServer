@@ -55,9 +55,9 @@ class CheckoutController extends Controller
 		    
 		        $reservation->notes = $checkoutAssistant->notes;
 			$now = date("Y-m-d H:i:s");
-			$later = date("Y-m-d H:i:s", strtotime($now . "+ 2 day"));
-			$reservation->start_date_time = $now;
-			$reservation->end_date_time = $later;
+			$later = date("Y-m-d", strtotime($now . "+ 2 day"));
+			$reservation->start_date = $now;
+			$reservation->end_date = $later;
 			$reservation->equipment_id = $equipment->equipment_id;
 
 			$reservation->save(false);
