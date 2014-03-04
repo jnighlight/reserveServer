@@ -35,12 +35,12 @@
 		<?php echo $form->label($model,'user_level_id'); ?>
 		<?php echo $form->textField($model,'user_level_id'); ?>
 	</div>
-
+<!--
 	<div class="row">
 		<?php echo $form->label($model,'salt'); ?>
 		<?php echo $form->textField($model,'salt',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
-
+-->
 	<div class="row">
 		<?php echo $form->label($model,'id_number'); ?>
 		<?php echo $form->textField($model,'id_number',array('size'=>10,'maxlength'=>10)); ?>
