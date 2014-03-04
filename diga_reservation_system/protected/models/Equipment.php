@@ -157,7 +157,7 @@ class Equipment extends CActiveRecord
 		$criteria->compare('image_url',$this->image_url,true);
 		$criteria->compare('equipment_type_id',$this->equipment_type_id);
 		$criteria->compare('availability',$this->availability);
-		$criteria->compar('su_number',$this->su_number);
+		$criteria->compare('su_number',$this->su_number);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
