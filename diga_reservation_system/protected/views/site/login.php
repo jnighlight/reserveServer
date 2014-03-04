@@ -48,8 +48,18 @@ $this->breadcrumbs=array(
 
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Login'); ?>
-		<?php echo CHtml::submitButton('Register'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
+
+
+	<div class="row buttons">
+          <?php 
+	    echo CHtml::beginForm();
+              //echo CHtml::submitButton('Register');
+	      echo CHtml::submitButton('Register',array('name'=>'Register'));
+	    echo CHtml::endForm();
+	  ?>
+        </div>
+
 </div><!-- form -->
