@@ -31,6 +31,10 @@ $image_style = array('class'=>'equipment_image',);
 	<?php echo CHtml::encode($data->model_number); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('su_number')); ?>:</b>
+        <?php echo CHtml::encode($data->su_number); ?>
+        <br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
 	<?php echo CHtml::encode($data->description); ?>
 	<br />
