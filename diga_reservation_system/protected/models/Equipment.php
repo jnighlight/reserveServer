@@ -13,6 +13,7 @@
  * @property string $image_url
  * @property integer $equipment_type_id
  * @property integer $availability
+ * @property string $su_number;
  */
 class Equipment extends CActiveRecord
 {
@@ -96,13 +97,13 @@ class Equipment extends CActiveRecord
 		return array(
 			array('name, equipment_type_id, availability', 'required'),
 			array('equipment_type_id, availability', 'numerical', 'integerOnly'=>true),
-			array('serial_number, manufacturer, model_number', 'length', 'max'=>30),
+			array('serial_number, manufacturer, model_number, su_number', 'length', 'max'=>30),
 			array('description', 'length', 'max'=>200),
 			array('name', 'length', 'max'=>40),
 			array('image_url', 'length', 'max'=>300),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('equipment_id, serial_number, manufacturer, model_number, description, name, image_url, equipment_type_id, availability', 'safe', 'on'=>'search'),
+			array('equipment_id, serial_number, manufacturer, model_number, description, name, image_url, equipment_type_id, availability, su_number', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -132,6 +133,7 @@ class Equipment extends CActiveRecord
 			'image_url' => 'Image Url',
 			'equipment_type_id' => 'Equipment Type',
 			'availability' => 'Availability',
+			'su_number' => 'SU Number'
 		);
 	}
 
@@ -155,6 +157,7 @@ class Equipment extends CActiveRecord
 		$criteria->compare('image_url',$this->image_url,true);
 		$criteria->compare('equipment_type_id',$this->equipment_type_id);
 		$criteria->compare('availability',$this->availability);
+		$criteria->compar('su_number',$this->su_number);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
