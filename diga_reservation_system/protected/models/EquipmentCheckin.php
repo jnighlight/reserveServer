@@ -23,6 +23,18 @@ class EquipmentCheckin extends CActiveRecord
 		return parent::model($className);
 	}
 
+	/*
+          Retrieves the accessory checklist for this return
+        */
+        public function getAccessoryChecklist()
+        {
+          $attributes =
+            array("equipment_checkin_id"=>$this->equipment_checkin_id);
+
+          return EquipmentCheckinAccessory::model()
+                   ->findAllByAttributes($attributes);
+        }
+
 	/**
 	 * @return string the associated database table name
 	 */
