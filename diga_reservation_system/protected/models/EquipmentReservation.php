@@ -7,8 +7,8 @@
  * @property integer $equipment_reservation_id
  * @property string $borrowers_email
  * @property string $equipment_id
- * @property string $start_date_time
- * @property string $end_date_time
+ * @property string $start_date
+ * @property string $end_date
  * @property string $notes
  * @property string $checkout_assistant_email
  */
@@ -52,13 +52,13 @@ class EquipmentReservation extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('borrowers_email, equipment_id, start_date_time, end_date_time, checkout_assistant_email', 'required'),
+			array('borrowers_email, equipment_id, start_date, end_date, checkout_assistant_email', 'required'),
 			array('borrowers_email, checkout_assistant_email', 'length', 'max'=>30),
 			array('equipment_id', 'length', 'max'=>20),
 			array('notes', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('equipment_reservation_id, borrowers_email, equipment_id, start_date_time, end_date_time, notes, checkout_assistant_email', 'safe', 'on'=>'search'),
+			array('equipment_reservation_id, borrowers_email, equipment_id, start_date, end_date, notes, checkout_assistant_email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,8 +82,8 @@ class EquipmentReservation extends CActiveRecord
 			'equipment_reservation_id' => 'Equipment Reservation',
 			'borrowers_email' => 'Borrowers Email',
 			'equipment_id' => 'Equipment',
-			'start_date_time' => 'Start Date Time',
-			'end_date_time' => 'End Date Time',
+			'start_date' => 'Start Date',
+			'end_date' => 'End Date',
 			'notes' => 'Notes',
 			'checkout_assistant_email' => 'Checkout Assistant Email',
 		);
