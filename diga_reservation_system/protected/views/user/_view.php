@@ -30,16 +30,5 @@
 	  $user_level = UserLevel::model()->findByPk($data->user_level_id)->name;
 	  echo CHtml::encode($user_level); ?>
 	<br />
-<!--
-	<b><?php echo CHtml::encode($data->getAttributeLabel('salt')); ?>:</b>
-	<?php echo CHtml::encode($data->salt); ?>
-	<br />
--->
-	<?php /*
-	<b><?php echo CHtml::encode($data->getAttributeLabel('id_number')); ?>:</b>
-	<?php echo CHtml::encode($data->id_number); ?>
-	<br />
-
-	*/ ?>
 
 </div>
