@@ -34,6 +34,13 @@
 	</div>
 
 	<div class="row">
+                <?php echo $form->labelEx($model,'su_number'); ?>
+                <?php echo $form->textField($model,'su_number',array('size'=>30,'maxlength'=>30)); ?>
+                <?php echo $form->error($model,'su_number'); ?>
+        </div>
+
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
 		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>200)); ?>
 		<?php echo $form->error($model,'description'); ?>
@@ -57,11 +64,51 @@
 		<?php echo $form->dropDownList($model, 'equipment_type_id', CHtml::listData(EquipmentType::model()->findAll(array('order'=>'name')),'equipment_type_id','name'));?>
 		<?php echo $form->error($model,'equipment_type_id'); ?>
 	</div>
+<?php
+if(isset($model->equipment_id))
+{
+  // Accessories Section
+  $accessory_section = array("class"=>"accessory_section");
 
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
+  $accessories = $model->getAccessories();
 
+  echo CHtml::openTag("h3");
+    print("Accessories");
+  echo CHtml::closeTag("h3");
+
+  echo CHtml::openTag("div",$accessory_section);
+  foreach($accessories as $accessory)
+  {
+    echo CHtml::textField($accessory->accessory_id, $accessory->name);
+    echo CHtml::closeTag("br");
+  }
+  echo CHtml::closeTag("div");
+
+  // Specification Section
+  $specs_section = array("class"=>"specs_section");
+
+
+  $specs = $model->getSpecs();
+
+  echo CHtml::openTag("h3");
+    print("Specifications");
+  echo CHtml::closeTag("h3");
+  echo CHtml::closeTag("br");
+
+  echo CHtml::openTag("div",$specs_section);
+  foreach($specs as $spec)
+  {
+    echo CHtml::textField($spec->specification_id, $spec->name);
+    echo CHtml::closeTag("br");
+  }
+  echo CHtml::closeTag("div");
+}
+?>
+
+        <div class="row buttons">
+                <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+        </div>
 <?php $this->endWidget(); ?>
+
 
 </div><!-- form -->
