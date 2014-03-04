@@ -27,6 +27,11 @@
 	</div>
 
 	<div class="row">
+                <?php echo $form->label($model,'su_number'); ?>
+                <?php echo $form->textField($model,'su_number',array('size'=>30,'maxlength'=>30)); ?>
+        </div>
+
+	<div class="row">
 		<?php echo $form->label($model,'model_number'); ?>
 		<?php echo $form->textField($model,'model_number',array('size'=>30,'maxlength'=>30)); ?>
 	</div>
