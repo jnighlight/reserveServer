@@ -27,7 +27,7 @@ $this->menu=array(
 		'last_name',
 		'phone_number',
 		'user_level_id',
-		'salt',
+		//'salt',
 		'id_number',
 	),
 )); ?>
