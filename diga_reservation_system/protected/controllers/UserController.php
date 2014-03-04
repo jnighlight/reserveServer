@@ -28,15 +28,15 @@ class UserController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array(),
-				'roles'=>array('user','workStudy','admin'),
+		//		'actions'=>array('create'),
+		//		'roles'=>array('user','workStudy','admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('index','view'),
 				'roles'=>array('workStudy','admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
-				'actions'=>array('update','create','admin','delete'),
+				'actions'=>array('update','admin','delete'),
 				'roles'=>array('admin'),
 			),
 			array('deny',  // deny all users
