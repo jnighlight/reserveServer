@@ -87,6 +87,11 @@ class SiteController extends Controller
 	 */
 	public function actionLogin()
 	{
+		if(isset($_POST["Register"]))
+		{
+		  $this->redirect(array("user/create"));
+		}
+
 		$model=new LoginForm;
 
 		// if it is ajax validation request
