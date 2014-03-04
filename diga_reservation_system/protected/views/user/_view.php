@@ -26,7 +26,9 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('user_level_id')); ?>:</b>
-	<?php echo CHtml::encode($data->user_level_id); ?>
+	<?php 
+	  $user_level = UserLevel::model()->findByPk($data->user_level_id)->name;
+	  echo CHtml::encode($user_level); ?>
 	<br />
 <!--
 	<b><?php echo CHtml::encode($data->getAttributeLabel('salt')); ?>:</b>
