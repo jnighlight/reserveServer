@@ -20,7 +20,8 @@ class CheckoutAssistantForm extends CFormModel
 
   public function authenticate($attributes,$params)
   {
-    $user = User::model()->findByPk($this->email);
+    //$user = User::model()->findByPk($this->email);
+    $user = User::model()->findByAttributes(array("email"=>$this->email));
 
     if($user == null) // user does not exist
     {
