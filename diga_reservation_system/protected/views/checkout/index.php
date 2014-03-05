@@ -109,7 +109,6 @@ $form = $this->beginWidget('CActiveForm', array(
 
 	// Accessories checklist
         $accessories = $equipment->getAccessories();
-	print("Number of Accessories: ".sizeof($accessories));
         echo CHtml::openTag("p");
           echo "Accessory Checklist";
         echo CHtml::closeTag("p");
@@ -141,6 +140,7 @@ $form = $this->beginWidget('CActiveForm', array(
 	  //echo CHtml::textArea("description");
 	  
 	echo CHtml::closeTag("div"); // close description
+
 /*
 	echo CHtml::openTag("p");
 	echo "* This is due back: 00/00/2014";
