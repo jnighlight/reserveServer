@@ -90,7 +90,7 @@ class Equipment extends CActiveRecord
           $criteria->order = "start_date ASC";
 	  $criteria->condition = "equipment_id = ".$this->equipment_id;
 
-          return $equipment->findAll($criteria);
+          return $equipment_reservations->findAll($criteria);
         }
 
 	/**
