@@ -1,12 +1,12 @@
 .history_block
 {
-  background-color:red;
-  //width:530px;
 }
+
 
 .history_block_title
 {
-  background-color:red;
+  //background-color:red;
+  text-decoration:underline;
   width:200px;
   font-size:25px;
   margin-left:auto;
@@ -16,6 +16,7 @@
 .checkout_history_block, .checkin_history_block
 {
   padding:15px;
+  color:white;
 }
 
 .checkout_history_block
@@ -30,4 +31,24 @@
   background-color:blue;
 
   float:right;
+}
+
+.checkout_history_date, .checkin_history_date
+{
+  text-decoration:underline;
+}
+
+.checkout_history_info, .checkin_history_info
+{
+  background-color:white;
+  color:black;
+  //display:none;
+
+  border-style:inset;
+  border-width:4px;
+}
+
+.checkout_history_info p, .checkin_history_info p
+{
+  margin-bottom:0px;
 }
