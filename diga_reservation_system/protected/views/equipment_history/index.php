@@ -2,6 +2,7 @@
 /* @var $this Equipment_historyController */
 
 $this->breadcrumbs=array(
+	'Equipment'=>array("/equipment/"),
 	'Equipment History',
 );
 
