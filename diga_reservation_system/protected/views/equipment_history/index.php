@@ -7,6 +7,18 @@ $this->breadcrumbs=array(
 
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/equipment_history_page.css");
 
+Yii::app()->clientScript->registerScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js");
+
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/extensions/js/history/equipment_history.js");
+
+$equipmentBlock = array(
+  'class'=>'equipment_block',
+);
+
+$equipmentImage = array(
+  'class'=>'equipment_image',
+);
+
 $historyBlock = array(
   'class'=>'history_block',
 );
@@ -40,6 +52,7 @@ echo CHtml::closeTag("div");
 foreach($checkout_history as $checkout)
 {
   echo CHtml::openTag("div",array(
+	'id'=>'checkout_history_date_'.$checkout->equipment_reservation_id,
   	'class'=>'checkout_history_date',));
     echo CHtml::openTag("p");
       echo "<b>Start Date</b>: ".$checkout->start_date." &nbsp &nbsp &nbsp <b>End Date</b>:".$checkout->end_date;
@@ -47,6 +60,7 @@ foreach($checkout_history as $checkout)
   echo CHtml::closeTag("div"); // close date div
 
   echo CHtml::openTag("div",array(
+	'id'=>'checkout_history_info_'.$checkout->equipment_reservation_id,
         'class'=>'checkout_history_info',));
 
   echo CHtml::openTag("p");
@@ -101,7 +115,20 @@ foreach($checkout_history as $checkout)
 }
 echo CHtml::closeTag("div");
 
+// Imageblock
+echo CHtml::openTag("div",$equipmentBlock);
+  echo CHtml::openTag("div",$equipmentImage);
+    echo CHtml::image($equipment->image_url);
+  echo CHtml::closeTag("div");
 
+  echo CHtml::openTag("p");
+    echo "<b>Name</b>: ".$equipment->name;
+  echo CHtml::closeTag("p");
+
+  echo CHtml::openTag("p");
+    echo "<b>SU Number</b>: ".$equipment->su_number;
+  echo CHtml::closeTag("p");
+echo CHtml::closeTag("div");
 
 
 // Checkin History Block
@@ -117,6 +144,7 @@ echo CHtml::closeTag("div");
 foreach($checkin_history as $checkin)
 {
   echo CHtml::openTag("div",array(
+	'id'=>'checkin_history_date_'.$checkin->equipment_checkin_id,
         'class'=>'checkin_history_date',));
     echo CHtml::openTag("p");
       echo "<b>Checkin Date Time</b>: ".$checkin->checkin_date_time;
@@ -124,6 +152,7 @@ foreach($checkin_history as $checkin)
   echo CHtml::closeTag("div"); // close date div
 
   echo CHtml::openTag("div",array(
+	'id'=>'checkin_history_info_'.$checkin->equipment_checkin_id,
         'class'=>'checkin_history_info',));
 
   echo CHtml::openTag("p");
@@ -177,7 +206,6 @@ foreach($checkin_history as $checkin)
   echo CHtml::closeTag("div"); // close info div
 }
 echo CHtml::closeTag("div");
-
 
 
 echo CHtml::closeTag("div"); // history block closed
