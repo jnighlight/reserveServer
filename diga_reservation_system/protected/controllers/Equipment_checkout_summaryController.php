@@ -31,7 +31,7 @@ class Equipment_checkout_summaryController extends Controller
 		    $this->render('index',
                       array("equipment_reservation" => $equipment_reservation,
 			   "equipment" => $equipment,
-			   "reservarion_accessories" => $reservation_accessories)
+			   "reservation_accessories" => $reservation_accessories)
 			);
 		  }
 	        }
