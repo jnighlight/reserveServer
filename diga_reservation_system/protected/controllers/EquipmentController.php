@@ -135,6 +135,22 @@ class EquipmentController extends Controller
 	 */
 	public function actionIndex()
 	{
+		if(isset($_POST['equipment_id']))
+                {
+		  print("TEST");
+                  if(!is_numeric($_POST['equipment_id']) ||
+                    empty($_POST['equipment_id']))
+                    {
+                      print("Invalid piece of equipment");
+                    }
+                  else
+                  {
+                    $this->redirect(
+                    array("/equipment_history/?equipment_id=".$_POST['equipment_id']));
+                  }
+                }
+
+
 		$dataProvider=new CActiveDataProvider('Equipment');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
