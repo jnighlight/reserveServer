@@ -25,10 +25,17 @@
 }
 
 /* Stylize the image of each piece of equipment */
-#reservation_list .reservation_list_row .reservation_list_image
+#reservation_list .reservation_list_row //.reservation_list_image
 {
   width:30%;
   height:80%;
+}
+
+.reservation_list_image
+{
+  width:100px;
+  height:100px;
+  margin-left:30px;
 }
 
 /* Stylize the description of each piece of equipment */
