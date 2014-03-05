@@ -53,4 +53,15 @@ $image_style = array('class'=>'equipment_image',);
 
 	?>
         <br />
+
+	<?php 
+	echo CHtml::beginForm();
+  	  echo CHtml::htmlButton("History",
+            array(
+              'type' => 'submit',
+              'name' => 'equipment_id',
+              'value' => $data->equipment_id,
+            ));
+	echo CHtml::endForm();
+	?>
 </div>
