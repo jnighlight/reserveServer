@@ -23,10 +23,12 @@ class Equipment_historyController extends Controller
                   {
 		    $equipment = Equipment::model()->findByPk($_GET['equipment_id']);
 		    $checkout_history = $equipment->getCheckouts();
+		    $checkin_history = $equipment->getCheckins();
 
 		    $this->render('index',
                       array("equipment" => $equipment,
 			    "checkout_history" => $checkout_history,
+			    "checkin_history" => $checkin_history,
                         ));
 		  }
 		}
