@@ -210,7 +210,7 @@ class Room_reservationController extends Controller
 		}
 		
 		//Now to check for conflicts
-		
+
 		//Taking the inputs and turning them into real time data
 		$adjustedStartHour = $startAMPM == 1? $startHour + 12 : $startHour;
 		$startTime = ' ' . $adjustedStartHour . ':' . ($startMinute * 30) . ':00';
@@ -236,6 +236,19 @@ class Room_reservationController extends Controller
 			'" OR DATE(end_date_time) = "' . $mysqlDate . '") AND room_id = "' . $roomID . '"';
 		$resvs = RoomReservation::model() -> findAll($criteria);
 
+		//Make sure it's not too long of a reservation
+		$maxLen = RoomReservationPolicy::model() -> findByAttributes(array('room_id'=>$roomID));
+		$maxLen = $maxLen['max_reservation_hours'];
+		if(isset($maxLen))
+		{
+			$timeForRes = $startDateTime -> diff($endDateTime);
+			$ResHours = $timeForRes->format('%h');
+			$ResHours += ($timeForRes->format('%i') > 0) ? 1 : 0;
+			echo($ResHours. '\n');
+			echo($maxLen. '\n');
+			if($ResHours > $maxLen)
+				{$inOrder = false;}
+		}
 
 		if($weekDay)
 		{
@@ -721,6 +734,19 @@ class Room_reservationController extends Controller
 		{
 			$this->redirect(array('permissions', 'room_id'=>$roomID, 'room_number'=>$roomNumber,
 				'building_name'=>$buildingName));
+		}
+		else if(isset($_POST['yt3']))
+		{
+			$roomPermission = RoomReservationPolicy::model() -> findByAttributes(array('room_id'=>$roomID));
+			if(isset($roomPermission['room_reservation_policy_id']))
+			{
+				$this->redirect(array('roomReservationPolicy/update/' . 
+					$roomPermission['room_reservation_policy_id'],));
+			}
+			else
+			{
+				$this->redirect(array('roomReservationPolicy/create'));
+			}
 		}
 		//Getting courses
 		$courses = Course::model() -> findAllByAttributes(array('room_id'=>$roomID));

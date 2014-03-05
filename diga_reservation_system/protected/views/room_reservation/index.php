@@ -10,6 +10,8 @@ $cs->registerCssFile($base . $fullCal . '/fullcalendar/fullcalendar.css');
 $cs->registerCoreScript('jquery');
 $cs->registerScriptFile($base . $fullCal . '/lib/jquery-ui.custom.min.js');
 $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
+$maxRes = RoomReservationPolicy::model()->findByAttributes(array('room_id'=>$roomID));
+$maxRes = $maxRes['max_reservation_hours'];
 
 $usersRole = User::model()->findByAttributes(array('email'=>Yii::app()->user->getId()));
 $superUser = ($usersRole['user_level_id'] == 2 || $usersRole['user_level_id'] == 1);
@@ -76,6 +78,7 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 			if($superUser)
 			{
 				echo " " . CHtml::submitButton('Modify Permissions');
+				echo " " . CHtml::submitButton('Set Reservation Time');
 			}
 
 ?>
@@ -86,6 +89,8 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 </div><!-- form -->
 
 <?php echo ("<center><h1> " . $buildingName . ", Room " . $roomNumber ." </h1></center>"); ?>
+<?php if(isset($maxRes))
+	{echo ("<center><h3> Max Reservation Time: ". $maxRes ." Hours</h3></center>");} ?>
 
 <script>
 
@@ -165,18 +170,6 @@ function checkFunction()
 		//return false;
 	//}
 }
-</script>
-<script>
-$('#room-reserve-form').submit(function(){ //listen for submit event
-    $.each(params, function(i,param){
-        $('<input />').attr('type', 'hidden')
-            .attr('name', 'bob')
-            .attr('value', '10')
-            .appendTo('#room-reserve-form');
-    });
-
-    return true;
-});
 </script>
 
 <div id='calendar'></div>
