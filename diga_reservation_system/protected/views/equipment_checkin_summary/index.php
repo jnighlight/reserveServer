@@ -115,11 +115,10 @@ echo CHtml::openTag("div", $summary_container);
     echo CHtml::closeTag("div");
   echo CHtml::closeTag("div");
 
-/*
   echo CHtml::openTag("div",$section_title_block);
     echo CHtml::openTag("div",$section_title);
       echo CHtml::openTag("p");
-        print("End");
+        print("Notes");
       echo CHtml::closeTag("p");
     echo CHtml::closeTag("div");
   echo CHtml::closeTag("div");
@@ -127,12 +126,10 @@ echo CHtml::openTag("div", $summary_container);
   echo CHtml::openTag("div",$section_content_block);
     echo CHtml::openTag("div",$section_content);
       echo CHtml::openTag("p");
-        print($equipment_reservation->end_date_time);
+        print($equipment_checkin->notes);
       echo CHtml::closeTag("p");
     echo CHtml::closeTag("div");
   echo CHtml::closeTag("div");
-
-*/
 
 echo CHtml::closeTag("div");
 ?>
