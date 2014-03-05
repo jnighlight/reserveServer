@@ -22,6 +22,8 @@ $cs->registerCssFile($base . $fullCal . '/fullcalendar/fullcalendar.css');
 $cs->registerCoreScript('jquery');
 $cs->registerScriptFile($base . $fullCal . '/lib/jquery-ui.custom.min.js');
 $cs->registerScriptFile($base . $fullCal . '/fullcalendar/fullcalendar.min.js');
+$maxRes = RoomReservationPolicy::model()->findByAttributes(array('room_id'=>$room_id));
+$maxRes = $maxRes['max_reservation_hours'];
 ?>
 <script>
 	//A script to create the calendar
@@ -109,6 +111,8 @@ function checkFunction()
 }
 </script>
 <?php echo ("<center><h1> " . $buildingName . ", Room " . $roomNumber ." </h1></center>"); ?>
+<?php if(isset($maxRes))
+	{echo ("<center><h3> Max Reservation Time: ". $maxRes ." Hours</h3></center>");} ?>
 <div id='calendar'></div>
 <div class="form">
 
