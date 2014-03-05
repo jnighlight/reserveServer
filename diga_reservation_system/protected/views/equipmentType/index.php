@@ -3,6 +3,7 @@
 /* @var $dataProvider CActiveDataProvider */
 
 $this->breadcrumbs=array(
+	'Equipment'=>array("/equipment/"),
 	'Equipment Types',
 );
 
