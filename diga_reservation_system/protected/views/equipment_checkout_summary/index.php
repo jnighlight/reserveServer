@@ -132,6 +132,22 @@ echo CHtml::openTag("div", $summary_container);
     echo CHtml::closeTag("div");
   echo CHtml::closeTag("div");
 
+    echo CHtml::openTag("div",$section_title_block);
+    echo CHtml::openTag("div",$section_title);
+      echo CHtml::openTag("p");
+        print("Notes");
+      echo CHtml::closeTag("p");
+    echo CHtml::closeTag("div");
+  echo CHtml::closeTag("div");
+
+  echo CHtml::openTag("div",$section_content_block);
+    echo CHtml::openTag("div",$section_content);
+      echo CHtml::openTag("p");
+        print($equipment_reservation->notes);
+      echo CHtml::closeTag("p");
+    echo CHtml::closeTag("div");
+  echo CHtml::closeTag("div");
+
 
 
 echo CHtml::closeTag("div");
