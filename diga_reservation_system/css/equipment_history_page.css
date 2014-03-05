@@ -1,0 +1,33 @@
+.history_block
+{
+  background-color:red;
+  //width:530px;
+}
+
+.history_block_title
+{
+  background-color:red;
+  width:200px;
+  font-size:25px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.checkout_history_block, .checkin_history_block
+{
+  padding:15px;
+}
+
+.checkout_history_block
+{
+  background-color:green;
+
+  float:left;
+}
+
+.checkin_history_block
+{
+  background-color:blue;
+
+  float:right;
+}
