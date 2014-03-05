@@ -20,12 +20,12 @@ class Equipment_reservationController extends Controller
 		$this->render('index');
 	}
 
-	public function getEquipment()
+	public function getEquipment($limit = 10, $offset = 0)
 	{
 	  $equipment = Equipment::model();
 	  $criteria = new CDbCriteria;
-	    $limit = 10;
-	    $offset = 0;
+	    //$limit = 10;
+	    //$offset = 0;
 	  $criteria->limit = $limit;
 	  $criteria->offset = $offset;
 	  $criteria->order = "name ASC";
