@@ -24,6 +24,7 @@ if($superUser)
 	$this->menu=array(
 	array('label'=>'Create Room Reservation', 'url'=>array('create')),
 	array('label'=>'Manage Room Reservation', 'url'=>array('admin')),
+	array('label'=>'Manage Max Reservation Times', 'url'=>array('/roomReservationPolicy')),
 	);
 }
 
