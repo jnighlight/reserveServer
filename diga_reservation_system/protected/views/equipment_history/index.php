@@ -108,7 +108,7 @@ foreach($checkout_history as $checkout)
 
 
   echo CHtml::openTag("p");
-    echo $checkout->notes;
+    echo "&nbsp &nbsp".$checkout->notes;
   echo CHtml::closeTag("p");
 
   echo CHtml::closeTag("div"); // close info div
@@ -200,7 +200,7 @@ foreach($checkin_history as $checkin)
 
 
   echo CHtml::openTag("p");
-    echo $checkin->notes;
+    echo "&nbsp &nbsp".$checkin->notes;
   echo CHtml::closeTag("p");
 
   echo CHtml::closeTag("div"); // close info div
