@@ -48,7 +48,7 @@ echo CHtml::openTag("div", $summary_container);
   echo CHtml::openTag("div",$section_content_block);
     echo CHtml::openTag("div",$section_content);
       echo CHtml::openTag("p");
-        foreach($reservarion_accessories as $reservation_accessory)
+        foreach($reservation_accessories as $reservation_accessory)
 	{
            $accessory = Accessory::model()->findByPk($reservation_accessory->accessory_id);
 
