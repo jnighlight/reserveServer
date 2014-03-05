@@ -78,6 +78,20 @@ class Equipment extends CActiveRecord
           return $specs;
         }
 
+	/* Get checkout history*/
+	public function getCheckouts($limit = 10, $offset = 0)
+        {
+          $equipment_reservations = EquipmentReservation::model();
+          $criteria = new CDbCriteria;
+            //$limit = 10;
+            //$offset = 0;
+          $criteria->limit = $limit;
+          $criteria->offset = $offset;
+          $criteria->order = "start_date ASC";
+	  $criteria->condition = "equipment_id = ".$this->equipment_id;
+
+          return $equipment->findAll($criteria);
+        }
 
 	/**
 	 * @return string the associated database table name
