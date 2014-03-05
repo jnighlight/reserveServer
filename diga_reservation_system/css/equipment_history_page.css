@@ -53,6 +53,11 @@
 
 .checkout_history_block, .checkin_history_block
 {
+  border-style:solid;
+  border-width:4px;
+  background-color: #2A7BAC;
+  border-color:#61A3CB;
+
   margin-bottom:60px;
   padding:15px;
   color:white;
@@ -62,14 +67,14 @@
 
 .checkout_history_block
 {
-  background-color:green;
+  //background-color:green;
 
   float:left;
 }
 
 .checkin_history_block
 {
-  background-color:blue;
+  //background-color:blue;
 
   float:right;
 }
@@ -83,13 +88,14 @@
 {
   background-color:white;
   color:black;
-  //display:none;
 
   border-style:inset;
   border-width:4px;
   display:none;
 
   margin-bottom:30px;
+
+  width:250px;
 }
 
 .checkout_history_info p, .checkin_history_info p
