@@ -55,7 +55,7 @@ foreach($checkout_history as $checkout)
 	'id'=>'checkout_history_date_'.$checkout->equipment_reservation_id,
   	'class'=>'checkout_history_date',));
     echo CHtml::openTag("p");
-      echo "<b>Start Date</b>: ".$checkout->start_date." &nbsp &nbsp &nbsp <b>End Date</b>:".$checkout->end_date;
+      echo "<b>Start Date</b>: ".$checkout->start_date." &nbsp &nbsp &nbsp <b>End Date</b>: ".$checkout->end_date;
     echo CHtml::closeTag("p");
   echo CHtml::closeTag("div"); // close date div
 
@@ -88,7 +88,10 @@ foreach($checkout_history as $checkout)
 
 
   echo CHtml::openTag("p");
-    echo "&nbsp &nbsp".$checkout->borrowers_email;
+    $borrower= User::model()->findByAttributes(array("email"=>$checkout->borrowers_email));
+    $borrowers_name = $borrower->first_name." ".$borrower->last_name;
+    $borrowers_email = $borrower->email;
+    echo "&nbsp &nbsp".$borrowers_name." (".$borrowers_email.")";
   echo CHtml::closeTag("p");
 
   echo CHtml::openTag("p");
@@ -97,7 +100,10 @@ foreach($checkout_history as $checkout)
 
 
   echo CHtml::openTag("p");
-    echo "&nbsp &nbsp".$checkout->checkout_assistant_email;
+    $checkout_assistant= User::model()->findByAttributes(array("email"=>$checkout->checkout_assistant_email));
+    $checkout_assistants_name = $checkout_assistant->first_name." ".$checkout_assistant->last_name;
+    $checkout_assistants_email = $checkout_assistant->email;
+    echo "&nbsp &nbsp".$checkout_assistants_name." (".$checkout_assistants_email.")";
   echo CHtml::closeTag("p");
 
 
@@ -180,7 +186,10 @@ foreach($checkin_history as $checkin)
 
 
   echo CHtml::openTag("p");
-    echo "&nbsp &nbsp".$checkin->borrowers_email;
+    $borrower = User::model()->findByAttributes(array("email"=>$checkin->borrowers_email));
+    $borrowers_name = $borrower->first_name." ".$borrower->last_name;
+    $borrowers_email = $borrower->email;
+    echo "&nbsp &nbsp".$borrowers_name." (".$borrowers_email.")";
   echo CHtml::closeTag("p");
 
   echo CHtml::openTag("p");
@@ -189,7 +198,10 @@ foreach($checkin_history as $checkin)
 
 
   echo CHtml::openTag("p");
-    echo "&nbsp &nbsp".$checkin->checkin_assistant_email;
+    $checkin_assistant= User::model()->findByAttributes(array("email"=>$checkin->checkin_assistant_email));
+    $checkin_assistants_name = $checkin_assistant->first_name." ".$checkin_assistant->last_name;
+    $checkin_assistants_email = $checkin_assistant->email;
+    echo "&nbsp &nbsp".$checkin_assistants_name." (".$checkin_assistants_email.")";
   echo CHtml::closeTag("p");
 
 
