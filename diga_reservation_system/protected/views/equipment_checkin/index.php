@@ -2,6 +2,7 @@
 /* @var $this EquipmentController */
 
 $this->breadcrumbs=array(
+	'Equipment'=>array("/equipment/"),
 	'Equipment Checkin',
 );
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/reservation_page.css");
