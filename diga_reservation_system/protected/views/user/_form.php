@@ -32,48 +32,37 @@
 		<?php echo $form->textField($model,'email',array('size'=>30,'maxlength'=>30)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
-
 	<div class="row">
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password',array('size'=>60,'maxlength'=>100)); ?>
 		<?php echo $form->error($model,'password'); ?>
 	</div>
-
 	<div class="row">
                 <?php echo $form->labelEx($model,'password_repeat'); ?>
                 <?php echo $form->passwordField($model,'password_repeat',array('size'=>60,'maxlength'=>100)); ?>
                 <?php echo $form->error($model,'password_repeat'); ?>
         </div>
-
 	<div class="row">
 		<?php echo $form->labelEx($model,'phone_number'); ?>
 		<?php echo $form->textField($model,'phone_number',array('size'=>15,'maxlength'=>15)); ?>
 		<?php echo $form->error($model,'phone_number'); ?>
 	</div>
-
+<?php
+  if(!Yii::app()->user->isGuest)
+  {
+    $user = User::model()->findByAttributes(array("email"=>Yii::app()->user->name));
+    if($user->user_level_id == 3) // if the user is an admin
+    {
+?>
 	<div class="row">
                 <?php echo $form->labelEx($model,'User Level'); ?>
-                <!--<?php echo $form->textField($model,'user_level_id'); ?> -->
                 <?php echo $form->dropDownList($model, 'user_level_id', CHtml::listData(UserLevel::model()->findAll(array('order'=>'name')),'user_level_id','name'));?>
                 <?php echo $form->error($model,'user_level_id'); ?>
         </div>
-
-
-<!--    commented out by Mark Burton. These should not be
-        acceccible by an level user
-
-
-	<div class="row">
-		<?php echo $form->labelEx($model,'user_level_id'); ?>
-		<?php echo $form->textField($model,'user_level_id'); ?>
-		<?php echo $form->error($model,'user_level_id'); ?>
-	</div>
-	<div class="row">
-		<?php echo $form->labelEx($model,'salt'); ?>
-		<?php echo $form->textField($model,'salt',array('size'=>60,'maxlength'=>100)); ?>
-		<?php echo $form->error($model,'salt'); ?>
-	</div>
--->
+<?php
+    }
+  }
+?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'ID Number (800-number)'); ?>
 		<?php echo $form->textField($model,'id_number',array('size'=>10,'maxlength'=>10)); ?>
