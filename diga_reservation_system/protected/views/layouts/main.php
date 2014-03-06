@@ -15,17 +15,18 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/form.css" />
 
-	<!-- Custom CSS files-->
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/main_page.css" />
-
-	<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/reservation_page.css" />
-
 	<title><?php echo CHtml::encode($this->pageTitle); ?></title>
 </head>
 
 <body>
 
 <div class="container" id="page">
+	<div class = "banner">
+	  <?php
+	    echo CHtml::imageButton(Yii::app()->baseUrl."/images/banner.png",array('submit'=>Yii::app()->baseUrl.'/site/index'));
+	  ?>
+	</div>
+
 
 	<div id="header">
 		<!--<div id="logo"><?php echo CHtml::encode(Yii::app()->name); ?></div>-->
