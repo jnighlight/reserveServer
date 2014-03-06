@@ -2,6 +2,12 @@
 /* @var $this UserController */
 /* @var $model User */
 
+
+Yii::app()->clientScript->registerScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js");
+
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/extensions/js/user_form/password_autofill.js");
+
+
 $this->breadcrumbs=array(
 	'Users'=>array('index'),
 	$model->email=>array('view','id'=>$model->email),
