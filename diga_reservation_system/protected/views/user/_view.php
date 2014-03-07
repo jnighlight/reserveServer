@@ -31,4 +31,16 @@
 	  echo CHtml::encode($user_level); ?>
 	<br />
 
+	<?php
+        echo CHtml::beginForm();
+          echo CHtml::htmlButton("History",
+            array(
+              'type' => 'submit',
+              'name' => 'user_id',
+              'value' => $data->user_id,
+            ));
+        echo CHtml::endForm();
+        ?>
+
+
 </div>
