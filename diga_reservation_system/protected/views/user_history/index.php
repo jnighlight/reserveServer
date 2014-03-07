@@ -65,6 +65,16 @@ foreach($checkout_history as $checkout)
         'id'=>'checkout_history_info_'.$checkout->equipment_reservation_id,
         'class'=>'checkout_history_info',));
 
+  $equipment = Equipment::model()->findByPK($checkout->equipment_id);
+  echo CHtml::openTag("p");
+    echo "<b>Equipment</b>";
+  echo CHtml::closeTag("p");
+
+
+  echo CHtml::openTag("p");
+    echo "&nbsp &nbsp".$equipment->name;
+  echo CHtml::closeTag("/p");
+
   echo CHtml::openTag("p");
     echo "<b>Accessories</b>";
   echo CHtml::closeTag("p");
