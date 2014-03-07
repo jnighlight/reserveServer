@@ -6,18 +6,18 @@ $this->breadcrumbs=array(
 	'Equipment History',
 );
 
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/equipment_history_page.css");
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/history_page.css");
 
 Yii::app()->clientScript->registerScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js");
 
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/extensions/js/history/equipment_history.js");
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/extensions/js/history/history.js");
 
-$equipmentBlock = array(
-  'class'=>'equipment_block',
+$componentBlock = array(
+  'class'=>'component_block',
 );
 
-$equipmentImage = array(
-  'class'=>'equipment_image',
+$componentImage = array(
+  'class'=>'component_image',
 );
 
 $historyBlock = array(
@@ -123,8 +123,8 @@ foreach($checkout_history as $checkout)
 echo CHtml::closeTag("div");
 
 // Imageblock
-echo CHtml::openTag("div",$equipmentBlock);
-  echo CHtml::openTag("div",$equipmentImage);
+echo CHtml::openTag("div",$componentBlock);
+  echo CHtml::openTag("div",$componentImage);
     echo CHtml::image($equipment->image_url);
   echo CHtml::closeTag("div");
 

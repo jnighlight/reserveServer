@@ -6,20 +6,20 @@ $this->breadcrumbs=array(
 	'User History',
 );
 
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/equipment_history_page.css");
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/history_page.css");
 
 Yii::app()->clientScript->registerScriptFile("//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js");
 
-Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/extensions/js/history/equipment_history.js");
+Yii::app()->clientScript->registerScriptFile(Yii::app()->baseUrl."/extensions/js/history/history.js");
 
-$equipmentBlock = array(
-  'class'=>'equipment_block',
+$componentBlock = array(
+  'class'=>'component_block',
 );
-/*
-$equipmentImage = array(
-  'class'=>'equipment_image',
+
+$componentImage = array(
+  'class'=>'component_image',
 );
-*/
+
 $historyBlock = array(
   'class'=>'history_block',
 );
@@ -108,6 +108,27 @@ foreach($checkout_history as $checkout)
   echo CHtml::closeTag("div"); // close info div
 }
 echo CHtml::closeTag("div");
+
+// Imageblock
+echo CHtml::openTag("div",$componentBlock);
+  
+  echo CHtml::openTag("div",$componentImage);
+    echo CHtml::image(Yii::app()->baseUrl."/images/user.png");
+  echo CHtml::closeTag("div");
+  
+  echo CHtml::openTag("p");
+    echo "<b>Name</b>: ".$user->first_name." ".$user->last_name;
+  echo CHtml::closeTag("p");
+
+  echo CHtml::openTag("p");
+    echo "<b>Email</b>: ".$user->email;
+  echo CHtml::closeTag("p");
+
+  echo CHtml::openTag("p");
+    echo "<b>SU Number</b>: ".$user->id_number;
+  echo CHtml::closeTag("p");
+echo CHtml::closeTag("div");
+
 
 // Checkin History Block
 
