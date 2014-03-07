@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'room_equipment_reservation':
  * @property integer $room_equipment_reservation_id
+ * @property integer $room_equipment_id
  * @property string $email
  * @property integer $room_id
  * @property string $start_date_time
@@ -38,12 +39,12 @@ class RoomEquipmentReservation extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('email, room_id, start_date_time, end_date_time', 'required'),
-			array('room_id', 'numerical', 'integerOnly'=>true),
+			array('room_equipment_id, email, room_id, start_date_time, end_date_time', 'required'),
+			array('room_equipment_id, room_id', 'numerical', 'integerOnly'=>true),
 			array('email', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('room_equipment_reservation_id, email, room_id, start_date_time, end_date_time', 'safe', 'on'=>'search'),
+			array('room_equipment_reservation_id, room_equipment_id, email, room_id, start_date_time, end_date_time', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +66,7 @@ class RoomEquipmentReservation extends CActiveRecord
 	{
 		return array(
 			'room_equipment_reservation_id' => 'Room Equipment Reservation',
+			'room_equipment_id' => 'Room Equipment',
 			'email' => 'Email',
 			'room_id' => 'Room',
 			'start_date_time' => 'Start Date Time',
@@ -84,6 +86,7 @@ class RoomEquipmentReservation extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('room_equipment_reservation_id',$this->room_equipment_reservation_id);
+		$criteria->compare('room_equipment_id',$this->room_equipment_id);
 		$criteria->compare('email',$this->email,true);
 		$criteria->compare('room_id',$this->room_id);
 		$criteria->compare('start_date_time',$this->start_date_time,true);

@@ -9,6 +9,10 @@
 	<?php echo CHtml::link(CHtml::encode($data->room_equipment_reservation_id), array('view', 'id'=>$data->room_equipment_reservation_id)); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('room_equipment_id')); ?>:</b>
+	<?php echo CHtml::encode($data->room_equipment_id); ?>
+	<br />
+
 	<b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?>:</b>
 	<?php echo CHtml::encode($data->email); ?>
 	<br />

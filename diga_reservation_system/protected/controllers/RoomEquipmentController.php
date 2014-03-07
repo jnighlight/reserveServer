@@ -28,7 +28,7 @@ class RoomEquipmentController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view'),
+				'actions'=>array('index','view','equipList'),
 				'roles'=>array('user','workStudy', 'admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -129,6 +129,37 @@ class RoomEquipmentController extends Controller
 	}
 
 	/**
+	 * Lists all equipment so they can rent one
+	 */
+	public function actionEquipList()
+	{
+		print_r($_POST);
+		$i = 0;
+		$room_id = Yii::app()->request->getParam('room_id', -1);
+		while(isset($_POST['equipmentID'.$i]))
+		{
+			if(isset($_POST['yt'. $i]))
+			{
+				$this->redirect(array('/roomEquipmentReservation/equipmentRes',
+					'equipment_id'=>$_POST['equipmentID'.$i], 'room_id'=>$room_id));
+			}
+			$i++;
+		}
+		if($room_id == -1)
+			{$this -> redirect(array('/room_reservation/'));}
+		$equipment = RoomEquipment::model()->findAllByAttributes(array('room_id'=>$room_id));
+		if(!isset($equipment[0]))
+			{$this->redirect(array("/room_reservation/index",'noEquip'=>true,));}
+		$room = Room::model()->findByAttributes(array('room_id'=>$room_id));
+		$building = Building::model()->findByAttributes(array('building_id'=>$room['building_id']));
+		$dataProvider=new CActiveDataProvider('RoomEquipment');
+		$this->render('equipList',array(
+			'dataProvider'=>$dataProvider, 'equipment'=>$equipment, 'buildName'=>$building['name'],
+			'roomNum'=>$room['room_number']
+		));
+	}
+
+	/**
 	 * Manages all models.
 	 */
 	public function actionAdmin()
@@ -137,7 +168,6 @@ class RoomEquipmentController extends Controller
 		$model->unsetAttributes();  // clear any default values
 		if(isset($_GET['RoomEquipment']))
 			$model->attributes=$_GET['RoomEquipment'];
-
 		$this->render('admin',array(
 			'model'=>$model,
 		));

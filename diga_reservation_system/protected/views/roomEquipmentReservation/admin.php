@@ -46,6 +46,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'filter'=>$model,
 	'columns'=>array(
 		'room_equipment_reservation_id',
+		'room_equipment_id',
 		'email',
 		'room_id',
 		'start_date_time',

@@ -76,8 +76,11 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('View');
 		      echo " " . CHtml::submitButton('Reserve');
+		      echo " " . CHtml::submitButton('Room Equipment', array('name'=>'equip'));
 			if($superUser)
 			{
+				echo("</div>");
+				echo("<div class='row buttons'>");
 				echo " " . CHtml::submitButton('Modify Permissions');
 				echo " " . CHtml::submitButton('Set Reservation Time');
 			}

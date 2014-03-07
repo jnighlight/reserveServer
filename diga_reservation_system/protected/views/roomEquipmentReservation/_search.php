@@ -17,6 +17,11 @@
 	</div>
 
 	<div class="row">
+		<?php echo $form->label($model,'room_equipment_id'); ?>
+		<?php echo $form->textField($model,'room_equipment_id'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->label($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>30,'maxlength'=>30)); ?>
 	</div>

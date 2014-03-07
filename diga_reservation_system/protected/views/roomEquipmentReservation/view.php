@@ -22,6 +22,7 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'room_equipment_reservation_id',
+		'room_equipment_id',
 		'email',
 		'room_id',
 		'start_date_time',

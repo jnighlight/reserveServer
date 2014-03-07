@@ -686,6 +686,11 @@ class Room_reservationController extends Controller
 	 */
 	public function actionIndex()
 	{
+		$noEquip = Yii::app()->request->getParam('noEquip', false);
+		if(isset($noEquip) && $noEquip)
+		{
+			echo('<script> alert("There is no equipment in this room"); </script>');
+		}
 		//If we're looking for a specific building and room, get that here. Otherwise...
 		$buildingID = Yii::app()->request->getParam('building_list', -1);
 		$roomID = Yii::app()->request->getParam('room_num',-1);
@@ -747,6 +752,10 @@ class Room_reservationController extends Controller
 			{
 				$this->redirect(array('roomReservationPolicy/create'));
 			}
+		}
+		else if(isset($_POST['equip']))
+		{
+			$this->redirect(array('/roomEquipment/equipList', 'room_id'=>$roomID));
 		}
 		//Getting courses
 		$courses = Course::model() -> findAllByAttributes(array('room_id'=>$roomID));

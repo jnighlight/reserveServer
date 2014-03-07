@@ -16,6 +16,12 @@
 	<?php echo $form->errorSummary($model); ?>
 
 	<div class="row">
+		<?php echo $form->labelEx($model,'room_equipment_id'); ?>
+		<?php echo $form->textField($model,'room_equipment_id'); ?>
+		<?php echo $form->error($model,'room_equipment_id'); ?>
+	</div>
+
+	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
 		<?php echo $form->textField($model,'email',array('size'=>30,'maxlength'=>30)); ?>
 		<?php echo $form->error($model,'email'); ?>
