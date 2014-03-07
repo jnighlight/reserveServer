@@ -137,7 +137,6 @@ class EquipmentController extends Controller
 	{
 		if(isset($_POST['equipment_id']))
                 {
-		  print("TEST");
                   if(!is_numeric($_POST['equipment_id']) ||
                     empty($_POST['equipment_id']))
                     {
