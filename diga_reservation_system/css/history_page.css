@@ -1,0 +1,102 @@
+.history_block
+{
+  display:block;
+}
+
+.component_block
+{
+  position:absolute;
+  left:0px;
+  right:0px;
+  margin-left:auto;
+  margin-right:auto;
+  width:240px;
+  border-style:solid;
+  border-width:2px;
+  clear:both;
+  display:block;
+}
+
+.component_block p
+{
+  text-align:center;
+  margin-bottom:0px;
+}
+
+.component_image
+{
+  width:100px;
+  height:100px;
+  margin-left:auto;
+  margin-right:auto;
+  //border-style:solid;
+  //border-width:2px;
+}
+
+
+.component_image img
+{
+  width:100px;
+  height:100px;
+}
+
+.history_block_title
+{
+  text-decoration:underline;
+  width:200px;
+  font-size:25px;
+  margin-left:auto;
+  margin-right:auto;
+}
+
+.checkout_history_block, .checkin_history_block
+{
+  border-style:solid;
+  border-width:4px;
+  background-color: #2A7BAC;
+  border-color:#61A3CB;
+
+  margin-bottom:60px;
+  padding:15px;
+  color:white;
+  // For whatever reason, the history block div isn't stretching to wrap its children divs.
+  // Because of this, for the time being, I will simple increase the margin on these blocks, to ensure that the footer doesn't cut into the upper contents.
+}
+
+.checkout_history_block
+{
+  //background-color:green;
+
+  float:left;
+}
+
+.checkin_history_block
+{
+  //background-color:blue;
+
+  float:right;
+}
+
+.checkout_history_date, .checkin_history_date
+{
+  text-decoration:underline;
+}
+
+.checkout_history_info, .checkin_history_info
+{
+  background-color:white;
+  color:black;
+
+  border-style:inset;
+  border-width:4px;
+  display:none;
+
+  margin-bottom:30px;
+
+  width:250px;
+}
+
+.checkout_history_info p, .checkin_history_info p
+{
+  margin-bottom:0px;
+}
