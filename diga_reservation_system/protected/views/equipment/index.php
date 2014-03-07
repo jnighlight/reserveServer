@@ -11,6 +11,7 @@ $this->menu=array(
 	array('label'=>'Manage Equipment', 'url'=>array('admin')),
 	array('label'=>'Checkin Equipment', 'url'=>array('equipment_checkin/index')),
 	array('label'=>'Equipment Types', 'url'=>array('equipmentType/index')),
+	array('label'=>'Accessories', 'url'=>array('accessory/index')),
 );
 
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/crud_controls.css");
