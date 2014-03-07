@@ -23,9 +23,16 @@ class User_historyController extends Controller
                   {
                     $user = User::model()->findByPk($_GET['user_id']);
 
-                    $this->render('index',
+                    $checkout_history = $user->getCheckouts();//= EquipmentReservation::model()->findByAttributes(array("borrowers_email"=>$user->email));
+		    $checkin_history = $user->getCheckins();//EquipmentCheckin::model()->findByAttributes
+(array("borrowers_email"=>$user->email));
+
+		    $this->render('index',
                       array("user" => $user,
+                            "checkout_history" => $checkout_history,
+                            "checkin_history" => $checkin_history,
                         ));
+			print(sizeof($checkout_history));
                   }
                 }
 	}
