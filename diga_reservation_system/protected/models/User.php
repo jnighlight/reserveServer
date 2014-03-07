@@ -50,6 +50,36 @@ class User extends CActiveRecord
 	  }
 	}
 
+	/* Get checkout history*/
+        public function getCheckouts($limit = 10, $offset = 0)
+        {
+          $equipment_reservations = EquipmentReservation::model();
+          $criteria = new CDbCriteria;
+            //$limit = 10;
+            //$offset = 0;
+          $criteria->limit = $limit;
+          $criteria->offset = $offset;
+          $criteria->order = "start_date ASC";
+          $criteria->condition = "borrowers_email = '".$this->email."'";
+
+          return $equipment_reservations->findAll($criteria);
+        }
+
+        /* Get checkout history*/
+        public function getCheckins($limit = 10, $offset = 0)
+        {
+          $equipment_checkins = EquipmentCheckin::model();
+          $criteria = new CDbCriteria;
+            //$limit = 10;
+            //$offset = 0;
+          $criteria->limit = $limit;
+	  $criteria->offset = $offset;
+          $criteria->order = "checkin_date_time ASC";
+          $criteria->condition = "borrowers_email = '".$this->email."'";
+
+          return $equipment_checkins->findAll($criteria);
+        }
+
 	/**
 	 * @return string the associated database table name
 	 */
