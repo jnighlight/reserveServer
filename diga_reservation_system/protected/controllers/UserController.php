@@ -124,6 +124,22 @@ class UserController extends Controller
 	 */
 	public function actionIndex()
 	{
+		if(isset($_POST['user_id']))
+                {
+                  if(!is_numeric($_POST['user_id']) ||
+                    empty($_POST['user_id']))
+                    {
+                      print("Invalid piece user.");
+                    }
+                  else
+                  {
+                    $this->redirect(
+                    array("/user_history/?user_id=".$_POST['user_id']));
+                  }
+                }
+
+
+
 		$dataProvider=new CActiveDataProvider('User');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
