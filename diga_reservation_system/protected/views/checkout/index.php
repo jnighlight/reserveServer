@@ -135,18 +135,18 @@ $form = $this->beginWidget('CActiveForm', array(
 	echo CHtml::openTag("div",$dates_section);
 	// Start Date
 	echo CHtml::openTag("p");
-          echo "Start Date:";
+          echo "Start Date (MM/DD/YYYY):";
         echo CHtml::closeTag("p");
 	// Start Date Fields
-        echo $form->labelEx($checkoutAssistant,"start_date");
+        //echo $form->labelEx($checkoutAssistant,"start_date");
         echo $form->textArea($checkoutAssistant,"start_date");
         echo $form->error($checkoutAssistant,'start_date',$error);
 	// End Date
         echo CHtml::openTag("p");
-          echo "End Date:";
+          echo "End Date(MM/DD/YYY):";
         echo CHtml::closeTag("p");
         // End Date Fields
-        echo $form->labelEx($checkoutAssistant,"end_date");
+        //echo $form->labelEx($checkoutAssistant,"end_date");
         echo $form->textArea($checkoutAssistant,"end_date");
         echo $form->error($checkoutAssistant,'end_date',$error);
 	echo CHtml::closeTag("div");
