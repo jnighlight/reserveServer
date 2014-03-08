@@ -22,16 +22,16 @@ class CheckinController extends Controller
 		  {
 		    $equipment = Equipment::model()->findByPk($_GET['equipment_id']);
 		    // Model to be used to validate the checkout assistant
-		    $checkinAssistant = new CheckoutAssistantForm;
+		    $checkinAssistant = new CheckinAssistantForm;
 		    // Model to be used to validate the borrower
 		    $borrower = new BorrowerCheckoutForm;
 
 		    // Perform validation all all models
-		    if(isset($_POST['CheckoutAssistantForm'],
+		    if(isset($_POST['CheckinAssistantForm'],
 		             $_POST['BorrowerCheckoutForm']))
 		    {
 
-		      $checkinAssistant->attributes = $_POST['CheckoutAssistantForm'];
+		      $checkinAssistant->attributes = $_POST['CheckinAssistantForm'];
 		      $borrower->attributes = $_POST['BorrowerCheckoutForm'];
 	
 		      $valid = $checkinAssistant->validate();
@@ -46,9 +46,18 @@ class CheckinController extends Controller
 		        $checkin->borrowers_email = $borrower->email;
 		    
 		        $checkin->notes = $checkinAssistant->notes;
+			/*
 			$now = date("Y-m-d H:i:s");
 			$later = date("Y-m-d H:i:s", strtotime($now . "+ 2 day"));
 			$checkin->checkin_date_time = $now;
+			*/
+			$checkin_date = $checkinAssistant->checkin_date;
+                        $yyyy = substr($checkin_date,6,4);
+                        $dd = substr($checkin_date,3,2);
+                        $mm = substr($checkin_date,0,2);
+                        $checkin_date = $yyyy."-".$mm."-".$dd;
+                        $checkin->checkin_date = $checkin_date;
+
 			$checkin->equipment_id = $equipment->equipment_id;
 
 			$checkin->save(false);
