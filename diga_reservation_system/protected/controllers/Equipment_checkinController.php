@@ -17,7 +17,14 @@ class Equipment_checkinController extends Controller
 		    array("/checkin/?equipment_id=".$_POST['equipment_id']));
 		  }
 		}
-		$this->render('index');
+		$dataProvider=new CActiveDataProvider('Equipment',
+		  array('criteria'=>
+		    array('condition'=>'availability = false')));
+                $this->render('index',array(
+                        'dataProvider'=>$dataProvider,
+                ));
+
+		//$this->render('index');
 	}
 
 	public function getMissingEquipment()

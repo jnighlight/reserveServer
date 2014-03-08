@@ -2,6 +2,8 @@
 
 class Equipment_reservationController extends Controller
 {
+	//public $step;
+
 	public function actionIndex()
 	{
 		if(isset($_POST['equipment_id']))
@@ -17,9 +19,18 @@ class Equipment_reservationController extends Controller
 		      array("/checkout/?equipment_id=".$_POST['equipment_id']));
 		  }
 		}
-		$this->render('index');
-	}
 
+		//$dataProvider=new CActiveDataProvider('Equipment');
+		$dataProvider=new CActiveDataProvider('Equipment',
+                  array('criteria'=>
+                    array('condition'=>'availability = true')));
+
+                $this->render('index',array(
+                        'dataProvider'=>$dataProvider,
+                ));
+
+	}
+/*	No longer needed with the user of the above widget.
 	public function getEquipment($limit = 10, $offset = 0)
 	{
 	  $equipment = Equipment::model();
@@ -32,7 +43,7 @@ class Equipment_reservationController extends Controller
 
           return $equipment->findAll($criteria);
 	}
-
+*/
 	public function getAllEquipmentTypes()
 	{
 	  return EquipmentType::model()->findAll(
