@@ -71,9 +71,9 @@ for($x = 0; $x < sizeof($equipment); $x++)
     //Equipment image
       //echo CHtml::image($equipment[$x]->image_url,"",$listImage);
 	if($equipment[$x]->image_url != "")
-          echo CHtml::image($equipment[$x]->image_url);
+          echo CHtml::image($equipment[$x]->image_url, "", $listImage);
         else
-          echo CHtml::image(Yii::app()->baseUrl."/images/equipment/no_image.png");
+          echo CHtml::image(Yii::app()->baseUrl."/images/equipment/no_image.png", "", $listImage);
 
     echo CHtml::openTag("div",$listDescription);
       echo CHtml::openTag("p",$listDescriptionTitle);
