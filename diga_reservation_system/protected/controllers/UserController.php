@@ -112,6 +112,12 @@ class UserController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		/*
+		$user = User::model()->findByPk($id);
+
+                EquipmentReservation::model()->deleteAllByAttributes(array("borrowers_email"=>$$user->email));
+                EquipmentCheckin::model()->deleteAllByAttributes(array("borrowers_email"=>$email->email));
+		*/
 		$this->loadModel($id)->delete();
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
