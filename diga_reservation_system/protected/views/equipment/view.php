@@ -28,7 +28,7 @@ $this->menu=array(
 		'model_number',
 		'description',
 		'name',
-		'image_url',
+//		'image_url',
 		'equipment_type_id',
 	),
 )); ?>

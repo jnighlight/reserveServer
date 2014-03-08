@@ -10,7 +10,12 @@ $image_style = array('class'=>'equipment_image',);
 
 <div class="view">
 	<?php echo CHtml::openTag("div",$image_style); ?>
-	<?php echo CHtml::link(CHtml::image($data->image_url), array('view', 'id'=>$data->equipment_id)); ?>
+	<?php
+	  if($data->image_url != "")
+	    echo CHtml::link(CHtml::image($data->image_url), array('view', 'id'=>$data->equipment_id)); 
+	  else
+	    echo CHtml::link(CHtml::image(Yii::app()->baseUrl."/images/equipment/no_image.png"), array('view', 'id'=>$data->equipment_id));
+	?>
 	<?php echo CHtml::closeTag("div"); ?>
 
         <br />

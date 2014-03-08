@@ -9,6 +9,7 @@
 <?php $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'equipment-form',
 	'enableAjaxValidation'=>false,
+	'htmlOptions'=>array('enctype'=>'multipart/form-data'),
 )); ?>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
@@ -53,11 +54,23 @@
 	</div>
 
 	<div class="row">
+		<!--
+                <?php echo $form->labelEx($model,'image'); ?>
+                <?php echo $form->fileField($model,'image'); ?>
+                <?php echo $form->error($model,'image'); ?>  -->
+
+		<?php
+		  echo CHtml::openTag("p"); echo "Image"; echo CHtml::closeTag("p");
+		  echo CHtml::fileField("image");
+		?>
+        </div>
+<!--
+	<div class="row">
 		<?php echo $form->labelEx($model,'image_url'); ?>
 		<?php echo $form->textField($model,'image_url',array('size'=>60,'maxlength'=>300)); ?>
 		<?php echo $form->error($model,'image_url'); ?>
 	</div>
-
+-->
 	<div class="row">
 		<?php echo $form->labelEx($model,'Equipment Type'); ?>
 		<!--<?php echo $form->textField($model,'equipment_type_id'); ?> -->
