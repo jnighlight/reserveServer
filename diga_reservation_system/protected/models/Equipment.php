@@ -17,6 +17,8 @@
  */
 class Equipment extends CActiveRecord
 {
+	public $image;
+
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
@@ -131,6 +133,7 @@ class Equipment extends CActiveRecord
 			array('description', 'length', 'max'=>200),
 			array('name', 'length', 'max'=>40),
 			array('image_url', 'length', 'max'=>300),
+//			array('image','file','types'=>'jpg,gif,png'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('equipment_id, serial_number, manufacturer, model_number, description, name, image_url, equipment_type_id, availability, su_number', 'safe', 'on'=>'search'),
@@ -163,7 +166,8 @@ class Equipment extends CActiveRecord
 			'image_url' => 'Image Url',
 			'equipment_type_id' => 'Equipment Type',
 			'availability' => 'Availability',
-			'su_number' => 'SU Number'
+			'su_number' => 'SU Number',
+	//		'image' => 'Image'
 		);
 	}
 
