@@ -1,0 +1,86 @@
+/*
+  Custom CSS file
+  styles reservation listings.
+*/
+
+/* Style the whole reservation list */
+#transaction_list
+{
+  width:90%;
+}
+/* Stylize each row */
+#transaction_list .transaction_list_row
+{
+  border-style:solid;
+  border-width:2px;
+  border-color:#61A3CB;
+  border-bottom:0px;
+  border-top-color:#2A7BAC;
+
+  width:100%;
+  height:100px;
+
+  //margin-bottom:5px;
+  clear:both;
+}
+
+/* Stylize the image of each piece of equipment */
+#transaction_list .transaction_list_row //.reservation_list_image
+{
+  width:30%;
+  height:80%;
+}
+
+.transaction_list_image
+{
+  width:100px;
+  height:100px;
+  margin-left:30px;
+}
+
+/* Stylize the description of each piece of equipment */
+#transaction_list .transaction_list_row .transaction_list_description
+{
+  float:right;
+  width:60%;
+}
+
+/* Stylize the description title of each piece of equipment */
+.transaction_list_description .transaction_list_description_title
+{
+  font-size:20px;
+  font-weight:bold;
+}
+
+/* Stylize the description text */
+.transaction_list_description p
+{
+  margin-bottom:2px;
+}
+
+/* Stylize the dropdown description div */
+.transaction_list_dropdown
+{
+  background-color:#61A3CB;
+  overflow:auto;
+  color:white;
+
+  border-style:solid;
+  border-top-width:5px;
+  border-bottom-width:3px;
+  border-color:#2A7BAC;
+  padding-top:0px;
+  margin-top:0px;
+}
+
+/* Stylize each section of the dropdown div */
+.transaction_list_dropdown_section
+{
+  float:left;
+  padding-right:50px;
+  padding-left:10px;
+
+  //background-color:#56C5FE;
+  padding-top:0px;
+  margin-top:0px;
+}
