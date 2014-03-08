@@ -4,6 +4,8 @@
 
 $image_style = array('class'=>'equipment_image',);
 
+//Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/crud_controls.css");
+
 ?>
 
 
