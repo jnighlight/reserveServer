@@ -32,7 +32,12 @@ echo CHtml::openTag("div", $summary_container);
   echo CHtml::openTag("div",$section_content_block);
     echo CHtml::openTag("div",$section_content);
       echo CHtml::openTag("p");
-        echo CHtml::image($equipment->image_url);
+        //echo CHtml::image($equipment->image_url);
+	if($equipment->image_url != "")
+          echo CHtml::image($equipment->image_url);
+        else
+          echo CHtml::image(Yii::app()->baseUrl."/images/equipment/no_image.png");
+
       echo CHtml::closeTag("p");
     echo CHtml::closeTag("div");
   echo CHtml::closeTag("div");
