@@ -220,7 +220,13 @@ class EquipmentController extends Controller
 		  if(file_exists($filename)) // if it exists, delete it.
 		    unlink($filename);
 		}
-
+		// Delete everything associated to this piece of equipment
+		EquipmentAccessory::model()->deleteAllByAttributes(array("equipment_id"=>$id));
+		Specification::model()->deleteAllByAttributes(array("equipment_id"=>$id));
+		
+		EquipmentReservation::model()->deleteAllByAttributes(array("equipment_id"=>$id));
+		EquipmentCheckin::model()->deleteAllByAttributes(array("equipment_id"=>$id));
+		// Finally, delete the piece of equipment itself
 		$this->loadModel($id)->delete();
 		//echo "ID: ".$id;
 
