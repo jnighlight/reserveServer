@@ -104,7 +104,7 @@ class Equipment extends CActiveRecord
             //$offset = 0;
           $criteria->limit = $limit;
           $criteria->offset = $offset;
-          $criteria->order = "checkin_date_time ASC";
+          $criteria->order = "checkin_date ASC";
           $criteria->condition = "equipment_id = ".$this->equipment_id;
 
           return $equipment_checkins->findAll($criteria);

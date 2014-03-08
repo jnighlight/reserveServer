@@ -5,15 +5,18 @@ class CheckoutAssistantForm extends CFormModel
   public $email;
   public $password;
   public $notes;
+  public $start_date;
+  public $end_date;
   
   //private $_identity;
 
   public function rules()
   {
     return array(
-      array("email,password","required"), 	// required
+      array("email,password,start_date,end_date","required"), 	// required
       array("email","email"),			// email
       array("password","authenticate"),		// password authentication
+      array("start_date,end_date","type","type"=>"date", "dateFormat"=>"MM/dd/yyyy"),
       array("notes","length","max"=>200),
     );
   }

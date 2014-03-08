@@ -7,7 +7,7 @@
  * @property string $equipment_checkin_id
  * @property string $borrowers_email
  * @property string $equipment_id
- * @property string $checkin_date_time
+ * @property string $checkin_date
  * @property string $notes
  * @property string $checkin_assistant_email
  */
@@ -51,13 +51,13 @@ class EquipmentCheckin extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('borrowers_email, equipment_id, checkin_date_time, checkin_assistant_email', 'required'),
+			array('borrowers_email, equipment_id, checkin_date, checkin_assistant_email', 'required'),
 			array('borrowers_email, checkin_assistant_email', 'length', 'max'=>30),
 			array('equipment_id', 'length', 'max'=>20),
 			array('notes', 'length', 'max'=>200),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('equipment_checkin_id, borrowers_email, equipment_id, checkin_date_time, notes, checkin_assistant_email', 'safe', 'on'=>'search'),
+			array('equipment_checkin_id, borrowers_email, equipment_id, checkin_date, notes, checkin_assistant_email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -81,7 +81,7 @@ class EquipmentCheckin extends CActiveRecord
 			'equipment_checkin_id' => 'Equipment Checkin',
 			'borrowers_email' => 'Borrowers Email',
 			'equipment_id' => 'Equipment',
-			'checkin_date_time' => 'Checkin Date Time',
+			'checkin_date' => 'Checkin Date',
 			'notes' => 'Notes',
 			'checkin_assistant_email' => 'Checkin Assistant Email',
 		);
@@ -101,7 +101,7 @@ class EquipmentCheckin extends CActiveRecord
 		$criteria->compare('equipment_checkin_id',$this->equipment_checkin_id,true);
 		$criteria->compare('borrowers_email',$this->borrowers_email,true);
 		$criteria->compare('equipment_id',$this->equipment_id,true);
-		$criteria->compare('checkin_date_time',$this->checkin_date_time,true);
+		$criteria->compare('checkin_date',$this->checkin_date,true);
 		$criteria->compare('notes',$this->notes,true);
 		$criteria->compare('checkin_assistant_email',$this->checkin_assistant_email,true);
 
