@@ -28,6 +28,8 @@ if(isset($_GET['equipment_id']))
 
     $notes_section = array('class'=> 'notes_section',);
 
+    $dates_section = array('class'=> 'dates_section',);
+
     $userSectionTitle = array('class'=>'user_section_title',);
 
     $userSectionForms = array('class'=>'user_section_forms',);
@@ -129,6 +131,27 @@ $form = $this->beginWidget('CActiveForm', array(
 	echo CHtml::closeTag("br"); // Space after accessory checklist
 
 	echo CHtml::closeTag("div"); // close accessory checklist
+
+	echo CHtml::openTag("div",$dates_section);
+	// Start Date
+	echo CHtml::openTag("p");
+          echo "Start Date:";
+        echo CHtml::closeTag("p");
+	// Start Date Fields
+        echo $form->labelEx($checkoutAssistant,"start_date");
+        echo $form->textArea($checkoutAssistant,"start_date");
+        echo $form->error($checkoutAssistant,'start_date',$error);
+	// End Date
+        echo CHtml::openTag("p");
+          echo "End Date:";
+        echo CHtml::closeTag("p");
+        // End Date Fields
+        echo $form->labelEx($checkoutAssistant,"end_date");
+        echo $form->textArea($checkoutAssistant,"end_date");
+        echo $form->error($checkoutAssistant,'end_date',$error);
+	echo CHtml::closeTag("div");
+
+
 
 	echo CHtml::openTag("p");
 	  echo "Any notes to add about this reservation:";

@@ -5,7 +5,7 @@ $this->breadcrumbs=array(
 	'Equipment'=>array("/equipment/"),
 	'Equipment Checkin',
 );
-Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/reservation_page.css");
+Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/equipment_transaction_page.css");
 
 
 /* Search form and filters */
@@ -32,31 +32,31 @@ echo CHTML::closeTag("br");
 $equipment = $this->getMissingEquipment();
 
 $listContainer = array(
-  'id'=>'reservation_list',
+  'id'=>'transaction_list',
 );
 
 $listRow = array(
-  'class'=>'reservation_list_row',
+  'class'=>'transaction_list_row',
 );
 
 $listImage = array(
-  'class' => 'reservation_list_image',
+  'class' => 'transaction_list_image',
 );
 
 $listDescription = array(
-  'class' => 'reservation_list_description',
+  'class' => 'transaction_list_description',
 );
 
 $listDescriptionTitle = array(
-  'class' => 'reservation_list_description_title',
+  'class' => 'transaction_list_description_title',
 );
 
 $listDescriptionDropDown = array(
-  'class' => 'reservation_list_dropdown',
+  'class' => 'transaction_list_dropdown',
 );
 
 $listDescriptionDropDownSection = array(
-  'class' => 'reservation_list_dropdown_section',
+  'class' => 'transaction_list_dropdown_section',
 );
 
 echo CHtml::beginForm();

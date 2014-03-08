@@ -26,6 +26,8 @@ if(isset($_GET['equipment_id']))
 
     $checkinSettings = array('class'=>'checkout_settings_section',);
 
+    $dates_section = array('class'=>'dates_section');
+
     $notes_section = array('class'=> 'notes_section',);
 
     $userSectionTitle = array('class'=>'user_section_title',);
@@ -38,7 +40,7 @@ if(isset($_GET['equipment_id']))
 
 
 $form = $this->beginWidget('CActiveForm', array(
-        'id'=>'checkout-form',
+        'id'=>'checkin-form',
         'enableClientValidation'=>true,
         'clientOptions'=>array(
                 'validateOnSubmit'=>true,
@@ -125,6 +127,18 @@ $form = $this->beginWidget('CActiveForm', array(
 	echo CHtml::closeTag("br"); // Space after accessory checklist
 
 	echo CHtml::closeTag("div"); // close accessory checklist
+
+	echo CHtml::openTag("div",$dates_section);
+        // Start Date
+        echo CHtml::openTag("p");
+          echo "Checkin Date:";
+        echo CHtml::closeTag("p");
+        // Start Date Fields
+        //echo $form->labelEx($checkinAssistant,"checkin_date");
+        echo $form->textArea($checkinAssistant,"checkin_date");
+        echo $form->error($checkinAssistant,'checkin_date',$error);
+        echo CHtml::closeTag("div");
+
 
 	echo CHtml::openTag("p");
 	  echo "Any notes to add about this reservation:";
