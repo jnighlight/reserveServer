@@ -39,19 +39,21 @@ class EquipmentController extends Controller
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index','view'),
-				'users'=>array('*'),
+				'users'=>array('workstudy,admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('create','update','admin','delete'),
-				'users'=>array('@'),
+				'users'=>array('workstudy,admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
-				'users'=>array('admin'),
+				'users'=>array('workstudy,admin'),
 			),
+/*
 			array('deny',  // deny all users
 				'users'=>array('*'),
 			),
+*/
 		);
 	}
 
@@ -80,16 +82,88 @@ class EquipmentController extends Controller
 		if(isset($_POST['Equipment']))
 		{
 			$model->attributes=$_POST['Equipment'];
-			// For some reason, the equipment_type_id was not saved in the model automatically as part of the statement above, so I had to use the statement below to ensure its addition.
 
-			//$model->equipment_type_id = $_POST['Equipment']['equipment_type_id'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->equipment_id));
+			{
+			  $this->checkUpload($model);
+			  $model->save();
+			  $this->redirect(array('view','id'=>$model->equipment_id));
+			}
 		}
 
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+
+	public function checkUpload($model)
+	{
+	  if(isset($_FILES['image']))
+	  {
+	    $allowed = array('image/jpeg', 'image/JPG','image/PNG','image/png','image/pjpeg','image/X-PNG','images/x-png','images/gif','images/GIF');
+
+	    if(in_array($_FILES['image']['type'],$allowed))
+	    {
+	      $info = pathinfo($_FILES['image']['name']);
+	      $ext = $info['extension'];
+
+	      if(move_uploaded_file($_FILES['image']['tmp_name'], "images/equipment/equipment_image_".$model->equipment_id.".".$ext))
+	      {
+	        $model->image_url = Yii::app()->baseUrl."/images/equipment/equipment_image_".$model->equipment_id.".".$ext;
+		//echo "SUCCESS";
+	      }
+		/*
+	      else // If the file wasn't placed.
+	      {
+		$model->image_url = Yii::app()->baseUrl."/images/equipment/no_image.png";
+	      }
+		*/
+	    }
+	    else
+	    {
+	      echo "Invalid type. Must be: jpg, png, or gif.";
+	    }
+
+	    if($_FILES['image']['error'] > 0)
+	    {
+	      echo "The file could not be uploded.";
+
+	      switch($_FILES['image']['error'])
+	      {
+	        case 1:
+		  echo "The file exceeds the upload_max_filesize setting in php.ini";
+		  break;
+		case 2:
+		  echo "The file exceeds the MAX_FILE_SIZE setting in the HTML form.";
+		  break;
+		case 3:
+		  echo "The file was only partially upload.";
+		  break;
+		case 4:
+		  echo "The file was not uploaded.";
+		  break;
+		case 6:
+		  echo "No temporary folder was available.";
+		  break;
+		case 7: 
+		  echo "Unable to write to the disk";
+		  break;
+		case 8:
+		  echo "File upload stopped";
+		  break;
+		case 9:
+		  echo "A system error occured";
+		  break;
+	      }
+	    }
+	    if(file_exists($_FILES['image']['tmp_name'])&&is_file($_FILES['image']['tmp_name']))
+	    {
+	      unlink($_FILES['image']['tmp_name']);
+	    }	
+	    
+	  }
+	 // else
+	   // echo "Not Set!";
 	}
 
 	/**
@@ -107,8 +181,24 @@ class EquipmentController extends Controller
 		if(isset($_POST['Equipment']))
 		{
 			$model->attributes=$_POST['Equipment'];
+/*
 			if($model->save())
 				$this->redirect(array('view','id'=>$model->equipment_id));
+*/
+
+			if($model->save())
+                        {
+                	  if($model->image_url != "")
+                	  {
+                  	    $filename = strstr($model->image_url, "images/equipment"); // shave the excess off the url.
+                  	    if(file_exists($filename)) // if it exists, delete it.
+                   	     unlink($filename);
+                	  }
+
+                          $this->checkUpload($model);
+                          $model->save();
+                          $this->redirect(array('view','id'=>$model->equipment_id));
+                        }
 		}
 
 		$this->render('update',array(
@@ -123,7 +213,16 @@ class EquipmentController extends Controller
 	 */
 	public function actionDelete($id)
 	{
+		$equipment = Equipment::model()->findByPk($id);
+		if($equipment->image_url != "")
+		{
+		  $filename = strstr($equipment->image_url, "images/equipment"); // shave the excess off the url.
+		  if(file_exists($filename)) // if it exists, delete it.
+		    unlink($filename);
+		}
+
 		$this->loadModel($id)->delete();
+		//echo "ID: ".$id;
 
 		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
 		if(!isset($_GET['ajax']))
@@ -148,7 +247,23 @@ class EquipmentController extends Controller
                     array("/equipment_history/?equipment_id=".$_POST['equipment_id']));
                   }
                 }
+/*
+		$dirname = "meow/images/equipment/";
+		$filename = $dirname."equipment_image_59.png";
+		$filename = strstr($filename, "images/equipment");
+		echo $filename;
+		unlink($dirname."equipment_image_59.png");
+		
+		$dir = opendir($dirname);
 
+		while(($file = readdir($dir)) != false)
+		{
+		  //if(($file!=".")&&($file!=".."))
+		  //{
+		    echo $file;
+		  //}
+		}
+		*/
 
 		$dataProvider=new CActiveDataProvider('Equipment');
 		$this->render('index',array(
