@@ -75,7 +75,12 @@ $form = $this->beginWidget('CActiveForm', array(
       echo CHtml::openTag("div",$equipmentSection);
         $equipment = $this->getEquipment($equipment_id);
 
-	echo CHtml::image($equipment->image_url);
+	//echo CHtml::image($equipment->image_url);
+	if($equipment->image_url != "")
+          echo CHtml::image($equipment->image_url);
+        else
+          echo CHtml::image(Yii::app()->baseUrl."/images/equipment/no_image.png");
+
 
         // Name of Product
         echo CHtml::openTag("p");
