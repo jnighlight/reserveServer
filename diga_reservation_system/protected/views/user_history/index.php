@@ -156,7 +156,7 @@ foreach($checkin_history as $checkin)
         'id'=>'checkin_history_date_'.$checkin->equipment_checkin_id,
         'class'=>'checkin_history_date',));
     echo CHtml::openTag("p");
-      echo "<b>Checkin Date Time</b>: ".$checkin->checkin_date_time;
+      echo "<b>Checkin Date</b>: ".$checkin->checkin_date;
     echo CHtml::closeTag("p");
   echo CHtml::closeTag("div"); // close date div
 
