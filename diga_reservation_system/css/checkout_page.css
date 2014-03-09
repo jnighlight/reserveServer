@@ -89,7 +89,7 @@
   width:100px;
 }
 
-.notes_section
+.notes_section, .dates_section
 {
   //background-color:red;
   width:80%;
@@ -101,6 +101,13 @@
 {
   width:100%;
   height:100px;
+}
+
+.dates_section textarea
+{
+  //display:none;
+  width: 120px;
+  height: 10px;
 }
 
 .user_section
