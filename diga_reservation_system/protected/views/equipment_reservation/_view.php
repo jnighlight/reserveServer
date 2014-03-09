@@ -77,9 +77,10 @@ $transactionInfoBlock = array(
         }
     echo CHtml::closeTag("div"); // close list description
 
+  echo CHtml::openTag("div",$listDescription);
   echo CHtml::openTag("div",$listDescriptionDropDown);
 
-  echo CHtml::openTag("div",$listDescription);
+ // echo CHtml::openTag("div",$listDescription);
 
   // Accessory Section --------------------------------
   $accessories = $data->getAccessories();
@@ -123,11 +124,12 @@ $transactionInfoBlock = array(
 
   echo CHtml::closeTag("div"); // close specifications section
   // End Specification Section ------------------------------
-
+  echo CHtml::closeTag("div");
+  echo CHtml::openTag("div",$listDescriptionDropDown);
   // Description Section
   echo CHtml::openTag("div",$listDescriptionDropDownSection);
     echo CHtml::openTag("p",$listDescriptionTitle);
-      echo "<b>Description</b>: ";
+      echo "<b>Description</b> ";
     echo CHtml::closeTag("p");
     echo CHtml::openTag("p");
       echo $data->description;
@@ -135,10 +137,10 @@ $transactionInfoBlock = array(
   echo CHtml::closeTag("div");
   // End Description Section
 
-  echo CHtml::closeTag("div"); // close list description
+  //echo CHtml::closeTag("div"); // close list description
 
 
   echo CHtml::closeTag("div"); // close drop-down div
-
+  echo CHtml::closeTag("div"); // close List Description
 ?>
 </div> 

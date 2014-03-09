@@ -4,6 +4,9 @@
 $this->breadcrumbs=array(
 	'Equipment',
 );
+?>
+<h1>Equipment Checkin</h1>
+<?php
 Yii::app()->clientScript->registerCssFile(Yii::app()->baseUrl."/css/equipment_transaction_page.css");
 
 echo CHtml::beginForm(); // this form is for respons to reservation requests

@@ -43,7 +43,7 @@
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>200)); ?>
+		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>300)); ?>
 		<?php echo $form->error($model,'description'); ?>
 	</div>
 

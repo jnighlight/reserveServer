@@ -51,12 +51,12 @@ $transactionInfoBlock = array(
       echo CHtml::closeTag("p");
       echo CHtml::openTag("p");
         echo "<b>Availability</b>: ";
-       /* This if-else statemet was removed because I only allow checked out pieces in this view now.
+	/*
         if($data->availability) // if available
         {
           echo "<font color ='green'>Available</font>";
           echo CHtml::closeTag("p");
-          echo CHtml::htmlButton("Checkin",
+          echo CHtml::htmlButton("Checkout",
           array(
             'type' => 'submit',
             'name' => 'equipment_id',
@@ -65,7 +65,7 @@ $transactionInfoBlock = array(
         }
         else
         {
-	*/
+*/
           echo "<font color = 'red'>Unavailable</font>";
           echo CHtml::closeTag("p");
 
@@ -75,12 +75,13 @@ $transactionInfoBlock = array(
             'name' => 'equipment_id',
             'value' => $data->equipment_id,
           ));
-       // }
+  //      }
     echo CHtml::closeTag("div"); // close list description
 
+  echo CHtml::openTag("div",$listDescription);
   echo CHtml::openTag("div",$listDescriptionDropDown);
 
-  echo CHtml::openTag("div",$listDescription);
+ // echo CHtml::openTag("div",$listDescription);
 
   // Accessory Section --------------------------------
   $accessories = $data->getAccessories();
@@ -124,11 +125,12 @@ $transactionInfoBlock = array(
 
   echo CHtml::closeTag("div"); // close specifications section
   // End Specification Section ------------------------------
-
+  echo CHtml::closeTag("div");
+  echo CHtml::openTag("div",$listDescriptionDropDown);
   // Description Section
   echo CHtml::openTag("div",$listDescriptionDropDownSection);
     echo CHtml::openTag("p",$listDescriptionTitle);
-      echo "<b>Description</b>: ";
+      echo "<b>Description</b> ";
     echo CHtml::closeTag("p");
     echo CHtml::openTag("p");
       echo $data->description;
@@ -136,10 +138,10 @@ $transactionInfoBlock = array(
   echo CHtml::closeTag("div");
   // End Description Section
 
-  echo CHtml::closeTag("div"); // close list description
+  //echo CHtml::closeTag("div"); // close list description
 
 
   echo CHtml::closeTag("div"); // close drop-down div
-
+  echo CHtml::closeTag("div"); // close List Description
 ?>
 </div> 
