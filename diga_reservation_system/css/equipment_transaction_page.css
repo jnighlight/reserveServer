@@ -3,30 +3,64 @@
   styles reservation listings.
 */
 
-/* Style the whole reservation list */
-#transaction_list
-{
-  width:90%;
-}
 /* Stylize each row */
-#transaction_list .transaction_list_row
+.transaction_list_row
 {
+/*
   border-style:solid;
   border-width:2px;
   border-color:#61A3CB;
   border-bottom:0px;
   border-top-color:#2A7BAC;
-
+*/
   width:100%;
-  height:100px;
+  height:100%;
 
   //margin-bottom:5px;
-  clear:both;
+  //clear:both;
+  background-color:green;
 }
 
-/* Stylize the image of each piece of equipment */
-#transaction_list .transaction_list_row //.reservation_list_image
+.transaction_info_block
 {
+  margin-bottom:2px;
+  width:250px;
+  height:auto;
+  float:left;
+
+  border-style:solid;
+  border-width:5px;
+  border-color:#2A7BAC;
+}
+
+.transaction_info_block p
+{
+  //background:red;
+  font-size:15px;
+  text-align:center;
+}
+
+.transaction_info_block button
+{
+  margin-left:85px;
+}
+/*
+.transaction_info_block button
+{
+  margin-left:auto;
+  margin-right:auto;
+}
+*/
+.transaction_list_description
+{
+  //width:100%;
+  //float:left;
+  //display:none;
+}
+
+.transaction_list_row
+{
+  //display:none;
   width:30%;
   height:80%;
 }
@@ -35,14 +69,16 @@
 {
   width:100px;
   height:100px;
-  margin-left:30px;
+  margin-left:75px;
+  //margin-right:auto;
 }
 
 /* Stylize the description of each piece of equipment */
-#transaction_list .transaction_list_row .transaction_list_description
+.transaction_list_row
 {
-  float:right;
-  width:60%;
+  //display:none;
+  //float:left;
+  //width:60%;
 }
 
 /* Stylize the description title of each piece of equipment */
@@ -58,9 +94,19 @@
   margin-bottom:2px;
 }
 
+.view
+{
+  height:auto;
+  //background-color:green;
+  display:inline-block;
+  //position:absolute;
+}
+
 /* Stylize the dropdown description div */
 .transaction_list_dropdown
 {
+  //float:left;
+
   background-color:#61A3CB;
   overflow:auto;
   color:white;
@@ -77,10 +123,10 @@
 .transaction_list_dropdown_section
 {
   float:left;
-  padding-right:50px;
+  padding-right:40px;
   padding-left:10px;
 
-  //background-color:#56C5FE;
   padding-top:0px;
   margin-top:0px;
+  width:150px;
 }
