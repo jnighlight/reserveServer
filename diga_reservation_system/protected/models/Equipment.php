@@ -130,7 +130,7 @@ class Equipment extends CActiveRecord
 			array('name, equipment_type_id, availability', 'required'),
 			array('equipment_type_id, availability', 'numerical', 'integerOnly'=>true),
 			array('serial_number, manufacturer, model_number, su_number', 'length', 'max'=>30),
-			array('description', 'length', 'max'=>200),
+			array('description', 'length', 'max'=>300),
 			array('name', 'length', 'max'=>40),
 			array('image_url', 'length', 'max'=>300),
 //			array('image','file','types'=>'jpg,gif,png'),
