@@ -390,12 +390,12 @@ class Room_reservationController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view','reserve','calendarRes', 'updateCal'),
+				'actions'=>array('index','reserve','calendarRes', 'updateCal'),
 				//'users'=>array('@'),
 				'roles'=>array('user','workStudy','admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update', 'permissions'),
+				'actions'=>array('view','create','update', 'permissions'),
 				//'users'=>array('@'),
 				'roles'=>array('workStudy','admin'),
 			),
@@ -569,7 +569,7 @@ class Room_reservationController extends Controller
 			//getting it all into the correct format, and redirecting to the page
 			//Maybe this should go to the calendar view for the current building/room...hmmm
 			$resID = $this -> insertRoomReservation(Yii::app()->user->getId(), $room_id, $startDateTime->format('Y/m/d H:i:s'), $endDateTime->format('Y/m/d H:i:s'));
-			$this->redirect(array($resID));
+			//$this->redirect(array($resID));
 		}
 		//If the reservation times are in a bad format (like it ends before it begins)
 		else if(!$valid[0])
