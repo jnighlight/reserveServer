@@ -50,21 +50,17 @@ class Equipment extends CActiveRecord
 
         public function getAccessories()
         {
-	  $accessories = Accessory::model();
-          //$equipment_accessories = EquipmentAccessory::model();
-          $criteria = new CDbCriteria;
-            $condition = "equipment_id = ".$this->equipment_id;
-          $criteria->condition = $condition;
-          $resulting_accessories = $accessories->findAll($criteria);
-          //return $resulting_equipment_accessories;
-	  /*
-          $resultAccessories = array();
-          for($x = 0; $x < sizeof($resulting_equipment_accessories); $x++)
-          {
-            $resultAccessories[] = Accessory::model()->find("accessory_id = ".$resulting_equipment_accessories[$x]->accessory_id);
-          }
-	  */
-          return $resulting_accessories;
+	  if(!isset($this->equipment_id) && ($this->equipment_id != null))
+	  {
+	    $accessories = Accessory::model();
+            $criteria = new CDbCriteria;
+              $condition = "equipment_id = ".$this->equipment_id;
+            $criteria->condition = $condition;
+            $resulting_accessories = $accessories->findAll($criteria);
+            return $resulting_accessories;
+	  }
+	  else
+	    return null;
         }
 
 	/*
@@ -76,11 +72,18 @@ class Equipment extends CActiveRecord
 
         public function getSpecs()
         {
-          $criteria = new CDbCriteria;
-            $condition = "equipment_id = ".$this->equipment_id;
-          $criteria->condition = $condition;
-          $specs = Specification::model()->findAll($criteria);
-          return $specs;
+	  if(!isset($this->equipment_id) && ($this->equipment_id != null))
+          {
+	    $specs = Specification::model();
+            $criteria = new CDbCriteria;
+              $condition = "equipment_id = ".$this->equipment_id;
+            $criteria->condition = $condition;
+            $resulting_specs = $specs->findAll($criteria);
+            return $resulting_specs;
+	  }
+	  else
+	    return null;
+
         }
 
 	/* Get checkout history*/
