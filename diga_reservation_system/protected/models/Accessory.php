@@ -6,7 +6,7 @@
  * The followings are the available columns in table 'accessory':
  * @property integer $accessory_id
  * @property string $name
- * @property string $description
+ * @property integer $equipment_id
  */
 class Accessory extends CActiveRecord
 {
@@ -36,12 +36,12 @@ class Accessory extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name', 'required'),
+			array('name, equipment_id', 'required'),
+			array('equipment_id', 'numerical', 'integerOnly'=>true),
 			array('name', 'length', 'max'=>20),
-			array('description', 'length', 'max'=>50),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('accessory_id, name, description', 'safe', 'on'=>'search'),
+			array('accessory_id, name, equipment_id', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +64,7 @@ class Accessory extends CActiveRecord
 		return array(
 			'accessory_id' => 'Accessory',
 			'name' => 'Name',
-			'description' => 'Description',
+			'equipment_id' => 'Equipment',
 		);
 	}
 
@@ -81,7 +81,7 @@ class Accessory extends CActiveRecord
 
 		$criteria->compare('accessory_id',$this->accessory_id);
 		$criteria->compare('name',$this->name,true);
-		$criteria->compare('description',$this->description,true);
+		$criteria->compare('equipment_id',$this->equipment_id);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
