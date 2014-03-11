@@ -22,19 +22,19 @@ echo CHtml::beginForm();
 // Equipment Reservation
 echo CHtml::imageButton(Yii::app()->baseUrl."/images/equipment_reservation.png",array('name'=>'reserve_equipment'));
 // Equipment Admin Controls
-if($user->user_level_id >= 2) // workstudy or admin
+if($user->user_level_id <= 2) // workstudy or admin
 {
   echo CHtml::imageButton(Yii::app()->baseUrl."/images/equipment_admin.png",array('name'=>'equipment_admin_controls'));
 }
 // Room Reservation
 echo CHtml::imageButton(Yii::app()->baseUrl."/images/room_reservation.png",array('name'=>'reserve_room'));
   //Room Admin Controls
-if($user->user_level_id >= 2) // workstudy or admin
+if($user->user_level_id <= 2) // workstudy or admin
 {
   echo CHtml::imageButton(Yii::app()->baseUrl."/images/room_admin.png",array('name'=>'room_admin_controls'));
 }
   // User Admin Mode
-if($user->user_level_id == 3) // admin
+if($user->user_level_id == 1) // admin
 {
   echo CHtml::imageButton(Yii::app()->baseUrl."/images/users_admin_mode.png",array('name'=>'user_admin_controls'));
 }

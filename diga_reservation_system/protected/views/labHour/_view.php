@@ -1,6 +1,10 @@
 <?php
 /* @var $this LabHourController */
 /* @var $data LabHour */
+$room = Room::model()->findByAttributes(array('room_id'=>$data->room_id));
+$roomName = $room['room_number'];
+$building = Building::model()->findByAttributes(array('building_id'=>$room['building_id']));
+$buildingName = $building['name'];
 ?>
 
 <div class="view">
@@ -9,8 +13,12 @@
 	<?php echo CHtml::link(CHtml::encode($data->lab_hour), array('view', 'id'=>$data->lab_hour)); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('room_id')); ?>:</b>
-	<?php echo CHtml::encode($data->room_id); ?>
+	<b><?php echo CHtml::encode('Building'); ?>:</b>
+	<?php echo CHtml::encode($buildingName); ?>
+	<br />
+
+	<b><?php echo CHtml::encode('Room Number'); ?>:</b>
+	<?php echo CHtml::encode($roomName); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('start_date')); ?>:</b>
@@ -30,7 +38,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('monday')); ?>:</b>
-	<?php echo CHtml::encode($data->monday); ?>
+	<?php echo CHtml::encode($data->monday == 0? 'No' : 'Yes'); ?>
 	<br />
 
 	<?php /*

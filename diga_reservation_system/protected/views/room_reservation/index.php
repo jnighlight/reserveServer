@@ -22,9 +22,11 @@ $this->breadcrumbs=array(
 if($superUser)
 {
 	$this->menu=array(
-	array('label'=>'Create Room Reservation', 'url'=>array('create')),
 	array('label'=>'Manage Room Reservation', 'url'=>array('admin')),
+	array('label'=>'Manage Lab Hours', 'url'=>array('/labHour')),
+	array('label'=>'Manage Classes', 'url'=>array('/Course')),
 	array('label'=>'Manage Max Reservation Times', 'url'=>array('/roomReservationPolicy')),
+	array('label'=>'Manage Room Equipment', 'url'=>array('roomEquipment/index')),
 	);
 }
 
@@ -62,7 +64,7 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	'empty'=> 'Choose a building',
 	'ajax' => array(
 	'type' => 'POST',
-	'url'=> CController::createUrl('room_reservation/'),
+	'url'=> CController::createUrl('labHour/buildList'),
 	'update'=>'#room_num',
 	)));?>
 

@@ -782,20 +782,6 @@ class Room_reservationController extends Controller
 			'buildingName' => $buildingName, 'roomNumber' => $roomNumber,'alert'=>$alert,
 			'roomTimes'=>$roomTimes,
 		));
-		/*       Modifying the second dropdown bar     */
-		if(!isset($_POST['building_list']))
-			{$_POST['building_list'] = '';}
-		$data = Room::model()->findAll('building_id=:building_list',
-			array(':building_list'=>(int) $_POST['building_list']));
-		
-		$data = CHtml::listData($data,'room_id','room_number');
-		echo CHtml::tag('option', array('value'=>''), 'Choose a room', true);
-		foreach($data as $value=>$name)
-		{
-			echo CHtml::tag('option',
-				array('value'=>$value),CHtml::encode($name),true);
-		}
-
 	}
 
 	/**

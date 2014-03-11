@@ -1,20 +1,24 @@
 <?php
 /* @var $this CourseController */
 /* @var $data Course */
+$room = Room::model()->findByAttributes(array('room_id'=>$data->room_id));
+$roomName = $room['room_number'];
+$building = Building::model()->findByAttributes(array('building_id'=>$room['building_id']));
+$buildingName = $building['name'];
 ?>
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('class_id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->class_id), array('view', 'id'=>$data->class_id)); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('room_id')); ?>:</b>
-	<?php echo CHtml::encode($data->room_id); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
-	<?php echo CHtml::encode($data->name); ?>
+	<?php echo CHtml::link(CHtml::encode($data->name), array('view', 'id'=>$data->class_id)); ?>
+	<br />
+
+	<b><?php echo CHtml::encode("Building"); ?>:</b>
+	<?php echo CHtml::encode($buildingName); ?>
+	<br />
+
+	<b><?php echo CHtml::encode("Room Number"); ?>:</b>
+	<?php echo CHtml::encode($roomName); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('email')); ?>:</b>

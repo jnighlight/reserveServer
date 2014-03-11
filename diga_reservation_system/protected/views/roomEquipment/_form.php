@@ -2,6 +2,8 @@
 /* @var $this RoomEquipmentController */
 /* @var $model RoomEquipment */
 /* @var $form CActiveForm */
+$buildings = Building::model()->findAll();
+$buildList = CHtml::listData($buildings, 'building_id', 'name');
 ?>
 
 <div class="form">
@@ -15,10 +17,25 @@
 
 	<?php echo $form->errorSummary($model); ?>
 
+<div class="row">
+	<?php   //Dropdown list that changes the one below it when items are selected
+		echo CHtml::label('Building', 'building_list');
+		echo CHtml::dropDownList('building_list','',$buildList,
+	array(
+	'empty'=> 'Choose a building',
+	'ajax' => array(
+	'type' => 'POST',
+	'url'=> CController::createUrl('labHour/buildList'),
+	'update'=>'#' . CHtml::activeId($model, 'room_id'),
+	)));?>
+	</div>
+
 	<div class="row">
-		<?php echo $form->labelEx($model,'room_id'); ?>
-		<?php echo $form->textField($model,'room_id'); ?>
-		<?php echo $form->error($model,'room_id'); ?>
+	<?php
+	echo $form->labelEx($model,'room_id');
+	echo $form -> dropDownList($model,'room_id',array(''=>'select a building'));
+	echo $form->error($model,'room_id');
+	?>
 	</div>
 
 	<div class="row">

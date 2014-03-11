@@ -2,6 +2,11 @@
 /* @var $this CourseController */
 /* @var $model Course */
 
+$room = Room::model()->findByAttributes(array('room_id'=>$model->room_id));
+$roomName = $room['room_number'];
+$building = Building::model()->findByAttributes(array('building_id'=>$room['building_id']));
+$buildingName = $building['name'];
+
 $this->breadcrumbs=array(
 	'Courses'=>array('index'),
 	$model->name,
@@ -22,17 +27,18 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'class_id',
-		'room_id',
+		array('label'=>'Building', 'value'=>$buildingName),
+		array('label'=>'Room Number', 'value'=>$roomName),
 		'name',
 		'email',
 		'startDate',
 		'endDate',
 		'start_time',
 		'end_time',
-		'monday',
-		'tuesday',
-		'wednesday',
-		'thursday',
-		'friday',
+		array('label'=>'Monday', 'value'=>($model->monday ? 'Yes':'No')),
+		array('label'=>'Tuesday', 'value'=>($model->tuesday ? 'Yes':'No')),
+		array('label'=>'Wednesday', 'value'=>($model->wednesday ? 'Yes':'No')),
+		array('label'=>'Thursday', 'value'=>($model->thursday ? 'Yes':'No')),
+		array('label'=>'Friday', 'value'=>($model->friday ? 'Yes':'No')),
 	),
 )); ?>

@@ -41,12 +41,14 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'start_date'); ?>
+		<?php echo CHtml::tag('p', array('class'=>'hint'), 'YYYY-mm-dd'); ?>
 		<?php echo $form->dateField($model,'start_date'); ?>
 		<?php echo $form->error($model,'start_date'); ?>
 	</div>
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'end_date'); ?>
+		<?php echo CHtml::tag('p', array('class'=>'hint'), 'YYYY-mm-dd'); ?>
 		<?php echo $form->dateField($model,'end_date'); ?>
 		<?php echo $form->error($model,'end_date'); ?>
 	</div>

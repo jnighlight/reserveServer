@@ -101,7 +101,7 @@ $buildList = CHtml::listData($buildings, 'building_id', 'name');
 	'empty'=> 'Choose a building',
 	'ajax' => array(
 	'type' => 'POST',
-	'url'=> CController::createUrl('course/create'),
+	'url'=> CController::createUrl('labHour/buildList'),
 	'update'=>'#' . CHtml::activeId($model, 'room_id'),
 	)));?>
 	</div>

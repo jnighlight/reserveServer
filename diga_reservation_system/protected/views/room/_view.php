@@ -1,28 +1,22 @@
 <?php
 /* @var $this RoomController */
 /* @var $data Room */
+$building = Building::model()->findByAttributes(array('building_id'=>$data->building_id));
+$buildName = $building['name'];
 ?>
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('room_id')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->room_id), array('view', 'id'=>$data->room_id)); ?>
-	<br />
-
 	<b><?php echo CHtml::encode($data->getAttributeLabel('room_number')); ?>:</b>
-	<?php echo CHtml::encode($data->room_number); ?>
+	<?php echo CHtml::link(CHtml::encode($data->room_number), array('view', 'id'=>$data->room_id)); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('building_id')); ?>:</b>
-	<?php echo CHtml::encode($data->building_id); ?>
+	<?php echo CHtml::encode($buildName); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('description')); ?>:</b>
 	<?php echo CHtml::encode($data->description); ?>
-	<br />
-
-	<b><?php echo CHtml::encode($data->getAttributeLabel('image_url')); ?>:</b>
-	<?php echo CHtml::encode($data->image_url); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('monday_open')); ?>:</b>

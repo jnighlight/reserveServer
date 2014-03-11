@@ -51,7 +51,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'end_date',
 		'start_time',
 		'end_time',
-		/*
 		'monday',
 		'tuesday',
 		'wednesday',
@@ -59,7 +58,6 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 		'friday',
 		'saturday',
 		'sunday',
-		*/
 		array(
 			'class'=>'CButtonColumn',
 		),
