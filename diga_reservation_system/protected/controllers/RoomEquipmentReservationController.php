@@ -57,12 +57,14 @@ class RoomEquipmentReservationController extends Controller
 					//Make a dateTime with SQL data, and outputting it in the javascript format
 					$start = new DateTime($lab['start_time']);
 					$v = new DateTime(($iterateDate -> format('D M d Y')) . ' ' . ($start -> format('H:i:s TO')));
-					$start = $v -> format('D M d Y H:i:s TO');
+					//$start = $v -> format('D M d Y H:i:s TO');
+					$start = $v -> format('Y-m-d\TH:i:s');
 
 					$end = new DateTime($lab['end_time']);
 					//Putting together the date and time
 					$v = new DateTime($iterateDate -> format('D M d Y') . ' ' . $end -> format('H:i:s TO'));
-					$end = $v -> format('D M d Y H:i:s TO');
+					//$end = $v -> format('D M d Y H:i:s TO');
+					$end = $v -> format('Y-m-d\TH:i:s');
 
 					$JSONLab[] = array('id'=>$id, 'title'=>$title, 'start'=>$start,
 					'end'=>$end, 'color'=>$color);
@@ -89,11 +91,13 @@ class RoomEquipmentReservationController extends Controller
 			//Make a dateTime with SQL data, and outputting it in the javascript format
 			$start = $equipment['start_date_time'];
 			$v = new DateTime($start);
-			$start = $v -> format('D M d Y H:i:s TO');
+			//$start = $v -> format('D M d Y H:i:s TO');
+			$start = $v -> format('Y-m-d\TH:i:s');
 
 			$end = $equipment['end_date_time'];
 			$v = new DateTime($end);
-			$end = $v -> format('D M d Y H:i:s TO');
+			//$end = $v -> format('D M d Y H:i:s TO');
+			$end = $v -> format('Y-m-d\TH:i:s');
 
 			$JSONRes[] = array('id'=>$id, 'title'=>$title, 'start'=>$start, 'end'=>$end, 'color'=>$color);
 		}
@@ -151,10 +155,8 @@ class RoomEquipmentReservationController extends Controller
 		$endTime = strtotime($endTime);
 
 		$goodLab = false;
-		echo("labs");
 		foreach($labs as $lab)
 		{
-			echo("A lab");
 			$labStart = strtotime($lab['start_time']);
 			$labEnd = strtotime($lab['end_time']);
 

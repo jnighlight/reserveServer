@@ -29,17 +29,17 @@ class SiteController extends Controller
 	{
 		// renders the view file 'protected/views/site/index.php'
 		// using the default layout 'protected/views/layouts/main.php'
-		$this->render('index');
-		if(isset($_POST['room_admin_controls']))
+		if(isset($_POST['room_admin_controls']) || isset($_POST['room_admin_controls_x']))
 			{$this->redirect(array("/room"));}
-		elseif(isset($_POST['reserve_equipment']))
+		elseif(isset($_POST['reserve_equipment']) || isset($_POST['reserve_equipment_x']))
 			{$this->redirect(array("/equipment_reservation"));}
-		elseif(isset($_POST['equipment_admin_controls']))
+		elseif(isset($_POST['equipment_admin_controls']) || isset($_POST['equipment_admin_controls_x']))
 			{$this->redirect(array("/equipment"));}
-		elseif(isset($_POST['reserve_room']))
+		elseif(isset($_POST['reserve_room']) || isset($_POST['reserve_room_x']))
 			{$this->redirect(array("/room_reservation"));}
-		elseif(isset($_POST['user_admin_controls']))
+		elseif(isset($_POST['user_admin_controls'])|| isset($_POST['user_admin_controls_x']))
 			{$this->redirect(array("/user"));}
+		$this->render('index');
 	}
 
 	/**

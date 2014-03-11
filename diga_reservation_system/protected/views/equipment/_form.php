@@ -2,6 +2,9 @@
 /* @var $this EquipmentController */
 /* @var $model Equipment */
 /* @var $form CActiveForm */
+$cs = Yii::app()->clientScript;
+$base = Yii::app()->baseUrl;
+$cs->registerCssFile($base . '/css/variableTextFields.css');
 ?>
 
 <div class="form">
@@ -90,11 +93,41 @@ if(isset($model->equipment_id))
   echo CHtml::closeTag("h3");
 
   echo CHtml::openTag("div",$accessory_section);
-  foreach($accessories as $accessory)
-  {
-    echo CHtml::textField($accessory->accessory_id, $accessory->name);
-    echo CHtml::closeTag("br");
   }
+?>
+	<a href="#" id="addAcessory">Add Another Input Box</a>
+
+	<div id="accessoryFields">
+	    <p>
+		<label for="accessoryFields"><input type="text" id="accessory" size="20" name="accessory[accessory_0]" value="" placeholder="Input Value" /></label><a href="#" id="removeAccessory">Remove</a>
+	    </p>
+	</div>
+
+
+<script>
+$(function() {
+        var scntDiv = $('#accessoryFields');
+        var i = $('#accessoryFields p').size();
+        
+        $('#addAcessory').live('click', function() {
+                $('<p><label for="accessoryFields"><input type="text" id="accessory" size="20" name="accessory[accessory_' + i +']" value="" placeholder="Input Value" /></label> <a href="#" id="removeAccessory">Remove</a></p>').appendTo(scntDiv);
+                i++;
+                return false;
+        });
+        
+        $('#removeAccessory').live('click', function() { 
+                if( i > 0 ) {
+                        $(this).parents('p').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+
+
+</script>
+
+<?php
   echo CHtml::closeTag("div");
 
   // Specification Section
@@ -106,16 +139,43 @@ if(isset($model->equipment_id))
   echo CHtml::openTag("h3");
     print("Specifications");
   echo CHtml::closeTag("h3");
-  echo CHtml::closeTag("br");
 
   echo CHtml::openTag("div",$specs_section);
-  foreach($specs as $spec)
-  {
-    echo CHtml::textField($spec->specification_id, $spec->name);
-    echo CHtml::closeTag("br");
-  }
+?>
+	<a href="#" id="addspec">Add Another Input Box</a>
+
+	<div id="specFields">
+	    <p>
+		<label for="specFields"><input type="text" id="spec" size="20" name="specs[spec_0]" value="" placeholder="Input Value" /></label><a href="#" id="removespec">Remove</a>
+	    </p>
+	</div>
+
+
+<script>
+$(function() {
+        var scntDiv = $('#specFields');
+        var i = $('#specFields p').size();
+        
+        $('#addspec').live('click', function() {
+                $('<p><label for="specFields"><input type="text" id="accessory" size="20" name="specs[spec_' + i +']" value="" placeholder="Input Value" /></label> <a href="#" id="removespec">Remove</a></p>').appendTo(scntDiv);
+                i++;
+                return false;
+        });
+        
+        $('#removespec').live('click', function() { 
+                if( i > 0 ) {
+                        $(this).parents('p').remove();
+                        i--;
+                }
+                return false;
+        });
+});
+
+
+</script>
+
+<?php
   echo CHtml::closeTag("div");
-}
 ?>
 
         <div class="row buttons">

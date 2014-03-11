@@ -11,6 +11,48 @@ class EquipmentController extends Controller
 	  return EquipmentType::model()->findAll();
 	}
 
+	public function setAccessories($equipment_id, $accessories)
+	{
+		$query = "delete from accessory where equipment_id= :equipment_id";
+		$command = Yii::app()->db->createCommand($query);
+		$command->execute(array('equipment_id' => $equipment_id));
+
+		$accessoryValues = array_values($accessories);		
+		$length = count($accessoryValues);
+
+		for($i = 0; $i < $length; $i++)
+		{
+			if($accessoryValues[$i] != '')
+			{
+				$acc = new Accessory;
+				$acc->equipment_id = $equipment_id;
+				$acc->name = $accessoryValues[$i];
+				$acc->save();
+			}
+		}
+	}
+
+	public function setSpecs($equipment_id, $specs)
+	{
+		$query = "delete from specification where equipment_id= :equipment_id";
+		$command = Yii::app()->db->createCommand($query);
+		$command->execute(array('equipment_id' => $equipment_id));
+
+		$specValues = array_values($specs);		
+		$length = count($specValues);
+
+		for($i = 0; $i < $length; $i++)
+		{
+			if($specValues[$i] != '')
+			{
+				$spec = new Specification;
+				$spec->equipment_id = $equipment_id;
+				$spec->name = $specValues[$i];
+				$spec->value = 0;
+				$spec->save();
+			}
+		}
+	}
 
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -86,6 +128,10 @@ class EquipmentController extends Controller
 			if($model->save())
 			{
 			  $this->checkUpload($model);
+			  if(isset($_POST['accessory']))
+				{$this->setAccessories($model->equipment_id, $_POST['accessory']);}
+			  if(isset($_POST['specs']))
+				{$this->setSpecs($model->equipment_id, $_POST['specs']);}
 			  $model->save();
 			  $this->redirect(array('view','id'=>$model->equipment_id));
 			}
@@ -196,8 +242,12 @@ class EquipmentController extends Controller
                 	  }
 
                           $this->checkUpload($model);
+			  if(isset($_POST['accessory']))
+				{$this->setAccessories($model->equipment_id, $_POST['accessory']);}
+			  if(isset($_POST['specs']))
+				{$this->setSpecs($model->equipment_id, $_POST['specs']);}
                           $model->save();
-                          $this->redirect(array('view','id'=>$model->equipment_id));
+                          //$this->redirect(array('view','id'=>$model->equipment_id));
                         }
 		}
 
