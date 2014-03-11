@@ -217,12 +217,12 @@ class RoomEquipmentReservationController extends Controller
 	{
 		return array(
 			array('allow',  // allow all users to perform 'index' and 'view' actions
-				'actions'=>array('index','view', 'equipmentRes'),
-				'users'=>array('*'),
+				'actions'=>array('equipmentRes'),
+				'roles'=>array('user','workStudy','admin'),
 			),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
-				'actions'=>array('create','update'),
-				'users'=>array('@'),
+				'actions'=>array('index','view', 'create','update'),
+				'roles'=>array('workStudy','admin'),
 			),
 			array('allow', // allow admin user to perform 'admin' and 'delete' actions
 				'actions'=>array('admin','delete'),
@@ -275,7 +275,7 @@ class RoomEquipmentReservationController extends Controller
 				//getting it all into the correct format, and redirecting to the page
 				//Maybe this should go to the calendar view for the current building/room...hmmm
 				$resID = $this->insertEquipmentReservation($equipment_id, Yii::app()->user->getId(), $room_id, $startDateTime->format('Y/m/d H:i:s'), $endDateTime->format('Y/m/d H:i:s'));
-				$this->redirect(array($resID));
+				//$this->redirect(array($resID));
 			}
 			else if(!$check[0])
 				{echo("<script> alert('Check the times for your reservation again.'); </script>");}
