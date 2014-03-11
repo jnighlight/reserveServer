@@ -5,6 +5,8 @@
 $cs = Yii::app()->clientScript;
 $base = Yii::app()->baseUrl;
 $cs->registerCssFile($base . '/css/variableTextFields.css');
+$linkedAccess = Accessory::model()->findAllByAttributes(array('equipment_id'=>$model->equipment_id));
+$linkedSpecs = Specification::model()->findAllByAttributes(array('equipment_id'=>$model->equipment_id));
 ?>
 
 <div class="form">
@@ -93,16 +95,19 @@ if(isset($model->equipment_id))
   echo CHtml::closeTag("h3");
 
   echo CHtml::openTag("div",$accessory_section);
+	echo("<a href='#' id='addAcessory'>Add Another Input Box</a>
+		<div id='accessoryFields'>");
+	for($i = 0; $i < count($linkedAccess); $i++)
+	{
+		echo("
+	    <p>
+		<label for='accessoryFields'><input type='text' id='accessory' size='20' name='accessory[accessory_".$i."]' value='".$linkedAccess[$i]['name']."' placeholder='Input Value' /></label><a href='#' id='removeAccessory'>Remove</a>
+	    </p>
+		");
+	}
+	echo("</div>");
   }
 ?>
-	<a href="#" id="addAcessory">Add Another Input Box</a>
-
-	<div id="accessoryFields">
-	    <p>
-		<label for="accessoryFields"><input type="text" id="accessory" size="20" name="accessory[accessory_0]" value="" placeholder="Input Value" /></label><a href="#" id="removeAccessory">Remove</a>
-	    </p>
-	</div>
-
 
 <script>
 $(function() {
@@ -141,15 +146,18 @@ $(function() {
   echo CHtml::closeTag("h3");
 
   echo CHtml::openTag("div",$specs_section);
+	echo("<a href='#' id='addspec'>Add Another Input Box</a>
+		<div id='specFields'>");
+	for($i = 0; $i < count($linkedSpecs); $i++)
+	{
+		echo("
+			    <p>
+				<label for='specFields'><input type='text' id='spec' size='20' name='specs[spec_".$i."]' value='".$linkedSpecs[$i]['name']."' placeholder='Input Value' /></label><a href='#' id='removespec'>Remove</a>
+			    </p>
+		");
+	}
+	echo("</div>");
 ?>
-	<a href="#" id="addspec">Add Another Input Box</a>
-
-	<div id="specFields">
-	    <p>
-		<label for="specFields"><input type="text" id="spec" size="20" name="specs[spec_0]" value="" placeholder="Input Value" /></label><a href="#" id="removespec">Remove</a>
-	    </p>
-	</div>
-
 
 <script>
 $(function() {

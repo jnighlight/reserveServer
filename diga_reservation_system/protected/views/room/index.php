@@ -7,6 +7,7 @@ $this->breadcrumbs=array(
 );
 
 $this->menu=array(
+	array('label'=>'Edit Buildings', 'url'=>array('/building')),
 	array('label'=>'Create Room', 'url'=>array('create')),
 	array('label'=>'Manage Room', 'url'=>array('admin')),
 );
