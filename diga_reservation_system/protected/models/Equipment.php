@@ -50,7 +50,7 @@ class Equipment extends CActiveRecord
 
         public function getAccessories()
         {
-	  if(!isset($this->equipment_id) && ($this->equipment_id != null))
+	  if($this->equipment_id != null)
 	  {
 	    $accessories = Accessory::model();
             $criteria = new CDbCriteria;
@@ -72,7 +72,7 @@ class Equipment extends CActiveRecord
 
         public function getSpecs()
         {
-	  if(!isset($this->equipment_id) && ($this->equipment_id != null))
+	  if($this->equipment_id != null)
           {
 	    $specs = Specification::model();
             $criteria = new CDbCriteria;

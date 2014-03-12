@@ -96,27 +96,25 @@
 
 .view
 {
+  width:900px;
   height:auto;
-  //background-color:green;
   display:inline-block;
-  //position:absolute;
 }
 
 /* Stylize the dropdown description div */
 .transaction_list_dropdown
 {
-  //float:left;
-
   background-color:#61A3CB;
   overflow:auto;
   color:white;
 
   border-style:solid;
-  border-top-width:5px;
-  border-bottom-width:3px;
+  border-width:3px;
   border-color:#2A7BAC;
   padding-top:0px;
   margin-top:0px;
+
+  margin-bottom:4px;
 }
 
 /* Stylize each section of the dropdown div */
