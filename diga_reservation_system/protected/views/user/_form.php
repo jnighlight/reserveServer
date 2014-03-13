@@ -51,12 +51,12 @@
   if(!Yii::app()->user->isGuest)
   {
     $user = User::model()->findByAttributes(array("email"=>Yii::app()->user->name));
-    if($user->user_level_id == 3) // if the user is an admin
+    if($user->user_level_id == 1) // if the user is an admin
     {
 ?>
 	<div class="row">
                 <?php echo $form->labelEx($model,'User Level'); ?>
-                <?php echo $form->dropDownList($model, 'user_level_id', CHtml::listData(UserLevel::model()->findAll(array('order'=>'name')),'user_level_id','name'));?>
+                <?php echo $form->dropDownList($model, 'user_level_id', CHtml::listData(UserLevel::model()->findAll(array('order'=>'user_level_id')),'user_level_id','name'));?>
                 <?php echo $form->error($model,'user_level_id'); ?>
         </div>
 <?php
