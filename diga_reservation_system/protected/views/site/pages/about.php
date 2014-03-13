@@ -8,5 +8,4 @@ $this->breadcrumbs=array(
 ?>
 <h1>About</h1>
 
-<p>This is a "static" page. You may change the content of this page
-by updating the file <code><?php echo __FILE__; ?></code>.</p>
+<p>This is the Reservation site for the DIGA Department at Stetson University. It is for students to simply and orderly reserve pieces of equipment and rooms online instead of constantly bothering teachers about it. It was coded by Jacob Lites and Mark Burton.</p> <p>If everything works great, let Jacob know at jlites@stetson.edu. If something is broken, make sure to notify Mark, at mburton1@stetson.edu</p>
