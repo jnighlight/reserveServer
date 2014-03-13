@@ -9,9 +9,10 @@ $buildingName = $building['name'];
 
 <div class="view">
 
-	<b><?php echo CHtml::encode($data->getAttributeLabel('name')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($data->name), array('view', 'id'=>$data->room_equipment_id)); ?>
-	<br />
+	<h3>
+	<?php echo CHtml::link(CHtml::encode($data->name), array('/roomEquipmentReservation/equipmentRes',
+					'equipment_id'=>$data->room_equipment_id, 'room_id'=>$data->room_id)); ?>
+	</h3>
 
 	<b><?php echo CHtml::encode('Building'); ?>:</b>
 	<?php echo CHtml::encode($buildingName); ?>
