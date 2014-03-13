@@ -34,10 +34,6 @@ $this->breadcrumbs=array(
 		<?php echo $form->labelEx($model,'password'); ?>
 		<?php echo $form->passwordField($model,'password'); ?>
 		<?php echo $form->error($model,'password'); ?>
-		<p class="hint">
-			This is what a hint looks like
-		</p>
-
 	</div>
 
 	<div class="row rememberMe">

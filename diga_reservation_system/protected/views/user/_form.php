@@ -68,6 +68,16 @@
 		<?php echo $form->textField($model,'id_number',array('size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'id_number'); ?>
 	</div>
+
+	<?php if(Yii::app()->user->isGuest)
+		{ ?>
+			<div class="row">
+			<?php echo CHtml::label('Terms of Service', false); ?>
+			<p class="hint">By creating an account on this site you are agreeing to the terms and conditions provided by Stetson University's Digital Arts Department</p>
+			<?php echo CHtml::textArea('ToS','Look at all these TERMS',array('cols'=>20,'rows'=>5, 'readonly'=>'true')); ?>
+			</div>
+		<?php }
+		?>
 	<div class="row buttons">
 		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
 	</div>

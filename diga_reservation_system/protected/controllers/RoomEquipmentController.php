@@ -133,10 +133,9 @@ class RoomEquipmentController extends Controller
 	 */
 	public function actionEquipList()
 	{
-		print_r($_POST);
-		$i = 0;
+		//$i = 0;
 		$room_id = Yii::app()->request->getParam('room_id', -1);
-		while(isset($_POST['equipmentID'.$i]))
+		/*while(isset($_POST['equipmentID'.$i]))
 		{
 			if(isset($_POST['yt'. $i]))
 			{
@@ -144,7 +143,7 @@ class RoomEquipmentController extends Controller
 					'equipment_id'=>$_POST['equipmentID'.$i], 'room_id'=>$room_id));
 			}
 			$i++;
-		}
+		}*/
 		if($room_id == -1)
 			{$this -> redirect(array('/room_reservation/'));}
 		$equipment = RoomEquipment::model()->findAllByAttributes(array('room_id'=>$room_id));
