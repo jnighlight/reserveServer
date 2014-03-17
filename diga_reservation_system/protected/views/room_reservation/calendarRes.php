@@ -33,12 +33,12 @@ $maxRes = $maxRes['max_reservation_hours'];
 			dayClick: function(date, allDay, jsEvent, view) {
 				//Lets you select the day by clicking on it...
 				$("#daySelect").html($.fullCalendar.formatDate(date, "dddd',' MMMM d',' yyyy"));
-				$("#dateHolder").val(date);
+				$("#dateHolder").val($.fullCalendar.formatDate(date, "yyyy'-'MM'-'dd"));
                                 },
 			eventClick: function(calEvent, jsEvent, view) {
 				//...Even if they click an event on that day
 				$("#daySelect").html($.fullCalendar.formatDate(calEvent.start, "dddd',' MMMM d',' yyyy"));
-				$("#dateHolder").val(calEvent.start);
+				$("#dateHolder").val($.fullCalendar.formatDate(calEvent.start, "yyyy'-'MM'-'dd"));
 				return false;
 			    },
 			editable: false,

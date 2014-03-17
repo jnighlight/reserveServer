@@ -25,6 +25,7 @@ class RoomEquipmentReservationController extends Controller
 	//building and turns them into a JSON array for the fullcalendar plugin
 	public function labsToJSON($labs)
 	{
+      date_default_timezone_set('America/New_York');
 		$JSONLab = array();
 		//i is just for the event ID's. Wouldn't want ppl knowing the real database id's. Security, and stuff
 		$i = 0;
@@ -109,6 +110,7 @@ class RoomEquipmentReservationController extends Controller
 	//It can't conflict with another reservation, and the end time must be after the start time
 	public function timeValidate($startHour, $startMinute, $startAMPM, $endHour, $endMinute, $endAMPM, $date, $roomID, $equipmentID)
 	{
+      date_default_timezone_set('America/New_York');
 		$conflicts = false;
 		$inOrder = true;
 		//If it starts in PM and ends in AM, it's not in order
@@ -250,7 +252,6 @@ class RoomEquipmentReservationController extends Controller
 	 */
 	public function actionEquipmentRes()
 	{
-		print_r($_POST);
 		$model = new RoomEquipmentReservation;
 		$room_id = Yii::app()->request->getParam('room_id', -1);
 		$equipment_id = Yii::app()->request->getParam('equipment_id', -1);

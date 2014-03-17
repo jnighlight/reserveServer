@@ -22,12 +22,12 @@ return array(
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		
-		'gii'=>array(
+		/*'gii'=>array(
 			'class'=>'system.gii.GiiModule',
 			'password'=>'MagicalYiiPass',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			'ipFilters'=>array('127.0.0.1','::1',$_SERVER['REMOTE_ADDR']),
-		),
+		),*/
 		'cal'=>array(
 			'debug'=>'true',
 		),
@@ -51,8 +51,8 @@ return array(
 		'db'=>array(
 			'class'=>'CDbConnection',
 			'connectionString' => 'mysql:host=localhost;dbname=auth_database',
-			'username' => 'digaReserveSys',
-			'password' => 'MagicalYiiPass',
+			'username' => 'cinf301',
+			'password' => 'f3rdb3rf3lp4ss',
 			'charset' => 'utf8',
 		),
 		'authManager'=>array(
@@ -84,8 +84,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=diga_reservation_system',
 			'emulatePrepare' => true,
-			'username' => 'digaReserveSys',
-			'password' => 'MagicalYiiPass',
+			'username' => 'cinf301',
+			'password' => 'f3rdb3rf3lp4ss',
 			'charset' => 'utf8',
 		),
 		

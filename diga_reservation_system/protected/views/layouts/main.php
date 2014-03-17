@@ -54,7 +54,7 @@
 	<div class="clear"></div>
 
 	<div id="footer">
-		Stetson University Digital Arts Department <?php echo date('Y'); ?><br/>
+		Stetson University Digital Arts Department <br/>
 		All Rights Reserved.<br/>
 		<?php //echo Yii::powered(); ?>
 	</div><!-- footer -->

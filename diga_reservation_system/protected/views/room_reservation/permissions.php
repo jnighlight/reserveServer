@@ -9,7 +9,7 @@
 <?php
 $cs = Yii::app()->clientScript;
 $cs->registerCoreScript('jquery');
-$cs->registerCssFile(Yii::app()->baseUrl.'/css/permission_table');
+$cs->registerCssFile(Yii::app()->baseUrl.'/css/permission_table.css');
 
 $this->breadcrumbs=array(
 	'Room Reservations'=>array('index'), 'Permissions'
@@ -60,13 +60,13 @@ $this->breadcrumbs=array(
 	</div>
 	</center>
 	<script>
-		var style = "border:solid;overflow:auto;width:" + ($(window).width()/1.25) + "px;height:" +
+		var style = "border:solid;overflow:auto;width:" + ($(window).width()/2.25) + "px;height:" +
 			($(window).height()/2) + "px;";
 		$("#userBox").attr('style', style);
 		$("#permHeader").attr('width','' + $(window).width()/10 + 'px');
 
 		$(window).resize(function() {
-			var style = "border:solid;overflow:auto;width:" + ($(window).width()/1.25) + "px;height:"+
+			var style = "border:solid;overflow:auto;width:" + ($(window).width()/2.25) + "px;height:"+
 				($(window).height()/2) + "px;";
 			$("#userBox").attr('style', style);
 			$("#permHeader").attr('width','' + $(window).width()/10 + 'px');

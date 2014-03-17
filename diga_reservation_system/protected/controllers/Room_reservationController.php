@@ -55,6 +55,7 @@ class Room_reservationController extends Controller
 	//building and turns them into a JSON array for the fullcalendar plugin
 	public function reservationsToJSON($reservations)
 	{
+      date_default_timezone_set('America/New_York');
 		$JSONRes = array();
 		//i is just for the event ID's. Wouldn't want ppl knowing the real database id's. Security, and stuff
 		$i = 0;
@@ -86,6 +87,7 @@ class Room_reservationController extends Controller
 	//building and turns them into a JSON array for the fullcalendar plugin
 	public function coursesToJSON($courses)
 	{
+      date_default_timezone_set('America/New_York');
 		$JSONCour = array();
 		//i is just for the event ID's. Wouldn't want ppl knowing the real database id's. Security, and stuff
 		$i = 0;
@@ -282,22 +284,35 @@ class Room_reservationController extends Controller
 			//Checks to see if our new reservation's start or end time is during an already made reservation
 			if(($startDateTime > $resStart && $startDateTime < $resEnd) ||
 				($endDateTime > $resStart && $endDateTime < $resEnd))
-				{$conflicts = true;}
+				{
+               echo("Reservation Starts: ". $resStart->format('Y-m-d H:i:s') . ", ends: " . $resEnd ->format('Y-m-d H:i:s'). "\n");
+               $conflicts = true;
+               echo('Reservation1');
+            }
 
 			if(($resStart > $startDateTime && $resStart < $endDateTime) ||
 				($resEnd > $startDateTime && $resEnd < $endDateTime))
-				{$conflicts = true;}
+				{$conflicts = true;
+            
+               echo("Reservation Starts: ". $resStart ->format('Y-m-d H:i:s'). ", ends: " . $resEnd ->format('Y-m-d H:i:s'). "\n");
+               echo('Reservation2');
+            }
 
 			//If they start and end at the same time, nogo
 			if($resStart == $startDateTime && $resEnd == $endDateTime)
-				{$conflicts = true;}
+				{$conflicts = true;
+               echo("Reservation Starts: ". $resStart->format('Y-m-d H:i:s') . ", ends: " . $resEnd ->format('Y-m-d H:i:s'). "\n");
+               echo('Reservation3');
+            }
 		}
 		$startTime = strtotime($startTime);
 		$endTime = strtotime($endTime);
 
 		//make sure that it's while the room is open
 		if($startTime < $roomOpenTime || $endTime > $roomCloseTime)
-			{$conflicts = true;}
+			{$conflicts = true;
+          echo('CLOSED');
+         }
 
 		foreach($labs as $lab)
 		{
@@ -505,7 +520,6 @@ class Room_reservationController extends Controller
 	public function actionCalendarRes()
 	{
     	    $model=new RoomReservation;
-
 	    //get the room and building ID from GET
 	    $building_id = Yii::app()->request->getQuery('build_id',-1);
 	    $room_id = Yii::app()->request->getQuery('room_number',-1);
@@ -562,13 +576,15 @@ class Room_reservationController extends Controller
 			$endTime = ' ' . $adjustedEndHour . ':' . ($endMinute * 30) . ':00';
 
 			//Getting the start and end time of the reservation to be made
+
 			$mysqlDate = date('Y-m-d', strtotime($date));
 			$startDateTime = new DateTime($mysqlDate . $startTime);
 			$endDateTime = new DateTime($mysqlDate . $endTime);
 
 			//getting it all into the correct format, and redirecting to the page
 			//Maybe this should go to the calendar view for the current building/room...hmmm
-			$resID = $this -> insertRoomReservation(Yii::app()->user->getId(), $room_id, $startDateTime->format('Y/m/d H:i:s'), $endDateTime->format('Y/m/d H:i:s'));
+			$resID = $this -> insertRoomReservation(Yii::app()->user->getId(), $room_id, $startDateTime->format('Y-m-d H:i:s'), $endDateTime->format('Y-m-d H:i:s'));
+         $this->refresh();
 			//$this->redirect(array($resID));
 		}
 		//If the reservation times are in a bad format (like it ends before it begins)
