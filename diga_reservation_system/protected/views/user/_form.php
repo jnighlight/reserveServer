@@ -16,12 +16,18 @@
 <script>
 function checkFunction()
 {
-   console.log("Hai");
-   console.log("the id number is " + $("#id_number").val().length);
+   var mailDomain = $("#email").val().split("@");
+   console.log(mailDomain[1]);
    if($("#id_number").val().length != 9)
    {
       alert("Your ID Numbre must be 9 digits long");
       console.log("Your ID Numbre must be 9 digits long");
+      return false;
+   }
+   else if(mailDomain[1] != "stetson.edu")
+   {
+      alert("You must provide a Stetson email");
+      console.log("You must provide a Stetson email...stupid");
       return false;
    }
 }
@@ -45,7 +51,7 @@ function checkFunction()
 
 	<div class="row">
 		<?php echo $form->labelEx($model,'email'); ?>
-		<?php echo $form->textField($model,'email',array('size'=>30,'maxlength'=>30)); ?>
+		<?php echo $form->textField($model,'email',array('id'=>'email','size'=>30,'maxlength'=>30)); ?>
 		<?php echo $form->error($model,'email'); ?>
 	</div>
 	<div class="row">
