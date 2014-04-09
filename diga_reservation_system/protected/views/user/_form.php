@@ -6,10 +6,26 @@
 
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
+<?php 
+   Yii::app()->clientScript->registerCoreScript('jquery');
+   $form=$this->beginWidget('CActiveForm', array(
 	'id'=>'user-form',
 	'enableAjaxValidation'=>false,
+   'htmlOptions'=>array('onsubmit'=>'return checkFunction()'),
 )); ?>
+<script>
+function checkFunction()
+{
+   console.log("Hai");
+   console.log("the id number is " + $("#id_number").val().length);
+   if($("#id_number").val().length != 9)
+   {
+      alert("Your ID Numbre must be 9 digits long");
+      console.log("Your ID Numbre must be 9 digits long");
+      return false;
+   }
+}
+</script>
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
@@ -65,7 +81,7 @@
 ?>
 	<div class="row">
 		<?php echo $form->labelEx($model,'ID Number (800-number)'); ?>
-		<?php echo $form->textField($model,'id_number',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->textField($model,'id_number',array('id'=>'id_number','size'=>10,'maxlength'=>10)); ?>
 		<?php echo $form->error($model,'id_number'); ?>
 	</div>
 
