@@ -18,13 +18,7 @@ function checkFunction()
 {
    var mailDomain = $("#email").val().split("@");
    console.log(mailDomain[1]);
-   if($("#id_number").val().length != 9)
-   {
-      alert("Your ID Numbre must be 9 digits long");
-      console.log("Your ID Numbre must be 9 digits long");
-      return false;
-   }
-   else if(mailDomain[1] != "stetson.edu")
+   if(mailDomain[1] != "stetson.edu")
    {
       alert("You must provide a Stetson email");
       console.log("You must provide a Stetson email...stupid");
@@ -86,8 +80,9 @@ function checkFunction()
   }
 ?>
 	<div class="row">
-		<?php echo $form->labelEx($model,'ID Number (800-number)'); ?>
-		<?php echo $form->textField($model,'id_number',array('id'=>'id_number','size'=>10,'maxlength'=>10)); ?>
+		<?php //echo $form->labelEx($model,'ID Number (800-number)'); ?>
+		<?php echo $form->labelEx($model,'id_number'); ?>
+		<?php echo $form->textField($model,'id_number',array('id'=>'id_number','size'=>9,'maxlength'=>9)); ?>
 		<?php echo $form->error($model,'id_number'); ?>
 	</div>
 

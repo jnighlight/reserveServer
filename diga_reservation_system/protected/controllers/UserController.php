@@ -31,6 +31,10 @@ class UserController extends Controller
 		//		'actions'=>array('create'),
 		//		'roles'=>array('user','workStudy','admin'),
 			),
+         array('allow',
+            'actions'=>array('passwordRecov'),
+            'users'=>array('*'),
+         ),
 			array('allow', // allow authenticated user to perform 'create' and 'update' actions
 				'actions'=>array('index','view'),
 				'roles'=>array('workStudy','admin'),
@@ -79,6 +83,33 @@ class UserController extends Controller
 		$this->render('create',array(
 			'model'=>$model,
 		));
+	}
+
+   /*
+   * Displays the Password Recovery Page
+   */
+	public function actionPasswordRecov()
+	{
+      echo('PASSRECOV');
+		/*$model=new ContactForm;
+		if(isset($_POST['PassForm']))
+		{
+			$model->attributes=$_POST['PassForm'];
+			if($model->validate())
+			{
+				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
+				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+				$headers="From: $name <{$model->email}>\r\n".
+					"Reply-To: {$model->email}\r\n".
+					"MIME-Version: 1.0\r\n".
+					"Content-type: text/plain; charset=UTF-8";
+
+				mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
+				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
+				$this->refresh();
+			}
+		}
+		$this->render('contact',array('model'=>$model));*/
 	}
 
 	/**
