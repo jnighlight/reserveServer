@@ -15,7 +15,7 @@ class CheckinAssistantForm extends CFormModel
       array("email,password,checkin_date","required"), 	// required
       array("email","email"),			// email
       array("password","authenticate"),		// password authentication
-      array("checkin_date","type","type"=>"date", "dateFormat"=>"MM/dd/yyyy"),
+//      array("checkin_date","type","type"=>"date", "dateFormat"=>"MM/dd/yyyy"),
       array("notes","length","max"=>200),
     );
   }
@@ -37,7 +37,7 @@ class CheckinAssistantForm extends CFormModel
       }
       else // correct username and password, but too low of a user level
       {
-        if($user->user_level_id < 2)
+        if($user->user_level_id > 2)
           $this->addError('password',"This user does not have the proper permissions to checkin equipment to other users.");
       }
     }
