@@ -226,29 +226,20 @@ class EquipmentController extends Controller
 
 		if(isset($_POST['Equipment']))
 		{
-			$model->attributes=$_POST['Equipment'];
-/*
-			if($model->save())
-				$this->redirect(array('view','id'=>$model->equipment_id));
-*/
+                        $model->attributes=$_POST['Equipment'];
 
-			if($model->save())
+                        if($model->save())
                         {
-                	  if($model->image_url != "")
-                	  {
-                  	    $filename = strstr($model->image_url, "images/equipment"); // shave the excess off the url.
-                  	    if(file_exists($filename)) // if it exists, delete it.
-                   	     unlink($filename);
-                	  }
-
                           $this->checkUpload($model);
-			  if(isset($_POST['accessory']))
-				{$this->setAccessories($model->equipment_id, $_POST['accessory']);}
-			  if(isset($_POST['specs']))
-				{$this->setSpecs($model->equipment_id, $_POST['specs']);}
+                          if(isset($_POST['accessory']))
+                                {$this->setAccessories($model->equipment_id, $_POST['accessory']);}
+                          if(isset($_POST['specs']))
+                                {$this->setSpecs($model->equipment_id, $_POST['specs']);}
                           $model->save();
-                          //$this->redirect(array('view','id'=>$model->equipment_id));
+                          $this->redirect(array('view','id'=>$model->equipment_id));
                         }
+ 
+
 		}
 
 		$this->render('update',array(
