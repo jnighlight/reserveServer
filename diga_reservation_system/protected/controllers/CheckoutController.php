@@ -62,18 +62,22 @@ class CheckoutController extends Controller
 			*/
 			// Format start date
 			$start_date = $checkoutAssistant->start_date;
+/*
                         $yyyy = substr($start_date,6,4);
                         $dd = substr($start_date,3,2);
                         $mm = substr($start_date,0,2);
                         $start_date = $yyyy."-".$mm."-".$dd;
+*/
 			$reservation->start_date = $start_date;
 			// Format end dat
 			$end_date = $checkoutAssistant->end_date;
 			//echo "Recieved: ".$end_date;
+/*
                         $yyyy = substr($end_date,6,4);
                         $dd = substr($end_date,3,2);
                         $mm = substr($end_date,0,2);
                         $end_date = $yyyy."-".$mm."-".$dd;
+*/
                         $reservation->end_date = $end_date;
 			//echo "Recieved: ".$end_date;
 			//echo "Formatted: ".$reservation->end_date;

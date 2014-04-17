@@ -52,10 +52,12 @@ class CheckinController extends Controller
 			$checkin->checkin_date_time = $now;
 			*/
 			$checkin_date = $checkinAssistant->checkin_date;
+/*
                         $yyyy = substr($checkin_date,6,4);
                         $dd = substr($checkin_date,3,2);
                         $mm = substr($checkin_date,0,2);
                         $checkin_date = $yyyy."-".$mm."-".$dd;
+*/
                         $checkin->checkin_date = $checkin_date;
 
 			$checkin->equipment_id = $equipment->equipment_id;
