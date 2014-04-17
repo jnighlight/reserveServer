@@ -140,7 +140,7 @@ $form = $this->beginWidget('CActiveForm', array(
         echo CHtml::closeTag("p");
         // Start Date Fields
         //echo $form->labelEx($checkinAssistant,"checkin_date");
-        echo $form->textArea($checkinAssistant,"checkin_date");
+        echo $form->dateField($checkinAssistant,"checkin_date");
         echo $form->error($checkinAssistant,'checkin_date',$error);
         echo CHtml::closeTag("div");
 
