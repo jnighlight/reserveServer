@@ -5,7 +5,7 @@
 $cs = Yii::app()->clientScript;
 $base = Yii::app()->baseUrl;
 $cs->registerCssFile($base . '/css/variableTextFields.css');
-$linkedAccess = Accessory::model()->findAllByAttributes(array('equipment_id'=>$model->equipment_id));
+$linkedAccess = EquipmentAccessory::model()->findAllByAttributes(array('equipment_id'=>$model->equipment_id));
 $linkedSpecs = Specification::model()->findAllByAttributes(array('equipment_id'=>$model->equipment_id));
 ?>
 
