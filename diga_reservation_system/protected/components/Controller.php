@@ -30,6 +30,7 @@ class Controller extends CController
 	  $loginPage = "site/login"; // login Controller/Action pair
 	  $registerPage = "user/create"; // register Controller/Action pair
 	  $contactPage = "site/contact"; // contact Controller/Action pair
+     $forgotPage = "site/passwordRecov";// password Recovery pair
 
 	  $request = Yii::app()->urlManager->parseUrl(Yii::app()->request);
 	  /*
@@ -45,7 +46,7 @@ class Controller extends CController
   	  if((Yii::app()->user->isGuest) == true)
 	  {
 	    // if the user is not on the login,register, or contact page
-	    if(($request != $loginPage)&&($request != $registerPage)&&($request != $contactPage))
+	    if(($request != $loginPage)&&($request != $registerPage)&&($request != $contactPage) && ($request != $forgotPage))
 	    {
 	      $this->redirect(array($loginPage));
 	    }

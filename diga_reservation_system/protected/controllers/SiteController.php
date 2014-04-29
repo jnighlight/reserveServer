@@ -20,7 +20,6 @@ class SiteController extends Controller
 			),
 		);
 	}
-
 	/**
 	 * This is the default 'index' action that is invoked
 	 * when an action is not explicitly requested by users.
@@ -59,6 +58,39 @@ class SiteController extends Controller
 	/**
 	 * Displays the contact page
 	 */
+	public function actionPasswordRecov()
+	{
+		$model=new User;
+		if(isset($_POST['User']))
+		{
+         echo("BUton Pushed");
+			/*$model->attributes=$_POST['User'];
+            echo('model validated');
+				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
+				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
+				$headers="From: $name <{$model->email}>\r\n".
+					"Reply-To: {$model->email}\r\n".
+					"MIME-Version: 1.0\r\n".
+					"Content-type: text/plain; charset=UTF-8";
+
+				mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);*/
+            $success = mail("jlites@stetson.edu", "SUBJECT", "MESSAGE");
+            if($success)
+            {
+				   Yii::app()->user->setFlash('passwordRecov','Thank you for contacting us. We will respond to you as soon as possible.');
+            }
+            else
+            {
+				   Yii::app()->user->setFlash('passwordRecov','Boo');
+            }
+				$this->refresh();
+		}
+		$this->render('passRecov',array('model'=>$model));
+   }
+
+	/**
+	 * Displays the contact page
+	 */
 	public function actionContact()
 	{
 		$model=new ContactForm;
@@ -92,6 +124,12 @@ class SiteController extends Controller
 		  $this->redirect(array("user/create"));
 		  //print("TEST");
 		}
+
+		if(isset($_POST["forgotPass"]))
+		{
+		  $this->redirect(array("site/passwordRecov"));
+		  //print("TEST");
+      }
 
 		$model=new LoginForm;
 
