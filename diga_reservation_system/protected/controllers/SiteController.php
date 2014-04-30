@@ -38,6 +38,10 @@ class SiteController extends Controller
 			{$this->redirect(array("/room_reservation"));}
 		elseif(isset($_POST['user_admin_controls'])|| isset($_POST['user_admin_controls_x']))
 			{$this->redirect(array("/user"));}
+		elseif(isset($_POST['admin_email__controls'])|| isset($_POST['admin_email_controls_x']))
+			{$this->redirect(array("/adminEmail/addressEdit"));}
+		elseif(isset($_POST['warning_email_controls'])|| isset($_POST['warning_email_controls_x']))
+			{$this->redirect(array("/warningEmail/emailEdit"));}
 		$this->render('index');
 	}
 

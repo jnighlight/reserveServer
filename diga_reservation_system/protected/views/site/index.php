@@ -15,7 +15,15 @@ $user = User::model()->findByAttributes(array("email"=>Yii::app()->user->name));
 //print($user->first_name);
 
 $mainButtons = array("class"=>"main_options");
-
+/*
+if($user->user_level_id == 1) // workstudy or admin
+{
+   $this->menu=array(
+      array('label'=>'Edit Main Admin Email', 'url'=>array('adminEmail/addressEdit')),
+      array('label'=>'Edit Warning Message', 'url'=>array('warningEmail/emailEdit')),
+   );
+}
+*/
 echo CHTml::openTag("div", $mainButtons);
 
 echo CHtml::beginForm();
@@ -37,6 +45,11 @@ if($user->user_level_id <= 2) // workstudy or admin
 if($user->user_level_id == 1) // admin
 {
   echo CHtml::imageButton(Yii::app()->baseUrl."/images/users_admin_mode.png",array('name'=>'user_admin_controls'));
+}
+if($user->user_level_id == 1) // admin
+{
+  echo CHtml::imageButton(Yii::app()->baseUrl."/images/users_admin_mode.png",array('name'=>'admin_email_controls'));
+  echo CHtml::imageButton(Yii::app()->baseUrl."/images/users_admin_mode.png",array('name'=>'warning_email_controls'));
 }
 echo CHtml::endForm();
 echo CHtml::closeTag("div");
