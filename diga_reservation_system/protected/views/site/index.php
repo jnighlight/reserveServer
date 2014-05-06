@@ -48,8 +48,8 @@ if($user->user_level_id == 1) // admin
 }
 if($user->user_level_id == 1) // admin
 {
-  echo CHtml::imageButton(Yii::app()->baseUrl."/images/users_admin_mode.png",array('name'=>'admin_email_controls'));
-  echo CHtml::imageButton(Yii::app()->baseUrl."/images/users_admin_mode.png",array('name'=>'warning_email_controls'));
+  echo CHtml::imageButton(Yii::app()->baseUrl."/images/adminEmail.png",array('name'=>'admin_email_controls'));
+  echo CHtml::imageButton(Yii::app()->baseUrl."/images/emailContent.png",array('name'=>'warning_email_controls'));
 }
 echo CHtml::endForm();
 echo CHtml::closeTag("div");
