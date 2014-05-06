@@ -4,8 +4,8 @@
 /* @var $form CActiveForm */
 $cs = Yii::app()->clientScript;
 $base = Yii::app()->baseUrl;
-$cs->registerCssFile($base . '/css/variableTextFields.css');
-$linkedAccess = EquipmentAccessory::model()->findAllByAttributes(array('equipment_id'=>$model->equipment_id));
+//$cs->registerCssFile($base . '/css/variableTextFields.css');
+$linkedAccess = Accessory::model()->findAllByAttributes(array('equipment_id'=>$model->equipment_id));
 $linkedSpecs = Specification::model()->findAllByAttributes(array('equipment_id'=>$model->equipment_id));
 ?>
 
@@ -83,8 +83,8 @@ $linkedSpecs = Specification::model()->findAllByAttributes(array('equipment_id'=
 		<?php echo $form->error($model,'equipment_type_id'); ?>
 	</div>
 <?php
-if(isset($model->equipment_id))
-{
+//if(isset($model->equipment_id))
+//{
   // Accessories Section
   $accessory_section = array("class"=>"accessory_section");
 
@@ -106,7 +106,7 @@ if(isset($model->equipment_id))
 		");
 	}
 	echo("</div>");
-  }
+  //}
 ?>
 
 <script>
